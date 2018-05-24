@@ -1,0 +1,111 @@
+package com.example.demo;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.UUID;
+
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
+
+
+
+public class UsuariosHelper {
+	
+	    //@Autowired
+	    //private Environment env;
+	
+		public static boolean IntentarLoguearse(HttpSession session, String mail, String contrasenia) throws SQLException{
+			
+			Connection connection;
+			connection = DriverManager.getConnection( "jdbc:postgresql://localhost:5432/ArmaTuFecha","postgres","admin" );
+			
+			PreparedStatement consulta = 
+					connection.prepareStatement("SELECT * FROM usuarios WHERE mail = ? AND contrasenia = ?;");
+			
+			consulta.setString(1, mail);
+			consulta.setString(2, contrasenia);
+			
+			ResultSet resultado = consulta.executeQuery();
+			
+			if ( resultado.next() ) {
+				
+				String codigo = UUID.randomUUID().toString(); 
+				session.setAttribute("codigo-autorizacion", codigo); 
+				 
+				consulta = connection.prepareStatement("UPDATE usuarios SET codigo = ? WHERE mail = ?;");
+				                                             
+				consulta.setString(1, codigo);
+				consulta.setString(2, mail);
+				
+				consulta.executeUpdate();
+				
+				connection.close();
+				
+				return true;
+			} else {
+				return false;
+			}
+		}
+
+	
+		public static int usuarioLogueado(HttpSession session) throws SQLException{
+			
+			String codigo = (String)session.getAttribute("codigo-autorizacion");
+			
+			if ( codigo != null) {
+				
+				Connection connection;
+				connection = DriverManager.getConnection( "jdbc:postgresql://localhost:5432/ArmaTuFecha","postgres","admin");
+				
+				PreparedStatement consulta = 
+						connection.prepareStatement("SELECT * FROM usuarios WHERE codigo = ?;");
+				                                                  
+				consulta.setString(1, codigo);
+				
+				ResultSet resultado = consulta.executeQuery();
+				
+				if ( resultado.next() ){
+					
+					int idLogueado = ( resultado.getInt("id") );
+				    
+					return idLogueado;
+					
+				} else {
+					
+					return 0;
+				}
+				
+			} else {
+
+			return 0;
+		    }
+		}
+		
+		
+
+		public static void cerrarSesion(HttpSession session) throws SQLException{
+			
+			
+			String codigo = (String)session.getAttribute("codigo-autorizacion"); 
+			
+			session.removeAttribute("codigo-autorizacion");
+			
+			Connection connection;
+			connection = DriverManager.getConnection( "jdbc:postgresql://localhost:5432/ArmaTuFecha","postgres","admin" );
+			
+			PreparedStatement consulta = 
+					connection.prepareStatement("UPDATE usuarios SET codigo = null WHERE codigo = ?;");
+			                                            
+			consulta.setString(1, codigo);
+			
+			consulta.executeUpdate();
+			connection.close();
+			
+		}
+
+}

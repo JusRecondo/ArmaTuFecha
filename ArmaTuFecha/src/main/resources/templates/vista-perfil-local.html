@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Perfil</title>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"></link>
+		
+			<link rel="stylesheet" type="text/css" href="/css/estilos.css"></link>
+			<meta charset="UTF-8"></meta>
+			
+			<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+			<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+	</head>
+
+	<body>
+		<div class="container">
+			<div class="row">
+				<header class="col-12">
+					<h1 th:text="${nombre}"></h1>
+				
+				</header>
+				
+				<div class="col-12">
+
+					<label>Dirección:&nbsp; </label><label th:text="${direccion}"></label><br></br>
+					<label>Teléfono:&nbsp; </label><label th:text="${telefono}"></label><br></br>
+					<label>Mail para contactarse:&nbsp; </label><label th:text="${mail_contacto}"></label><br></br>
+					<label>Descripción:&nbsp; </label><label th:text="${descripcion}"></label><br></br>
+					<label>Redes Sociales:&nbsp; </label><br></br>
+					<a th:href="${red_social1}">Facebook</a><br></br>
+					<a th:href="${red_social2}">Instagram</a><br></br>
+					<a th:href="${red_social3}">Otro</a><br></br>
+				
+					
+				</div>
+			</div>
+		</div>
+	</body>
+
+</html>
