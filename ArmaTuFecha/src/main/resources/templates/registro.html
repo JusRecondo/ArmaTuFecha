@@ -44,7 +44,9 @@
 					<h3 class="margin">Ingresá tus datos y selecciona<br> qué tipo de perfil vas a crear</h3>
 					
 					<div class="form-group">
-						<label>Ingresá una dirección de e-mail:&nbsp;</label><br><input class="form-control" id="mail" type="email" placeholder="mail..."></input>
+						<label th:text="${aviso_mail}"></label><br></br>
+						<label> Ingresá una dirección de e-mail:&nbsp;</label><br><input class="form-control" id="mail" type="email" placeholder="mail..."></input>
+								
 						<br></br>
 						<label>Ingresá una contraseña:&nbsp;</label><br><input class="form-control" id="contrasenia" type="password" placeholder="contraseña..."></input>
 						<br></br>

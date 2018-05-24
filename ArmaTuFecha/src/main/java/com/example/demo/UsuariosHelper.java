@@ -11,18 +11,20 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
+import org.springframework.stereotype.Service;
 
 
-
+@Service
 public class UsuariosHelper {
 	
-	    //@Autowired
-	    //private Environment env;
+	    @Autowired
+	    private Environment env;
 	
-		public static boolean IntentarLoguearse(HttpSession session, String mail, String contrasenia) throws SQLException{
+		public boolean IntentarLoguearse(HttpSession session, String mail, String contrasenia) throws SQLException{
 			
 			Connection connection;
-			connection = DriverManager.getConnection( "jdbc:postgresql://localhost:5432/ArmaTuFecha","postgres","admin" );
+			connection = DriverManager.getConnection( env.getProperty("spring.datasource.url"),
+					env.getProperty("spring.datasource.username"), env.getProperty("spring.datasource.password") );
 			
 			PreparedStatement consulta = 
 					connection.prepareStatement("SELECT * FROM usuarios WHERE mail = ? AND contrasenia = ?;");
@@ -53,14 +55,15 @@ public class UsuariosHelper {
 		}
 
 	
-		public static int usuarioLogueado(HttpSession session) throws SQLException{
+		public int usuarioLogueado(HttpSession session) throws SQLException{
 			
 			String codigo = (String)session.getAttribute("codigo-autorizacion");
 			
 			if ( codigo != null) {
 				
 				Connection connection;
-				connection = DriverManager.getConnection( "jdbc:postgresql://localhost:5432/ArmaTuFecha","postgres","admin");
+				connection = DriverManager.getConnection( env.getProperty("spring.datasource.url"),
+						env.getProperty("spring.datasource.username"), env.getProperty("spring.datasource.password") );
 				
 				PreparedStatement consulta = 
 						connection.prepareStatement("SELECT * FROM usuarios WHERE codigo = ?;");
@@ -88,7 +91,7 @@ public class UsuariosHelper {
 		
 		
 
-		public static void cerrarSesion(HttpSession session) throws SQLException{
+		public void cerrarSesion(HttpSession session) throws SQLException{
 			
 			
 			String codigo = (String)session.getAttribute("codigo-autorizacion"); 
@@ -96,7 +99,8 @@ public class UsuariosHelper {
 			session.removeAttribute("codigo-autorizacion");
 			
 			Connection connection;
-			connection = DriverManager.getConnection( "jdbc:postgresql://localhost:5432/ArmaTuFecha","postgres","admin" );
+			connection = DriverManager.getConnection( env.getProperty("spring.datasource.url"),
+					env.getProperty("spring.datasource.username"), env.getProperty("spring.datasource.password") );
 			
 			PreparedStatement consulta = 
 					connection.prepareStatement("UPDATE usuarios SET codigo = null WHERE codigo = ?;");
