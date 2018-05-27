@@ -45,7 +45,7 @@
 					
 					<div class="form-group">
 						<label th:text="${aviso_mail}"></label><br></br>
-						<label> Ingresá una dirección de e-mail:&nbsp;</label><br><input class="form-control" id="mail" type="email" placeholder="mail..."></input>
+						<label>Ingresá una dirección de e-mail:&nbsp;</label><br><input class="form-control" id="mail" type="email" placeholder="mail..."></input>
 								
 						<br></br>
 						<label>Ingresá una contraseña:&nbsp;</label><br><input class="form-control" id="contrasenia" type="password" placeholder="contraseña..."></input>
@@ -62,7 +62,7 @@
 							<br></br>
 						</label>
 					</div>
-					<label id="continua">Continua con el formulario abajo...</label>
+					<label id="continua">Continua con el siguiente formulario...</label>
 								
 			</div>
 	
@@ -81,7 +81,7 @@
 							<br></br>
 							<label>Teléfono de contacto para organizar fechas:&nbsp;</label><input class="form-control" name="telefono" type="text" th:value="${telefonoCargado}"></input>
 							<br></br>
-							<label>e-mail para contacto:&nbsp;</label><input class="form-control" name="mail_contacto" type="email" th:value="${mailCargado}"></input>
+							<label>e-mail para contacto:&nbsp;</label><input class="form-control" name="mail_contacto" type="email" th:value="${mail_contactoCargado}"></input>
 							<br></br>
 							<label>Descripción del lugar (máx. 1400 caracteres). Debe incluir: tipo de establecimiento, equipamiento de sonido, <br></br>
 							arreglo con los músicos (puerta para las bandas, arreglo 70-30 o similar por entradas, pago de un cashé, etc.), capacidad, <br></br> estilos musicales de los shows):</label>
@@ -89,9 +89,9 @@
 							<textarea class="form-control textarea-height" name="descripcion" type="text" maxlength="1400" th:text="${descripcionCargada}"></textarea>
 							<br></br>
 							<label>Links a redes sociales:&nbsp;</label><br></br>
-							<label>Facebook:&nbsp;</label><input class="form-control" name="red_social1" type="url" th:value="${redSocial1Cargada}"></input><br></br>
-							<label>Instagram:&nbsp;</label><input class="form-control" name="red_social2" type="url" th:value="${redSocial2Cargada}"></input><br></br>							
-							<label>Otro:&nbsp;</label><input class="form-control" name="red_social3" type="url" th:value="${redSocial3Cargada}"></input><br></br>						
+							<label>Facebook:&nbsp;</label><input class="form-control" name="red_social1" type="url" th:value="${red_social1Cargada}"></input><br></br>
+							<label>Instagram:&nbsp;</label><input class="form-control" name="red_social2" type="url" th:value="${red_social2Cargada}"></input><br></br>							
+							<label>Otro:&nbsp;</label><input class="form-control" name="red_social3" type="url" th:value="${red_social3Cargada}"></input><br></br>						
 							<!-- falta input para cargar fotos -->
 							<input class="btn btn-default" type="submit" value="Crear"></input>
 							<br></br>
@@ -123,13 +123,13 @@
 							<textarea class="form-control textarea-height" name="descripcion" type="text" maxlength="1400" th:text="${descripcionCargada}"></textarea>
 							<br></br>
 							<label>Links a redes sociales:&nbsp;</label><br></br>
-							<label>Facebook:&nbsp;</label><input class="form-control" name="red_social1" type="url" th:value="${redSocial1Cargada}"></input><br></br>
-							<label>Instagram:&nbsp;</label><input class="form-control" name="red_social2" type="url" th:value="${redSocial2Cargada}"></input><br></br>						
-							<label>Otro:&nbsp;</label><input class="form-control" name="red_social3" type="url" th:value="${redSocial3Cargada}"></input><br></br>	
+							<label>Facebook:&nbsp;</label><input class="form-control" name="red_social1" type="url" th:value="${red_social1Cargada}"></input><br></br>
+							<label>Instagram:&nbsp;</label><input class="form-control" name="red_social2" type="url" th:value="${red_social2Cargada}"></input><br></br>						
+							<label>Otro:&nbsp;</label><input class="form-control" name="red_social3" type="url" th:value="${red_social3Cargada}"></input><br></br>	
 							<label>Links a tu música (Youtube, Bandcamp, Spotify, Soundcloud, etc.):&nbsp;</label><br></br>
-							<label>YouTube:&nbsp;</label><input class="form-control" name="link_musica1" type="url" th:value="${linkMusicaCargado1}"></input><br></br>	
-							<label>Bandcamp:&nbsp;</label><input class="form-control" name="link_musica2" type="url" th:value="${linkMusicaCargado2}"></input><br></br>						
-							<label>Otro:&nbsp;</label><input class="form-control" name="link_musica3" type="url" th:value="${linkMusicaCargado3}"></input><br></br>						
+							<label>YouTube:&nbsp;</label><input class="form-control" name="link_musica1" type="url" th:value="${link_musicaCargado1}"></input><br></br>	
+							<label>Bandcamp:&nbsp;</label><input class="form-control" name="link_musica2" type="url" th:value="${link_musicaCargado2}"></input><br></br>						
+							<label>Otro:&nbsp;</label><input class="form-control" name="link_musica3" type="url" th:value="${link_musicaCargado3}"></input><br></br>						
 							<!-- falta input para cargar fotos -->
 							<input class="btn btn-default" type="submit" value="Crear"></input>	
 				
