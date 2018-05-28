@@ -57,18 +57,19 @@ public class UsuariosController {
 		return "crear-perfil";
 	}
 
-
 	@PostMapping("/procesar-perfil/local")
-	public String procesarPerfilLocal(Model template, @RequestParam String mail, @RequestParam String contrasenia,
-			@RequestParam String contrasenia2, @RequestParam String nombre, @RequestParam String direccion, @RequestParam String telefono,
-			@RequestParam String mail_contacto, @RequestParam String descripcion, @RequestParam String red_social1,
-			@RequestParam String red_social2, @RequestParam String red_social3) throws SQLException {
+	public String procesarPerfilLocal(Model template, @RequestParam String mail_usuario,
+			@RequestParam String contrasenia, @RequestParam String contrasenia2, @RequestParam String nombre,
+			@RequestParam String direccion, @RequestParam String telefono, @RequestParam String mail_contacto,
+			@RequestParam String descripcion, @RequestParam String red_social1, @RequestParam String red_social2,
+			@RequestParam String red_social3) throws SQLException {
 
-		if ( mail.length() == 0 || contrasenia.length() == 0 || contrasenia2.length() == 0 || nombre.length() == 0 || direccion.length() == 0 || telefono.length() == 0 || 
-				mail_contacto.length() == 0 || descripcion.length() == 0 ) { 
-			
+		if (mail_usuario.length() == 0 || contrasenia.length() == 0 || contrasenia2.length() == 0
+				|| nombre.length() == 0 || direccion.length() == 0 || telefono.length() == 0
+				|| mail_contacto.length() == 0 || descripcion.length() == 0) {
+
 			template.addAttribute("aviso_incompleto", "Por favor completar los campos obligatorios");
-			template.addAttribute("mailCargado", mail);
+			template.addAttribute("mailCargado", mail_usuario);
 			template.addAttribute("nombreCargado", nombre);
 			template.addAttribute("direccionCargada", direccion);
 			template.addAttribute("telefonoCargado", telefono);
@@ -77,14 +78,14 @@ public class UsuariosController {
 			template.addAttribute("red_social1Cargada", red_social1);
 			template.addAttribute("red_social2Cargada", red_social2);
 			template.addAttribute("red_social3Cargada", red_social3);
-			
+
 			// faltan fotos
 			return "crear-perfil";
-			
-		} else if ( !contrasenia.equals(contrasenia2) ){
-			
+
+		} else if (!contrasenia.equals(contrasenia2)) {
+
 			template.addAttribute("aviso_contrasenia", "Las contraseñas ingresadas no coinciden.");
-			template.addAttribute("mailCargado", mail);
+			template.addAttribute("mailCargado", mail_usuario);
 			template.addAttribute("nombreCargado", nombre);
 			template.addAttribute("direccionCargada", direccion);
 			template.addAttribute("telefonoCargado", telefono);
@@ -93,43 +94,42 @@ public class UsuariosController {
 			template.addAttribute("red_social1Cargada", red_social1);
 			template.addAttribute("red_social2Cargada", red_social2);
 			template.addAttribute("red_social3Cargada", red_social3);
-			
+
 			return "crear-perfil";
-			
+
 		} else {
 
 			Connection connection;
 			connection = DriverManager.getConnection(env.getProperty("spring.datasource.url"),
 					env.getProperty("spring.datasource.username"), env.getProperty("spring.datasource.password"));
 
-			PreparedStatement consulta = connection.prepareStatement("SELECT mail FROM usuarios;");
+			PreparedStatement consulta = connection.prepareStatement("SELECT mail FROM usuarios WHERE mail = '?';");
+			consulta.setString(1, mail_usuario);
 
 			ResultSet resultado = consulta.executeQuery();
 
 			if (resultado.next()) {
 				String mail1 = resultado.getString("mail");
-				
-				if ( mail1.equals(mail) ) {
-					
-					template.addAttribute("aviso_mail", "El e-mail ingresado ya esta en uso.");
-					template.addAttribute("nombreCargado", nombre);
-					template.addAttribute("direccionCargada", direccion);
-					template.addAttribute("telefonoCargado", telefono);
-					template.addAttribute("mail_contactoCargado", mail_contacto);
-					template.addAttribute("descripcionCargada", descripcion);
-					template.addAttribute("red_social1Cargada", red_social1);
-					template.addAttribute("red_social2Cargada", red_social2);
-					template.addAttribute("red_social3Cargada", red_social3);
-				
-					return "crear-perfil";
-				}
-			} 
+
+				template.addAttribute("aviso_mail", "El e-mail ingresado ya esta en uso.");
+				template.addAttribute("nombreCargado", nombre);
+				template.addAttribute("direccionCargada", direccion);
+				template.addAttribute("telefonoCargado", telefono);
+				template.addAttribute("mail_contactoCargado", mail_contacto);
+				template.addAttribute("descripcionCargada", descripcion);
+				template.addAttribute("red_social1Cargada", red_social1);
+				template.addAttribute("red_social2Cargada", red_social2);
+				template.addAttribute("red_social3Cargada", red_social3);
+
+				return "crear-perfil";
+
+			}
 
 			consulta = connection.prepareStatement(
 					"INSERT INTO usuarios (mail, contrasenia, tipo, nombre) VALUES (?, ?, 'local', ?);",
 					PreparedStatement.RETURN_GENERATED_KEYS);
 
-			consulta.setString(1, mail);
+			consulta.setString(1, mail_usuario);
 			consulta.setString(2, contrasenia);
 			consulta.setString(3, nombre);
 
@@ -138,9 +138,9 @@ public class UsuariosController {
 			ResultSet generatedKeys = consulta.getGeneratedKeys();
 
 			int nuevoIdUsuario = 0;
-				if (generatedKeys.next()) {
-					nuevoIdUsuario = generatedKeys.getInt(1);
-				}
+			if (generatedKeys.next()) {
+				nuevoIdUsuario = generatedKeys.getInt(1);
+			}
 
 			consulta = connection.prepareStatement("INSERT INTO perfiles_locales (id_usuario) VALUES( ? );");
 
@@ -166,22 +166,24 @@ public class UsuariosController {
 			connection.close();
 
 			return "redirect:/login";
-			}
-			
+		}
+
 	}
 
 	@PostMapping("/procesar-perfil/musico")
-	public String procesarPerfilMusico(Model template, @RequestParam String mail, @RequestParam String contrasenia, 
-			@RequestParam String contrasenia2, @RequestParam String nombre, @RequestParam String ubicacion, @RequestParam String telefono,
-			@RequestParam String mail_contacto, @RequestParam String descripcion, @RequestParam String red_social1,
-			@RequestParam String red_social2, @RequestParam String red_social3, @RequestParam String link_musica1,
-			@RequestParam String link_musica2, @RequestParam String link_musica3) throws SQLException {
+	public String procesarPerfilMusico(Model template, @RequestParam String mail_usuario,
+			@RequestParam String contrasenia, @RequestParam String contrasenia2, @RequestParam String nombre,
+			@RequestParam String ubicacion, @RequestParam String telefono, @RequestParam String mail_contacto,
+			@RequestParam String descripcion, @RequestParam String red_social1, @RequestParam String red_social2,
+			@RequestParam String red_social3, @RequestParam String link_musica1, @RequestParam String link_musica2,
+			@RequestParam String link_musica3) throws SQLException {
 
-		if ( mail.length() == 0 || contrasenia.length() == 0 || contrasenia2.length() == 0 || nombre.length() == 0 || ubicacion.length() == 0 || 
-				telefono.length() == 0 || mail_contacto.length() == 0 || descripcion.length() == 0 ) {
-			
+		if (mail_usuario.length() == 0 || contrasenia.length() == 0 || contrasenia2.length() == 0
+				|| nombre.length() == 0 || ubicacion.length() == 0 || telefono.length() == 0
+				|| mail_contacto.length() == 0 || descripcion.length() == 0) {
+
 			template.addAttribute("aviso_incompleto", "Por favor completar los campos obligatorios");
-			template.addAttribute("mailCargado", mail);
+			template.addAttribute("mailCargado", mail_usuario);
 			template.addAttribute("nombreCargado", nombre);
 			template.addAttribute("ubicacionCargada", ubicacion);
 			template.addAttribute("telefonoCargado", telefono);
@@ -196,11 +198,11 @@ public class UsuariosController {
 			// faltan fotos
 
 			return "crear-perfil";
-			
-		} else if ( !contrasenia.equals(contrasenia2) ){
-			
+
+		} else if (!contrasenia.equals(contrasenia2)) {
+
 			template.addAttribute("aviso_contrasenia", "Las contraseñas ingresadas no coinciden.");
-			template.addAttribute("mailCargado", mail);
+			template.addAttribute("mailCargado", mail_usuario);
 			template.addAttribute("nombreCargado", nombre);
 			template.addAttribute("ubicacionCargada", ubicacion);
 			template.addAttribute("telefonoCargado", telefono);
@@ -212,46 +214,44 @@ public class UsuariosController {
 			template.addAttribute("link_musicaCargado1", link_musica1);
 			template.addAttribute("link_musicaCargado2", link_musica2);
 			template.addAttribute("link_musicaCargado3", link_musica3);
-			
+
 			return "crear-perfil";
-		
+
 		} else {
-            //no funciona
+
 			Connection connection;
 			connection = DriverManager.getConnection(env.getProperty("spring.datasource.url"),
 					env.getProperty("spring.datasource.username"), env.getProperty("spring.datasource.password"));
 
-			PreparedStatement consulta = connection.prepareStatement("SELECT mail FROM usuarios;");
+			PreparedStatement consulta = connection.prepareStatement("SELECT mail FROM usuarios WHERE mail = '?';");
+			consulta.setString(1, mail_usuario);
 
 			ResultSet resultado = consulta.executeQuery();
 
 			if (resultado.next()) {
 				String mail1 = resultado.getString("mail");
-				
-				if ( mail1.equals(mail) ) {
-					
-					template.addAttribute("aviso_mail", "El e-mail ingresado ya esta en uso.");
-					template.addAttribute("nombreCargado", nombre);
-					template.addAttribute("ubicacionCargada", ubicacion);
-					template.addAttribute("telefonoCargado", telefono);
-					template.addAttribute("mail_contactoCargado", mail_contacto);
-					template.addAttribute("descripcionCargada", descripcion);
-					template.addAttribute("red_social1Cargada", red_social1);
-					template.addAttribute("red_social2Cargada", red_social2);
-					template.addAttribute("red_social3Cargada", red_social3);
-					template.addAttribute("link_musicaCargado1", link_musica1);
-					template.addAttribute("link_musicaCargado2", link_musica2);
-					template.addAttribute("link_musicaCargado3", link_musica3);
-				
-					return "crear-perfil";
-				}
-			} 
-			
+
+				template.addAttribute("aviso_mail", "El e-mail ingresado ya esta en uso.");
+				template.addAttribute("nombreCargado", nombre);
+				template.addAttribute("ubicacionCargada", ubicacion);
+				template.addAttribute("telefonoCargado", telefono);
+				template.addAttribute("mail_contactoCargado", mail_contacto);
+				template.addAttribute("descripcionCargada", descripcion);
+				template.addAttribute("red_social1Cargada", red_social1);
+				template.addAttribute("red_social2Cargada", red_social2);
+				template.addAttribute("red_social3Cargada", red_social3);
+				template.addAttribute("link_musicaCargado1", link_musica1);
+				template.addAttribute("link_musicaCargado2", link_musica2);
+				template.addAttribute("link_musicaCargado3", link_musica3);
+
+				return "crear-perfil";
+			}
+
 			consulta = connection.prepareStatement(
 					"INSERT INTO usuarios (mail, contrasenia, tipo, nombre) VALUES (?, ?, 'musico', ?);",
 					PreparedStatement.RETURN_GENERATED_KEYS);
 
-			consulta.setString(1, mail);
+			consulta.setString(1, mail_usuario);
 			consulta.setString(2, contrasenia);
 			consulta.setString(3, nombre);
 
@@ -260,9 +260,9 @@ public class UsuariosController {
 			ResultSet generatedKeys = consulta.getGeneratedKeys();
 
 			int nuevoIdUsuario = 0;
-				if (generatedKeys.next()) {
-					nuevoIdUsuario = generatedKeys.getInt(1);
-				}
+			if (generatedKeys.next()) {
+				nuevoIdUsuario = generatedKeys.getInt(1);
+			}
 
 			consulta = connection.prepareStatement("INSERT INTO perfiles_musicos (id_usuario) VALUES( ? );");
 
@@ -272,6 +272,7 @@ public class UsuariosController {
 
 			consulta = connection.prepareStatement(
 					"UPDATE perfiles_musicos SET nombre = ?, ubicacion = ?, telefono = ?, mail_contacto = ?, descripcion = ?, red_social1 = ?, red_social2 = ?, red_social3 = ?, link_musica1 = ?, link_musica2 = ?, link_musica3 = ? WHERE id_usuario = ?;");
+
 			consulta.setString(1, nombre);
 			consulta.setString(2, ubicacion);
 			consulta.setString(3, telefono);
@@ -295,7 +296,7 @@ public class UsuariosController {
 
 	}
 
-	// vista publica
+	// vista publica, modifcar ruta por /{nombre} y modificar donde haga falta
 	@GetMapping("/vista-perfil-local/{id_usuario}")
 	public String perfilLocal(Model template, @PathVariable int id_usuario) throws SQLException {
 
@@ -331,10 +332,10 @@ public class UsuariosController {
 			template.addAttribute("red_social3", red_social3);
 		}
 
-		return "vista-perfil-local";
+		return "perfil-local";
 	}
 
-	// vista publica
+	// vista publica, modifcar ruta por /{nombre} y modificar donde haga falta
 	@GetMapping("/vista-perfil-musico/{id_usuario}")
 	public String perfilMusico(Model template, @PathVariable int id_usuario) throws SQLException {
 
@@ -377,7 +378,7 @@ public class UsuariosController {
 			template.addAttribute("link_musica3", link_musica3);
 		}
 
-		return "vista-perfil-musico";
+		return "perfil-musico";
 	}
 
 	@GetMapping("/listado-locales")
@@ -554,6 +555,7 @@ public class UsuariosController {
 		return "redirect:/";
 	}
 
+	// modificar ruta a /{nombre}/mi perfil y modificar donde haga falta
 	@GetMapping("/locales/{nombre}")
 	public String perfilLocalLogueado(HttpSession session, Model template, @PathVariable String nombre)
 			throws SQLException {
@@ -561,7 +563,7 @@ public class UsuariosController {
 		int idLogueado = UsuariosHelper.usuarioLogueado(session);
 
 		if (idLogueado == 0) {
-		return "redirect:/login";
+			return "redirect:/login";
 		}
 
 		Connection connection;
@@ -595,6 +597,7 @@ public class UsuariosController {
 			template.addAttribute("red_social1", red_social1);
 			template.addAttribute("red_social2", red_social2);
 			template.addAttribute("red_social3", red_social3);
+			template.addAttribute("id_usuario", id_usuario);
 
 			consulta = connection.prepareStatement("SELECT mail, contrasenia FROM usuarios WHERE id = ?;");
 
@@ -611,10 +614,10 @@ public class UsuariosController {
 
 			}
 		}
-		return "vista-perfil-local-logueado";
+		return "perfil-local-logueado";
 	}
 
-	// prueba de cambiar id_usuario por nombre
+	// modificar ruta a /{nombre}/mi perfil y modificar donde haga falta
 	@GetMapping("/musicos/{nombre}")
 	public String perfilMusicoLogueado(HttpSession session, Model template, @PathVariable String nombre)
 			throws SQLException {
@@ -623,7 +626,7 @@ public class UsuariosController {
 
 		if (idLogueado == 0) {
 			return "redirect:/login";
-		 }
+		}
 
 		Connection connection;
 		connection = DriverManager.getConnection(env.getProperty("spring.datasource.url"),
@@ -662,6 +665,7 @@ public class UsuariosController {
 			template.addAttribute("link_musica1", link_musica1);
 			template.addAttribute("link_musica2", link_musica2);
 			template.addAttribute("link_musica3", link_musica3);
+			template.addAttribute("id_usuario", id_usuario);
 
 			consulta = connection.prepareStatement("SELECT mail, contrasenia FROM usuarios WHERE id = ?;");
 
@@ -679,7 +683,7 @@ public class UsuariosController {
 			}
 
 		}
-		return "vista-perfil-musico-logueado";
+		return "perfil-musico-logueado";
 	}
 
 	// falta comprobacion de sesion iniciada
@@ -704,43 +708,73 @@ public class UsuariosController {
 
 		}
 
-		return "editar-usuario";
+		return "editar-datos-usuario";
 	}
 
 	@PostMapping("/procesar-edicion-usuario/{id}")
-	public String procesarEdicionUsuario(Model template, @PathVariable int id, @RequestParam String mail,
-			@RequestParam String contrasenia) throws SQLException {
-		Connection connection;
-		connection = DriverManager.getConnection(env.getProperty("spring.datasource.url"),
-				env.getProperty("spring.datasource.username"), env.getProperty("spring.datasource.password"));
+	public String procesarEdicionUsuario(Model template, @PathVariable int id, @RequestParam String mail_usuario,
+			@RequestParam String contrasenia, @RequestParam String contrasenia2) throws SQLException {
 
-		PreparedStatement consulta = connection
-				.prepareStatement("UPDATE usuarios SET mail = ?, contrasenia = ? WHERE id = ?;");
+		if ( mail_usuario.length() == 0 || contrasenia.length() == 0 || contrasenia2.length() == 0) {
+			template.addAttribute("aviso_incompleto", "Por favor completar los campos obligatorios");
+			template.addAttribute("mailCargado", mail_usuario);
+			return "editar-datos-usuario";
 
-		consulta.setString(1, mail);
-		consulta.setString(2, contrasenia);
-		consulta.setInt(3, id);
+		} else if (!contrasenia.equals(contrasenia2)) {
 
-		consulta.executeUpdate();
+			template.addAttribute("aviso_contrasenia", "Las contraseñas ingresadas no coinciden.");
+			template.addAttribute("mailCargado", mail_usuario);
+			
+			return "editar-datos-usuario";
+		
+		} else {
 
-		consulta = connection.prepareStatement("SELECT tipo, nombre FROM usuarios WHERE id = ?;");
+			Connection connection;
+			connection = DriverManager.getConnection(env.getProperty("spring.datasource.url"),
+					env.getProperty("spring.datasource.username"), env.getProperty("spring.datasource.password"));
 
-		consulta.setInt(1, id);
+			PreparedStatement consulta = connection.prepareStatement("SELECT mail FROM usuarios WHERE mail = '?';");
+			
+			consulta.setString(1, mail_usuario);
 
-		ResultSet resultado = consulta.executeQuery();
+			ResultSet resultado = consulta.executeQuery();
 
-		if (resultado.next()) {
-			String tipo = resultado.getString("tipo");
-			String nombre = resultado.getString("nombre");
+			if (resultado.next()) {
+				String mail1 = resultado.getString("mail");
 
-			if (tipo.equals("musico")) {
-				return "redirect:/musicos/" + nombre;
+				template.addAttribute("aviso_mail", "El e-mail ingresado ya esta en uso.");
+				
+				return "editar-datos-usuario";
+			}
+	
 
-			} else if (tipo.equals("local")) {
-				return "redirect:/locales/" + nombre;
+		    consulta = connection
+					.prepareStatement("UPDATE usuarios SET mail = ?, contrasenia = ? WHERE id = ?;");
+
+			consulta.setString(1, mail_usuario);
+			consulta.setString(2, contrasenia);
+			consulta.setInt(3, id);
+
+			consulta.executeUpdate();
+
+			consulta = connection.prepareStatement("SELECT tipo, nombre FROM usuarios WHERE id = ?;");
+
+			consulta.setInt(1, id);
+
+			ResultSet resultado1 = consulta.executeQuery();
+
+			if (resultado1.next()) {
+				String tipo = resultado1.getString("tipo");
+				String nombre = resultado1.getString("nombre");
+
+				if (tipo.equals("musico")) {
+					return "redirect:/musicos/" + nombre;
+
+				} else if (tipo.equals("local")) {
+					return "redirect:/locales/" + nombre;
+				}
 			}
 		}
-
 		return "redirect:/";
 	}
 
@@ -789,7 +823,7 @@ public class UsuariosController {
 
 		if (nombre.length() == 0 || direccion.length() == 0 || telefono.length() == 0 || mail_contacto.length() == 0
 				|| descripcion.length() == 0) {
-
+			template.addAttribute("aviso_incompleto", "Por favor completar los campos obligatorios");
 			template.addAttribute("nombre", nombre);
 			template.addAttribute("direccion", direccion);
 			template.addAttribute("telefono", telefono);
@@ -885,6 +919,7 @@ public class UsuariosController {
 
 		if (nombre.length() == 0 || ubicacion.length() == 0 || telefono.length() == 0 || mail_contacto.length() == 0
 				|| descripcion.length() == 0) {
+			template.addAttribute("aviso_incompleto", "Por favor completar los campos obligatorios");
 			template.addAttribute("nombre", nombre);
 			template.addAttribute("ubicacion", ubicacion);
 			template.addAttribute("telefono", telefono);

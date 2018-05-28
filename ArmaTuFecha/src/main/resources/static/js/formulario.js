@@ -7,7 +7,7 @@ $(document).ready(function() {
 	
 	
     $("#tipo-local").change(function () {
-    	console.log("asdasd");
+    	
     	if($(this).is(':checked')){
     		$("#formulario-local").show(); 		
     		$("#formulario-musico").hide();
@@ -16,7 +16,7 @@ $(document).ready(function() {
     });
     
     $("#tipo-musico").change(function () {
-    	console.log("qweqwe");
+    	
     	if($(this).is(':checked')){
     		$("#formulario-musico").show(); 		
     		$("#formulario-local").hide(); 

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+
+    <title th:text="${nombre}"></title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="/css/portfolio-item.css" rel="stylesheet">
+
+  </head>
+
+  <body>
+
+    <!-- Navigation -->
+	<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top"
+		id="mainNav">
+		<div class="container">
+			<a class="navbar-brand js-scroll-trigger" href="#page-top">Arma
+				Tu Fecha</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse"
+				data-target="#navbarResponsive" aria-controls="navbarResponsive"
+				aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarResponsive">
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item"><a class="nav-link js-scroll-trigger"
+						th:href="'/home/local/' + ${nombre}">Home</a></li>
+					<li class="nav-item">
+		              <a class="nav-link js-scroll-trigger" th:href="'/locales/' + ${nombre}">Mi Perfil</a>
+		             </li> 	
+		            <li class="nav-item">
+		              <a class="nav-link js-scroll-trigger" href="/logout">Log out</a>
+		            </li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	<!-- Page Content -->
+    <div class="container">
+
+      <!-- Portfolio Item Heading -->
+      <h1 class="my-4" th:text="${nombre}">
+      </h1>
+
+      <!-- Portfolio Item Row -->
+      <div class="row">
+
+        <div class="col-md-8">
+          <img class="img-fluid" src="http://placehold.it/750x500" alt="">
+        </div>
+
+        <div class="col-md-4">
+          <h3 class="my-3">Descripción</h3>
+          <p th:text="${descripcion}">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae. Sed dui lorem, adipiscing in adipiscing et, interdum nec metus. Mauris ultricies, justo eu convallis placerat, felis enim.</p>
+          <h3 class="my-3">Datos de contacto</h3>
+            <label th:text="${direccion}">Lorem Ipsum</label><br>
+            <label th:text="${telefono}">a</label><br>
+            <label th:text="${mail_contacto}">a</label><br>
+            <a th:href="${red_social1}" th:if="${red_social1}">Facebook</a><br>
+			<a th:href="${red_social2}" th:if="${red_social2}">Instagram</a><br>
+		    <a th:href="${red_social3}" th:if="${red_social3}">Otro</a><br>
+		    <a th:href="'/locales/mi-perfil/editar/' + ${id_usuario}" >Editar datos del perfil</a><br>
+					
+		    <h3 class="my-3">Datos de la cuenta</h3>
+		  	<label>Mail:&nbsp;</label><label th:text="${mail}"></label><br>
+		  	<label>Contraseña:&nbsp;</label><label th:text="${contrasenia}"></label><br>
+		  	<a th:href= "'/editar-datos-usuario/' + ${id_usuario}">Editar datos de usuario</a><br></br>
+			
+			<a th:href="'/locales/eliminar-cuenta/' + ${id_usuario}">Eliminar cuenta y perfil.</a>		
+        </div>
+
+      </div>
+      <!-- /.row -->
+
+      <!-- Related Projects Row -->
+      <h3 class="my-4">Fotos</h3>
+
+      <div class="row">
+
+        <div class="col-md-3 col-sm-6 mb-4">
+          <a href="#">
+            <img class="img-fluid" src="http://placehold.it/500x300" alt="">
+          </a>
+        </div>
+
+        <div class="col-md-3 col-sm-6 mb-4">
+          <a href="#">
+            <img class="img-fluid" src="http://placehold.it/500x300" alt="">
+          </a>
+        </div>
+
+        <div class="col-md-3 col-sm-6 mb-4">
+          <a href="#">
+            <img class="img-fluid" src="http://placehold.it/500x300" alt="">
+          </a>
+        </div>
+
+        <div class="col-md-3 col-sm-6 mb-4">
+          <a href="#">
+            <img class="img-fluid" src="http://placehold.it/500x300" alt="">
+          </a>
+        </div>
+
+      </div>
+      <!-- /.row -->
+
+    </div>
+    <!-- /.container -->
+
+    <!-- Footer -->
+    <footer class="py-5 bg-dark">
+      <div class="container">
+        <p class="m-0 text-center text-white">Copyright &copy; Your Website 2018</p>
+      </div>
+      <!-- /.container -->
+    </footer>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="/vendor/jquery/jquery.min.js"></script>
+    <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  </body>
+
+</html>

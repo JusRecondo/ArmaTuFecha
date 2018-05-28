@@ -27,9 +27,9 @@
 					<div class="row">
 						<div class="col-12">
 			             	<form th:action="'/procesar-edicion-usuario/' + ${id}" method="POST" >			   
-								<label>Editar e-mail:&nbsp;</label><input name="mail" type="email" th:value="${mail}"></input>
+								<label>*Editar e-mail:&nbsp;</label><input name="mail" type="email" th:value="${mail}"></input>
 								<br></br>
-								<label>Editar contraseña:&nbsp;</label><input name="contrasenia" type="password" th:value="${contrasenia}"></input>
+								<label>*Editar contraseña:&nbsp;</label><input name="contrasenia" type="password" th:value="${contrasenia}"></input>
 								<br></br>
 								<input type="submit" value="Guardar cambios"></input>
 								<br></br>

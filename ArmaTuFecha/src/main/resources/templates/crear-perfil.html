@@ -48,24 +48,25 @@
 					<div class="row">
 						<div class="col-12">
 							<h1>
-								Ingresá tus datos y selecciona<br>el tipo de perfil que vas a
-								crear
+								Ingresá tus datos y selecciona<br>el tipo de perfil que vas a crear
 							</h1>
 							<h5>(Los campos marcados con * son obligatorios)</h5>
-							<h5 th:text="${aviso_incompleto}"></h5>
+							<div class="alert alert-danger" role="alert" th:text="${aviso_incompleto}" th:if="${aviso_incompleto}">
+							</div>
 						</div>
 					</div>
 					    <div class="col-12">
 					    	<div class="form-group">
 								
-								 <label th:text="${aviso_mail}"></label>
+								<div class="alert alert-danger" role="alert" th:text="${aviso_mail}" th:if="${aviso_mail}">
+								</div>
 								<br>
 								<label>*Ingresá una dirección de e-mail:&nbsp;</label>
 								<br>
 							
 								<input class="form-control" id="mail" type="email" placeholder="mail..." th:value="${mailCargado}"></input> 
 								<br></br> 
-								<div class="alert alert-danger" role="alert" th:text="${aviso_contrasenia}">
+								<div class="alert alert-danger" role="alert" th:text="${aviso_contrasenia}" th:if="${aviso_contrasenia}">
 								</div>	
 								<label>*Ingresá una contraseña:&nbsp;</label>
 								<br>
@@ -98,7 +99,7 @@
 							<form  class="form-group" action="/procesar-perfil/local" method="POST">
 							
 								<h3 class="no-margin-top">Completa los datos para tu perfil</h3>
-								<input class="mail" type="hidden" name="mail"></input>
+								<input class="mail" type="hidden" name="mail_usuario"></input>
 								<input class="contrasenia" type="hidden" name="contrasenia"></input>
 								<input class="contrasenia2" type="hidden" name="contrasenia2"></input>
 								
@@ -137,7 +138,7 @@
 							<form class="form-group" action="/procesar-perfil/musico" method="POST">
 							
 							<h3 class="no-margin-top">Completa los datos para tu perfil</h3>
-							<input class="mail" type="hidden" name="mail"></input>
+							<input class="mail" type="hidden" name="mail_usuario"></input>
 							<input class="contrasenia" type="hidden" name="contrasenia"></input>
 							<input class="contrasenia2" type="hidden" name="contrasenia2"></input>
 							

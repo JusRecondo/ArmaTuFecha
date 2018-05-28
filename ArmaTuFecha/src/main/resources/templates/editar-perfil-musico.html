@@ -1,64 +1,116 @@
-<!doctype html>
-<html>
-	<head>
-		<title>Editar perfil</title>
-			<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"></link>
-		
-			<link rel="stylesheet" type="text/css" href="/css/estilos.css"></link>
-			<meta charset="UTF-8"></meta>
-			
-			<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-			<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-			<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-			
-			<script src="/js/formulario.js"></script>
-	
-	</head>
-	
-		<body>
-			<div class="container">
-				<div class="row">
-					<header class="col-12">
-						<h1>Modifica los datos de tu perfil</h1>
-					
-					</header>
-					
-				</div>
-				
-				<div class="row">
-					<div class="col-12">
-						<form th:action="'/musicos/mi-perfil/procesar-edicion/' + ${id_usuario}" method="POST">
-							
-							
-							<label>Nombre de la banda/solista:&nbsp;</label><input name="nombre" type="text" th:value="${nombre}"></input>
-							<br></br>
-							<label>Ubicación (Provincia, localidad):&nbsp;</label><input name="ubicacion" type="text" th:value="${ubicacion}"></input>
-							<br></br>
-							<label>Teléfono de contacto:&nbsp;</label><input name="telefono" type="text" th:value="${telefono}"></input>
-							<br></br>
-							<label>e-mail para contacto:&nbsp;</label><input name="mail_contacto" type="email" th:value="${mail_contacto}"></input>
-							<br></br>
-							<label>Descripción del proyecto musical. Debe incluir: requerimientos técnicos de sonido, cantidad de integrantes, estilo musical, <br></br>
-							cashé o arreglo mínimo que aceptan (puerta, porcentaje de entradas, etc.)</label>
-						    <br></br>
-							<textarea name="descripcion" type="text" th:text="${descripcion}"></textarea>
-							<br></br>
-							<label>Links a redes sociales:&nbsp;</label><br></br>
-							<label>Facebook:&nbsp;</label><input name="red_social1" type="url" th:value="${red_social1}"></input><br></br>
-							<label>Instagram:&nbsp;</label><input name="red_social2" type="url" th:value="${red_social2}"></input><br></br>						
-							<label>Otro:&nbsp;</label><input name="red_social3" type="url" th:value="${red_social3}"></input><br></br>	
-							<label>Links a tu música (Youtube, Bandcamp, Spotify, Soundcloud, etc.):&nbsp;</label><br></br>
-							<label>YouTube:&nbsp;</label><input name="link_musica1" type="url" th:value="${link_musica1}"></input><br></br>	
-							<label>Bandcamp:&nbsp;</label><input name="link_musica2" type="url" th:value="${link_musica2}"></input><br></br>						
-							<label>Otro:&nbsp;</label><input name="link_musica3" type="url" th:value="${link_musica3}"></input><br></br>						
-							<!-- falta input para cargar fotos -->
-							<input type="submit" value="Guardar cambios"></input>	
-				
-						</form>					
-					</div>	
-				
-				</div>
-		</body>
+<!DOCTYPE html>
+<html lang="es">
 
+	<head>
+
+		<meta charset="utf-8"></meta>
+		<meta name="viewport"
+			content="width=device-width, initial-scale=1, shrink-to-fit=no"></meta>
+		
+		
+		<title>Editar Perfil</title>
+		
+		<!-- Bootstrap core CSS -->
+		<link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"></link>
+		
+		<!-- Custom styles for this template -->
+		<link href="/css/scrolling-nav.css" rel="stylesheet"></link>
+		<link rel="stylesheet" type="text/css" href="/css/estilos.css"></link>
+		
+		
+	</head>
+
+		<body id="page-top">
+		
+			<!-- Navigation -->
+			<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top"
+				id="mainNav">
+				<div class="container">
+					<a class="navbar-brand js-scroll-trigger" href="#page-top">Arma
+						Tu Fecha</a>
+					<button class="navbar-toggler" type="button" data-toggle="collapse"
+						data-target="#navbarResponsive" aria-controls="navbarResponsive"
+						aria-expanded="false" aria-label="Toggle navigation">
+						<span class="navbar-toggler-icon"></span>
+					</button>
+					<div class="collapse navbar-collapse" id="navbarResponsive">
+						<ul class="navbar-nav ml-auto">
+							<li class="nav-item"><a class="nav-link js-scroll-trigger"
+								th:href="'/home/musico/' + ${nombre}">Home</a></li>
+							<li class="nav-item">
+				              <a class="nav-link js-scroll-trigger" th:href="'/musicos/' + ${nombre}">Mi Perfil</a>
+				             </li> 	
+						</ul>
+					</div>
+				</div>
+			</nav>
+			
+			<header class="bg-primary text-white bootstrap-override-header" id="color1">
+				<div class="container text-center">
+					<div class="row">
+						<div class="col-12">
+							<h1>
+								Modifica los datos de tu perfil
+							</h1>
+							<h5>(Los campos marcados con * son obligatorios)</h5>
+							<div class="alert alert-danger" role="alert" th:text="${aviso_incompleto}" th:if="${aviso_incompleto}">
+							</div>
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class="col-12">
+							<form class="form-group" th:action="'/musicos/mi-perfil/procesar-edicion/' + ${id_usuario}" method="POST">
+								
+								<label>*Nombre del lugar:&nbsp;</label><input class="form-control" name="nombre" type="text" th:value="${nombre}"></input>
+								<br></br>
+								<label>*Dirección (provincia, localidad, calle, altura):&nbsp;</label><input class="form-control" name="ubicacion" type="text" th:value="${ubicacion}"></input>
+								<br></br>
+								<label>*Teléfono de contacto para organizar fechas:&nbsp;</label><input class="form-control" name="telefono" type="text" th:value="${telefono}"></input>
+								<br></br>
+								<label>*e-mail para contacto:&nbsp;</label><input class="form-control" name="mail_contacto" type="email" th:value="${mail_contacto}"></input>
+								<br></br>
+								<label>*Descripción del lugar (máx. 1400 caracteres). Debe incluir: tipo de establecimiento, equipamiento de sonido,
+								arreglo con los músicos (puerta para las bandas, arreglo 70-30 o similar por entradas, pago de un cashé, etc.), capacidad, estilos musicales de los shows):</label>
+								<br></br>
+								<textarea class="form-control textarea-height" name="descripcion" type="text" maxlength="1400" th:text="${descripcion}"></textarea>
+								<br></br>
+								<label>Links a redes sociales:&nbsp;</label><br></br>
+								<label>Facebook:&nbsp;</label><input class="form-control" name="red_social1" type="url" th:value="${red_social1}"></input><br></br>
+								<label>Instagram:&nbsp;</label><input class="form-control" name="red_social2" type="url" th:value="${red_social2}"></input><br></br>							
+								<label>Otro:&nbsp;</label><input class="form-control" name="red_social3" type="url" th:value="${red_social3}"></input><br></br>						
+								<label>YouTube:&nbsp;</label><input class="form-control" name="link_musica1" type="url" th:value="${link_musica1}"></input><br></br>	
+							<label>Bandcamp:&nbsp;</label><input class="form-control" name="link_musica2" type="url" th:value="${link_musica2}"></input><br></br>						
+							<label>Otro:&nbsp;</label><input class="form-control" name="link_musica3" type="url" th:value="${link_musica3}"></input><br></br>	
+								<!-- falta input para cargar fotos -->
+								<input class="btn btn-default" type="submit" value="Guardar cambios"></input>
+								<br></br>
+								<br></br>
+							</form>			
+						</div>
+					  </div> 
+					</div>
+				</header>	
+			<!-- Footer -->
+			<footer class="py-5 bg-dark">
+				<div class="container">
+					<p class="m-0 text-center text-white">Copyright &copy; Your
+						Website 2017</p>
+				</div>
+				<!-- /.container -->
+			</footer>
+		
+			<!-- Bootstrap core JavaScript -->
+			<script src="/vendor/jquery/jquery.min.js"></script>
+			<script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+		
+			<!-- Plugin JavaScript -->
+			<script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
+		
+			<!-- Custom JavaScript for this theme -->
+			<script src="/js/scrolling-nav.js"></script>
+			<script src="/js/formulario.js"></script>
+		
+		</body>
 
 </html>

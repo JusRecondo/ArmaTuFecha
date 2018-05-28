@@ -8,7 +8,7 @@
 			content="width=device-width, initial-scale=1, shrink-to-fit=no"></meta>
 		
 		
-		<title>Editar Perfil</title>
+		<title>Editar Usuario</title>
 		
 		<!-- Bootstrap core CSS -->
 		<link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"></link>
@@ -45,12 +45,12 @@
 				</div>
 			</nav>
 			
-			<header class="bg-primary text-white bootstrap-override-header" id="color1" layout:fragment="edicion">
+			<header class="bg-primary text-white bootstrap-override-header" id="color1">
 				<div class="container text-center">
 					<div class="row">
 						<div class="col-12">
 							<h1>
-								Modifica los datos de tu perfil
+								Modifica tus datos de usuario
 							</h1>
 							<h5>(Los campos marcados con * son obligatorios)</h5>
 							<div class="alert alert-danger" role="alert" th:text="${aviso_incompleto}" th:if="${aviso_incompleto}">
@@ -60,27 +60,15 @@
 					
 					<div class="row">
 						<div class="col-12">
-							<form class="form-group" th:action="'/locales/mi-perfil/procesar-edicion/' + ${id_usuario}" method="POST">
+							<form  class="form-group" th:action="'/procesar-edicion-usuario/' + ${id}" method="POST" >			   
+								<label>*Editar e-mail:&nbsp;</label><input class="form-control" name="mail_usuario" type="email" th:value="${mail}"></input>
+								<br></br>
+								<label>*Editar contraseña:&nbsp;</label><input class="form-control" name="contrasenia" type="password" th:value="${contrasenia}"></input>
+								<br></br>
+								<label>*Volvé a ingresar la contraseña:&nbsp;</label>
+								<br>
+								<input class="form-control" name="contrasenia2" type="password" placeholder="contraseña..."></input> <br></br>
 								
-								<label>*Nombre del lugar:&nbsp;</label><input class="form-control" name="nombre" type="text" th:value="${nombre}"></input>
-								<br></br>
-								<label>*Dirección (provincia, localidad, calle, altura):&nbsp;</label><input class="form-control" name="direccion" type="text" th:value="${direccion}"></input>
-								<br></br>
-								<label>*Teléfono de contacto para organizar fechas:&nbsp;</label><input class="form-control" name="telefono" type="text" th:value="${telefono}"></input>
-								<br></br>
-								<label>*e-mail para contacto:&nbsp;</label><input class="form-control" name="mail_contacto" type="email" th:value="${mail_contacto}"></input>
-								<br></br>
-								<label>*Descripción del lugar (máx. 1400 caracteres). Debe incluir: tipo de establecimiento, equipamiento de sonido,
-								arreglo con los músicos (puerta para las bandas, arreglo 70-30 o similar por entradas, pago de un cashé, etc.), capacidad, estilos musicales de los shows):</label>
-								<br></br>
-								<textarea class="form-control textarea-height" name="descripcion" type="text" maxlength="1400" th:text="${descripcionCargada}"></textarea>
-								<br></br>
-								<label>Links a redes sociales:&nbsp;</label><br></br>
-								<label>Facebook:&nbsp;</label><input class="form-control" name="red_social1" type="url" th:value="${red_social1}"></input><br></br>
-								<label>Instagram:&nbsp;</label><input class="form-control" name="red_social2" type="url" th:value="${red_social2}"></input><br></br>							
-								<label>Otro:&nbsp;</label><input class="form-control" name="red_social3" type="url" th:value="${red_social3}"></input><br></br>						
-								
-								<!-- falta input para cargar fotos -->
 								<input class="btn btn-default" type="submit" value="Guardar cambios"></input>
 								<br></br>
 								<br></br>
