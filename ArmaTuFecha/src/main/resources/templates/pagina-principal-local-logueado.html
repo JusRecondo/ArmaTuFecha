@@ -1,108 +1,107 @@
 <!DOCTYPE html>
 <html lang="es">
 
-  <head>
+	  <head>
+	
+	    <meta charset="utf-8"></meta>
+	    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"></meta>
+	    
+	
+	    <title>Arma Tu Fecha</title>
+	
+	    <!-- Bootstrap core CSS -->
+	   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous"></link>
+	
+	    <!-- Custom styles for this template -->
+	    <link href="/css/pagina-principal.css" rel="stylesheet"></link>
+	    <link rel="stylesheet" type="text/css" href="/css/estilos.css"></link>
+	    
+	  </head>
 
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>Arma Tu Fecha</title>
-
-    <!-- Bootstrap core CSS -->
-   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
-
-    <!-- Custom styles for this template -->
-    <link href="/css/pagina-principal.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="/css/estilos.css"></link>
-    
-  </head>
-
-  <body id="page-top">
-
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top" id="mainNav">
-      <div class="container">
-        <a class="navbar-brand js-scroll-trigger" href="#page-top">Arma Tu Fecha</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-          <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="/">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" th:href="'/locales/' + ${nombre}">Mi Perfil</a>
-             </li> 
-            <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="/logout">Log out</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-
-    <header class="bg-primary text-white" id="color1">
-      <div class="container text-center">    
-        <div class="row">
-        	<div class="col-12">
-        		<h1>Bienvenid@ a Arma Tu Fecha<br>¿Qué estas buscando?</h1>
-        	</div>
-        </div>
-        <div class="row">
-			<div class="col-lg-6 mx-auto text-center" id="bootstrap-override-col1">
-				<a href="/listado-locales" id="btn1" class="btn btn-outline-light">Lugares donde no cobren<br>para tocar</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			</div>                
-	    	<div class="col-lg-6 mx-auto text-center" id="bootstrap-override-col2">
-	    		<a href="/listado-musicos" id="btn2" class="btn btn-outline-light">Bandas/musicos solistas/etc.<br>para armar fechas</a>			
-	    	</div> 
- 		</div>		
- 	  </div>     
-    </header>
-
-    <section id="about">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-8 mx-auto">
-            <h2>¿Qué es Arma Tu Fecha?</h2>
-            <p class="lead">Es un proyecto autogestivo que surge ante la problématica que tienen lxs músicxs independientes de no encontrar lugares para tocar donde haya condiciones mínimas de sonido e instalaciones y no les cobren para tocar, 
-            				ya sea porque explícitamente les exijan un monto para tocar en el lugar o que les pidan rendir a través de la venta de entradas una determinada suma de dinero (lo cual es excluyente para que se realize el evento) y que en muchos casos 
-							luego además les pidan un %50 de la venta del resto de entradas.
-							<br>
-							Creemos que lxs músicos debemos dejar de alimentar este negocio y por eso en esta página se van a difundir aquellos lugares que den un trato digno a lxs artistas. 
-							<br>
-							También podes crear un perfil para tu banda para que te encuentren en el listado otrxs músicxs u organizadores.
-		    </p>
-			<a href="/registro" class="btn btn-outline-dark">Crear un perfil</a>          
-          </div>
-        </div>
-      </div>
-    </section>
-
-    
-
-    <!-- Footer -->
-    <footer class="py-5 bg-dark">
-      <div class="container">
-        <p class="m-0 text-center text-white">Copyright &copy; Your Website 2017</p>
-      </div>
-      <!-- /.container -->
-    </footer>
-
-    <!-- Bootstrap core JavaScript -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
-
-    <!-- Plugin JavaScript -->
-    <script src="https://github.com/JusRecondo/ArmaTuFecha/blob/master/ArmaTuFecha/src/main/resources/static/vendor/jquery-easing/jquery.easing.min.js"></script>
-
-    <!-- Custom JavaScript for this theme -->
-    <script src="https://github.com/JusRecondo/ArmaTuFecha/blob/master/ArmaTuFecha/src/main/resources/static/js/scrolling-nav.js"></script>
-    
-
-  </body>
+		  <body id="page-top">
+		
+		    <!-- Navigation -->
+		    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top" id="mainNav">
+		      <div class="container">
+		        <a class="navbar-brand js-scroll-trigger" href="#page-top">Arma Tu Fecha</a>
+		        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+		          <span class="navbar-toggler-icon"></span>
+		        </button>
+		        <div class="collapse navbar-collapse" id="navbarResponsive">
+		          <ul class="navbar-nav ml-auto">
+		            <li class="nav-item">
+		              <a class="nav-link js-scroll-trigger" href="/">Home</a>
+		            </li>
+		            <li class="nav-item">
+		              <a class="nav-link js-scroll-trigger" th:href="'/locales/' + ${nombre}">Mi Perfil</a>
+		             </li> 
+		            <li class="nav-item">
+		              <a class="nav-link js-scroll-trigger" href="/logout">Log out</a>
+		            </li>
+		          </ul>
+		        </div>
+		      </div>
+		    </nav>
+		
+		    <header class="bg-primary text-white" id="color1">
+		      <div class="container text-center">    
+		        <div class="row">
+		        	<div class="col-12">
+		        		<h1>Bienvenid@ a Arma Tu Fecha<br>¿Qué estas buscando?</h1>
+		        	</div>
+		        </div>
+		        <div class="row">
+					<div class="col-lg-6 mx-auto text-center" id="bootstrap-override-col1">
+						<a href="/listado-locales" id="btn1" class="btn btn-outline-light">Lugares donde no cobren<br>para tocar</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					</div>                
+			    	<div class="col-lg-6 mx-auto text-center" id="bootstrap-override-col2">
+			    		<a href="/listado-musicos" id="btn2" class="btn btn-outline-light">Bandas/musicos solistas/etc.<br>para armar fechas</a>			
+			    	</div> 
+		 		</div>		
+		 	  </div>     
+		    </header>
+		
+		    <section id="about">
+		      <div class="container">
+		        <div class="row">
+		          <div class="col-lg-8 mx-auto">
+		            <h2>¿Qué es Arma Tu Fecha?</h2>
+		            <p class="lead">Es un proyecto autogestivo que surge ante la problématica que tienen lxs músicxs independientes de no encontrar lugares para tocar donde haya condiciones mínimas de sonido e instalaciones y no les cobren para tocar, 
+		            				ya sea porque explícitamente les exijan un monto para tocar en el lugar o que les pidan rendir a través de la venta de entradas una determinada suma de dinero (lo cual es excluyente para que se realize el evento) y que en muchos casos 
+									luego además les pidan un %50 de la venta del resto de entradas.
+									<br>
+									Creemos que lxs músicos debemos dejar de alimentar este negocio y por eso en esta página se van a difundir aquellos lugares que den un trato digno a lxs artistas. 
+									<br>
+									También podes crear un perfil para tu banda para que te encuentren en el listado otrxs músicxs u organizadores.
+				    </p>
+					<a href="/registro" class="btn btn-outline-dark">Crear un perfil</a>          
+		          </div>
+		        </div>
+		      </div>
+		    </section>
+		
+		    
+		
+		    <!-- Footer -->
+		    <footer class="py-5 bg-dark">
+		      <div class="container">
+		        <p class="m-0 text-center text-white">Copyright &copy; Your Website 2017</p>
+		      </div>
+		      <!-- /.container -->
+		    </footer>
+		
+		    <!-- Bootstrap core JavaScript -->
+		    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+			<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+		
+		    <!-- Plugin JavaScript -->
+		    <script src="https://github.com/JusRecondo/ArmaTuFecha/blob/master/ArmaTuFecha/src/main/resources/static/vendor/jquery-easing/jquery.easing.min.js"></script>
+		
+		    <!-- Custom JavaScript for this theme -->
+		    <script src="https://github.com/JusRecondo/ArmaTuFecha/blob/master/ArmaTuFecha/src/main/resources/static/js/scrolling-nav.js"></script>
+		    
+		
+		  </body>
 
 </html> 

@@ -1,5 +1,5 @@
 
-$(document).ready( function(){
+$(document).ready(function() {
 	
 	$("#formulario-local").hide();
 	$("#formulario-musico").hide();
@@ -27,7 +27,8 @@ $(document).ready( function(){
    $("form").submit( function(){
 	   $(this).find(".mail").val($("#mail").val());
 	   $(this).find(".contrasenia").val($("#contrasenia").val());
- 	
+	   $(this).find(".contrasenia2").val($("#contrasenia2").val());
+   
 	   
    });
 

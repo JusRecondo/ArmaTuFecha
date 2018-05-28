@@ -109,7 +109,7 @@ ALTER TABLE public.perfiles_musicos
     
     
     
-INSERT INTO usuarios (mail, contrasenia, tipo) VALUES ('pruebalocal@gmail.com','admin','local');
-INSERT INTO usuarios (mail, contrasenia, tipo) VALUES ('pruebamusico@gmail.com','admin','musico');
+INSERT INTO usuarios (mail, contrasenia, tipo) VALUES ('pruebalocal@gmail.com','admin','local', 'pruebalocal');
+INSERT INTO usuarios (mail, contrasenia, tipo) VALUES ('pruebamusico@gmail.com','admin','musico', 'pruebamusico');
 INSERT INTO perfiles_locales (nombre, direccion, telefono,  mail_contacto, descripcion, id_usuario) VALUES ('pruebalocal','aslkdj','123455','prueba@gmail.com','lasjdfsakfsdf', '1');
 INSERT INTO perfiles_musicos (nombre, ubicacion, telefono,  mail_contacto, descripcion, id_usuario) VALUES ('pruebamusico','aslkdj','123455','prueba@gmail.com','lasjdfsakfsdf', '1');

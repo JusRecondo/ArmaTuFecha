@@ -15,6 +15,14 @@
 	
 }
 
+.bootstrap-override-header {
+	padding-bottom: 80px !important;
+}
+
+.bootstrap-override-section {
+	padding-top: 100px !important;
+}
+
 #btn1 {
 	display: block;
 	padding: 32px 14px;
@@ -29,4 +37,12 @@
 
 #color1 {
 	background-color: #117a8b !important;
+}
+
+#label1 {
+	font-size: 1.5rem;
+}
+
+#label2 {
+	font-size: 1.5rem;
 }
