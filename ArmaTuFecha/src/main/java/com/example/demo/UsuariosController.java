@@ -1,5 +1,7 @@
 package com.example.demo;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -7,8 +9,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.swing.plaf.synth.SynthSeparatorUI;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
@@ -22,8 +24,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.example.model.PerfilLocal;
 import com.example.model.PerfilMusico;
 
-import ch.qos.logback.core.net.SyslogOutputStream;
-
 @Controller
 public class UsuariosController {
 
@@ -34,7 +34,17 @@ public class UsuariosController {
 	private UsuariosHelper UsuariosHelper;
 
 	@GetMapping("/")
-	public String paginaPrincipal() {
+	public String paginaPrincipal(HttpServletRequest request, Model template) throws MalformedURLException {
+	   //no funciona, porque la ruta tiene una parte variable	
+		String referer = request.getHeader("Referer");
+		if (referer != null) {
+			URL url = new URL(referer);
+            System.out.println(url.getPath());
+			if (url.getPath().equals("/locales/confirmacion-eliminar-perfil/{}") || url.getPath().equals("/musicos/confirmacion-eliminar-perfil/{}") ) {
+				
+				template.addAttribute("mensaje_eliminado", "Perfil y datos de usuario eliminados.");
+			}
+		}
 		return "pagina-principal";
 	}
 
@@ -58,18 +68,18 @@ public class UsuariosController {
 	}
 
 	@PostMapping("/procesar-perfil/local")
-	public String procesarPerfilLocal(Model template, @RequestParam String mail_usuario,
+	public String procesarPerfilLocal(Model template, @RequestParam String mail,
 			@RequestParam String contrasenia, @RequestParam String contrasenia2, @RequestParam String nombre,
 			@RequestParam String direccion, @RequestParam String telefono, @RequestParam String mail_contacto,
 			@RequestParam String descripcion, @RequestParam String red_social1, @RequestParam String red_social2,
 			@RequestParam String red_social3) throws SQLException {
 
-		if (mail_usuario.length() == 0 || contrasenia.length() == 0 || contrasenia2.length() == 0
+		if (mail.length() == 0 || contrasenia.length() == 0 || contrasenia2.length() == 0
 				|| nombre.length() == 0 || direccion.length() == 0 || telefono.length() == 0
 				|| mail_contacto.length() == 0 || descripcion.length() == 0) {
 
 			template.addAttribute("aviso_incompleto", "Por favor completar los campos obligatorios");
-			template.addAttribute("mailCargado", mail_usuario);
+			template.addAttribute("mailCargado", mail);
 			template.addAttribute("nombreCargado", nombre);
 			template.addAttribute("direccionCargada", direccion);
 			template.addAttribute("telefonoCargado", telefono);
@@ -85,7 +95,7 @@ public class UsuariosController {
 		} else if (!contrasenia.equals(contrasenia2)) {
 
 			template.addAttribute("aviso_contrasenia", "Las contraseñas ingresadas no coinciden.");
-			template.addAttribute("mailCargado", mail_usuario);
+			template.addAttribute("mailCargado", mail);
 			template.addAttribute("nombreCargado", nombre);
 			template.addAttribute("direccionCargada", direccion);
 			template.addAttribute("telefonoCargado", telefono);
@@ -103,8 +113,9 @@ public class UsuariosController {
 			connection = DriverManager.getConnection(env.getProperty("spring.datasource.url"),
 					env.getProperty("spring.datasource.username"), env.getProperty("spring.datasource.password"));
 
-			PreparedStatement consulta = connection.prepareStatement("SELECT mail FROM usuarios WHERE mail = '?';");
-			consulta.setString(1, mail_usuario);
+			PreparedStatement consulta = connection.prepareStatement("SELECT mail FROM usuarios WHERE mail = ? ;");
+			
+			consulta.setString(1, mail);
 
 			ResultSet resultado = consulta.executeQuery();
 
@@ -129,7 +140,7 @@ public class UsuariosController {
 					"INSERT INTO usuarios (mail, contrasenia, tipo, nombre) VALUES (?, ?, 'local', ?);",
 					PreparedStatement.RETURN_GENERATED_KEYS);
 
-			consulta.setString(1, mail_usuario);
+			consulta.setString(1, mail);
 			consulta.setString(2, contrasenia);
 			consulta.setString(3, nombre);
 
@@ -171,19 +182,19 @@ public class UsuariosController {
 	}
 
 	@PostMapping("/procesar-perfil/musico")
-	public String procesarPerfilMusico(Model template, @RequestParam String mail_usuario,
+	public String procesarPerfilMusico(Model template, @RequestParam String mail,
 			@RequestParam String contrasenia, @RequestParam String contrasenia2, @RequestParam String nombre,
 			@RequestParam String ubicacion, @RequestParam String telefono, @RequestParam String mail_contacto,
 			@RequestParam String descripcion, @RequestParam String red_social1, @RequestParam String red_social2,
 			@RequestParam String red_social3, @RequestParam String link_musica1, @RequestParam String link_musica2,
 			@RequestParam String link_musica3) throws SQLException {
 
-		if (mail_usuario.length() == 0 || contrasenia.length() == 0 || contrasenia2.length() == 0
+		if (mail.length() == 0 || contrasenia.length() == 0 || contrasenia2.length() == 0
 				|| nombre.length() == 0 || ubicacion.length() == 0 || telefono.length() == 0
 				|| mail_contacto.length() == 0 || descripcion.length() == 0) {
 
 			template.addAttribute("aviso_incompleto", "Por favor completar los campos obligatorios");
-			template.addAttribute("mailCargado", mail_usuario);
+			template.addAttribute("mailCargado", mail);
 			template.addAttribute("nombreCargado", nombre);
 			template.addAttribute("ubicacionCargada", ubicacion);
 			template.addAttribute("telefonoCargado", telefono);
@@ -202,7 +213,7 @@ public class UsuariosController {
 		} else if (!contrasenia.equals(contrasenia2)) {
 
 			template.addAttribute("aviso_contrasenia", "Las contraseñas ingresadas no coinciden.");
-			template.addAttribute("mailCargado", mail_usuario);
+			template.addAttribute("mailCargado", mail);
 			template.addAttribute("nombreCargado", nombre);
 			template.addAttribute("ubicacionCargada", ubicacion);
 			template.addAttribute("telefonoCargado", telefono);
@@ -223,8 +234,9 @@ public class UsuariosController {
 			connection = DriverManager.getConnection(env.getProperty("spring.datasource.url"),
 					env.getProperty("spring.datasource.username"), env.getProperty("spring.datasource.password"));
 
-			PreparedStatement consulta = connection.prepareStatement("SELECT mail FROM usuarios WHERE mail = '?';");
-			consulta.setString(1, mail_usuario);
+			PreparedStatement consulta = connection.prepareStatement("SELECT mail FROM usuarios WHERE mail =  ? ;");
+			
+			consulta.setString(1, mail);
 
 			ResultSet resultado = consulta.executeQuery();
 
@@ -251,7 +263,7 @@ public class UsuariosController {
 					"INSERT INTO usuarios (mail, contrasenia, tipo, nombre) VALUES (?, ?, 'musico', ?);",
 					PreparedStatement.RETURN_GENERATED_KEYS);
 
-			consulta.setString(1, mail_usuario);
+			consulta.setString(1, mail);
 			consulta.setString(2, contrasenia);
 			consulta.setString(3, nombre);
 
@@ -381,114 +393,9 @@ public class UsuariosController {
 		return "perfil-musico";
 	}
 
-	@GetMapping("/listado-locales")
-	public String listadoLocales(Model template) throws SQLException {
+	
 
-		Connection connection;
-		connection = DriverManager.getConnection(env.getProperty("spring.datasource.url"),
-				env.getProperty("spring.datasource.username"), env.getProperty("spring.datasource.password"));
-
-		PreparedStatement consulta = connection.prepareStatement("SELECT * FROM perfiles_locales;");
-
-		ResultSet resultado = consulta.executeQuery();
-
-		ArrayList<PerfilLocal> listadoLocales = new ArrayList<PerfilLocal>();
-
-		while (resultado.next()) {
-			int id = resultado.getInt("id");
-			String nombre = resultado.getString("nombre");
-			String direccion = resultado.getString("direccion");
-			String telefono = resultado.getString("telefono");
-			String mail_contacto = resultado.getString("mail_contacto");
-			String descripcion = resultado.getString("descripcion");
-			String red_social1 = resultado.getString("red_social1");
-			String red_social2 = resultado.getString("red_social2");
-			String red_social3 = resultado.getString("red_social3");
-			int id_usuario = resultado.getInt("id_usuario");
-
-			PerfilLocal x = new PerfilLocal(id, nombre, direccion, telefono, mail_contacto, descripcion, red_social1,
-					red_social2, red_social3, id_usuario);
-			listadoLocales.add(x);
-		}
-
-		template.addAttribute("listadoLocales", listadoLocales);
-
-		return "listado-locales";
-	}
-
-	// ejemplo template con fragments
-	@GetMapping("/listado-locales1")
-	public String listadoLocales1(Model template) throws SQLException {
-
-		Connection connection;
-		connection = DriverManager.getConnection(env.getProperty("spring.datasource.url"),
-				env.getProperty("spring.datasource.username"), env.getProperty("spring.datasource.password"));
-
-		PreparedStatement consulta = connection.prepareStatement("SELECT * FROM perfiles_locales;");
-
-		ResultSet resultado = consulta.executeQuery();
-
-		ArrayList<PerfilLocal> listadoLocales = new ArrayList<PerfilLocal>();
-
-		while (resultado.next()) {
-			int id = resultado.getInt("id");
-			String nombre = resultado.getString("nombre");
-			String direccion = resultado.getString("direccion");
-			String telefono = resultado.getString("telefono");
-			String mail_contacto = resultado.getString("mail_contacto");
-			String descripcion = resultado.getString("descripcion");
-			String red_social1 = resultado.getString("red_social1");
-			String red_social2 = resultado.getString("red_social2");
-			String red_social3 = resultado.getString("red_social3");
-			int id_usuario = resultado.getInt("id_usuario");
-
-			PerfilLocal x = new PerfilLocal(id, nombre, direccion, telefono, mail_contacto, descripcion, red_social1,
-					red_social2, red_social3, id_usuario);
-			listadoLocales.add(x);
-		}
-
-		template.addAttribute("listadoLocales", listadoLocales);
-
-		return "listadolocales1";
-	}
-
-	@GetMapping("/listado-musicos")
-	public String listadoMusicos(Model template) throws SQLException {
-
-		Connection connection;
-		connection = DriverManager.getConnection(env.getProperty("spring.datasource.url"),
-				env.getProperty("spring.datasource.username"), env.getProperty("spring.datasource.password"));
-
-		PreparedStatement consulta = connection.prepareStatement("SELECT * FROM perfiles_musicos;");
-
-		ResultSet resultado = consulta.executeQuery();
-
-		ArrayList<PerfilMusico> listadoMusicos = new ArrayList<PerfilMusico>();
-
-		while (resultado.next()) {
-			int id = resultado.getInt("id");
-			String nombre = resultado.getString("nombre");
-			String ubicacion = resultado.getString("ubicacion");
-			String telefono = resultado.getString("telefono");
-			String mail_contacto = resultado.getString("mail_contacto");
-			String descripcion = resultado.getString("descripcion");
-			String red_social1 = resultado.getString("red_social1");
-			String red_social2 = resultado.getString("red_social2");
-			String red_social3 = resultado.getString("red_social3");
-			String link_musica1 = resultado.getString("link_musica1");
-			String link_musica2 = resultado.getString("link_musica2");
-			String link_musica3 = resultado.getString("link_musica3");
-			int id_usuario = resultado.getInt("id_usuario");
-
-			PerfilMusico x = new PerfilMusico(id, nombre, ubicacion, telefono, mail_contacto, descripcion, red_social1,
-					red_social2, red_social3, link_musica1, link_musica2, link_musica3, id_usuario);
-			listadoMusicos.add(x);
-		}
-
-		template.addAttribute("listadoMusicos", listadoMusicos);
-
-		return "listado-musicos";
-	}
+	
 
 	@GetMapping("/index")
 	public String estructura() {
@@ -509,7 +416,16 @@ public class UsuariosController {
 	}
 
 	@GetMapping("/login")
-	public String login() {
+	public String login(HttpServletRequest request, Model template) throws MalformedURLException {
+		String referer = request.getHeader("Referer");
+		if (referer != null) {
+			URL url = new URL(referer);
+
+			if (url.getPath().equals("/crear-perfil")) {
+				
+				template.addAttribute("mensaje_bienvenida", "¡Gracias por unirte!");
+			}
+		}
 		return "login";
 	}
 
@@ -687,15 +603,15 @@ public class UsuariosController {
 	}
 
 	// falta comprobacion de sesion iniciada
-	@GetMapping("/editar-datos-usuario/{id}")
-	public String editarUsuario(Model template, @PathVariable int id) throws SQLException {
+	@GetMapping("/editar-datos-usuario/{id_usuario}")
+	public String editarUsuario(Model template, @PathVariable int id_usuario) throws SQLException {
 		Connection connection;
 		connection = DriverManager.getConnection(env.getProperty("spring.datasource.url"),
 				env.getProperty("spring.datasource.username"), env.getProperty("spring.datasource.password"));
 
 		PreparedStatement consulta = connection.prepareStatement("SELECT * FROM usuarios WHERE id = ?;");
 
-		consulta.setInt(1, id);
+		consulta.setInt(1, id_usuario);
 
 		ResultSet resultado = consulta.executeQuery();
 
@@ -703,7 +619,7 @@ public class UsuariosController {
 			String mail = resultado.getString("mail");
 			String contrasenia = resultado.getString("contrasenia");
 
-			template.addAttribute("mail", mail);
+			template.addAttribute("mailCargado", mail);
 			template.addAttribute("contrasenia", contrasenia);
 
 		}
@@ -712,18 +628,18 @@ public class UsuariosController {
 	}
 
 	@PostMapping("/procesar-edicion-usuario/{id}")
-	public String procesarEdicionUsuario(Model template, @PathVariable int id, @RequestParam String mail_usuario,
+	public String procesarEdicionUsuario(Model template, @PathVariable int id, @RequestParam String mail,
 			@RequestParam String contrasenia, @RequestParam String contrasenia2) throws SQLException {
 
-		if ( mail_usuario.length() == 0 || contrasenia.length() == 0 || contrasenia2.length() == 0) {
+		if ( mail.length() == 0 || contrasenia.length() == 0 || contrasenia2.length() == 0) {
 			template.addAttribute("aviso_incompleto", "Por favor completar los campos obligatorios");
-			template.addAttribute("mailCargado", mail_usuario);
+			template.addAttribute("mailCargado", mail);
 			return "editar-datos-usuario";
 
 		} else if (!contrasenia.equals(contrasenia2)) {
 
 			template.addAttribute("aviso_contrasenia", "Las contraseñas ingresadas no coinciden.");
-			template.addAttribute("mailCargado", mail_usuario);
+			template.addAttribute("mailCargado", mail);
 			
 			return "editar-datos-usuario";
 		
@@ -733,9 +649,9 @@ public class UsuariosController {
 			connection = DriverManager.getConnection(env.getProperty("spring.datasource.url"),
 					env.getProperty("spring.datasource.username"), env.getProperty("spring.datasource.password"));
 
-			PreparedStatement consulta = connection.prepareStatement("SELECT mail FROM usuarios WHERE mail = '?';");
+			PreparedStatement consulta = connection.prepareStatement("SELECT mail FROM usuarios WHERE mail =  ?;");
 			
-			consulta.setString(1, mail_usuario);
+			consulta.setString(1, mail);
 
 			ResultSet resultado = consulta.executeQuery();
 
@@ -751,7 +667,7 @@ public class UsuariosController {
 		    consulta = connection
 					.prepareStatement("UPDATE usuarios SET mail = ?, contrasenia = ? WHERE id = ?;");
 
-			consulta.setString(1, mail_usuario);
+			consulta.setString(1, mail);
 			consulta.setString(2, contrasenia);
 			consulta.setInt(3, id);
 
@@ -964,17 +880,25 @@ public class UsuariosController {
 
 		}
 	}
-
+    //no funciona el volver
 	@GetMapping("/locales/eliminar-cuenta/{id_usuario}")
-	public String eliminarCuentaLocal(Model template, @PathVariable int id_usuario) {
-		template.addAttribute("id_usuario", id_usuario);
-
+	public String eliminarCuentaLocal(HttpServletRequest request, Model template, @PathVariable int id_usuario) throws MalformedURLException {
+		String referer = request.getHeader("Referer");
+		if (referer != null) {
+			URL url = new URL(referer);
+			
+				template.addAttribute("volver", url.getPath());
+				
+				template.addAttribute("id_usuario", id_usuario);
+			
+		}
 		return "eliminar-cuenta-local";
 	}
 
-	@GetMapping("/musicos/eliminar-cuenta/id_usuario")
-	public String eliminarCuentaMusico(Model template, @PathVariable String id_usuario) {
+	@GetMapping("/musicos/eliminar-cuenta/{id_usuario}")
+	public String eliminarCuentaMusico(Model template, @PathVariable int id_usuario) {
 		template.addAttribute("id_usuario", id_usuario);
+
 		return "eliminar-cuenta-musico";
 	}
 
@@ -1007,12 +931,12 @@ public class UsuariosController {
 		connection = DriverManager.getConnection(env.getProperty("spring.datasource.url"),
 				env.getProperty("spring.datasource.username"), env.getProperty("spring.datasource.password"));
 
-		PreparedStatement consulta = connection.prepareStatement("DELETE FROM perfiles_musicos WHERE id_usuario = ?");
+		PreparedStatement consulta = connection.prepareStatement("DELETE FROM perfiles_musicos WHERE id_usuario = ?;");
 		consulta.setInt(1, id_usuario);
 
 		consulta.executeUpdate();
 
-		consulta = connection.prepareStatement("DELETE FROM usuarios WHERE id = ?");
+		consulta = connection.prepareStatement("DELETE FROM usuarios WHERE id = ?;");
 		consulta.setInt(1, id_usuario);
 
 		consulta.executeUpdate();
