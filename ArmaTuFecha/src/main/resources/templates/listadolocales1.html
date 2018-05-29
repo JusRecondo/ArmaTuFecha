@@ -1,9 +1,9 @@
-<html layout:decorator="index">
+<html >
     <head>
     	<title>Lugares donde tocar</title>
     
     </head>
-	<div class="col-lg-9" layout:fragment="contenido">
+	<div class="col-lg-9" >
 
           <div id="carouselExampleIndicators" class="carousel slide my-4" data-ride="carousel">
             <ol class="carousel-indicators">
@@ -44,8 +44,8 @@
                   <p class="card-text">
                   		<label>Dirección:&nbsp; </label><label th:text="${perfilLocal.direccion}">Dirección</label><br></br>
 						<label>Teléfono:&nbsp; </label><label th:text="${perfilLocal.telefono}">Teléfono</label><br></br>
-						<label>Mail:&nbsp; </label><label th:text="${perfilLocal.mail}">Mail</label><br></br>
-						<a th:href="${perfilLocal.redsocial1}">Facebook</a><br></br>
+						<label>Mail:&nbsp; </label><label th:text="${perfilLocal.mail_contacto}">Mail</label><br></br>
+						<a th:href="${perfilLocal.red_social1}">Facebook</a><br></br>
                   </p>
                 </div>
                 <div class="card-footer">

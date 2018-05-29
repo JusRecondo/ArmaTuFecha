@@ -3,17 +3,19 @@
 
   <head>
 
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta charset="utf-8"></meta>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"></meta>
     
 
     <title th:text="${nombre}"></title>
 
     <!-- Bootstrap core CSS -->
-    <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"></link>
 
     <!-- Custom styles for this template -->
-    <link href="/css/portfolio-item.css" rel="stylesheet">
+    <link href="/css/portfolio-item.css" rel="stylesheet"></link>
+    <link href="css/scrolling-nav.css" rel="stylesheet"></link>
+    <link rel="stylesheet" type="text/css" href="/css/estilos.css"></link>
 
   </head>
 
@@ -47,30 +49,36 @@
       <!-- Portfolio Item Heading -->
       <h1 class="my-4" th:text="${nombre}">
       </h1>
-
-      <!-- Portfolio Item Row -->
       <div class="row">
-
-        <div class="col-md-8">
-          <img class="img-fluid" src="http://placehold.it/750x500" alt="">
-        </div>
-
-        <div class="col-md-4">
-          <h3 class="my-3">Descripción</h3>
+      	<div class="col-8">
+			<div class="row">
+				<div class="col-md-12">
+					<img class="img-fluid" src="http://placehold.it/750x500" alt="">
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-6">
+					<h3 class="my-3">Datos de contacto</h3>
+		            <label th:text="${direccion}">Lorem Ipsum</label><br>
+		            <label th:text="${telefono}">a</label><br>
+		            <label th:text="${mail_contacto}">a</label><br>
+				    
+				</div>
+				<div class="col-6">
+					<h3 class="my-3">Redes Sociales</h3>
+					<a th:href="${red_social1}" th:if="${red_social1}">Facebook</a><br><br>
+					<a th:href="${red_social2}" th:if="${red_social2}">Instagram</a><br><br>
+				    <a th:href="${red_social3}" th:if="${red_social3}">Otro</a><br><br>
+				</div>
+			</div>      	
+      	</div>
+      	<div class="col-md-4">
+      		<h3 class="my-3">Descripción</h3>
           <p th:text="${descripcion}">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae. Sed dui lorem, adipiscing in adipiscing et, interdum nec metus. Mauris ultricies, justo eu convallis placerat, felis enim.</p>
-          <h3 class="my-3">Datos de contacto</h3>
-            <label th:text="${direccion}">Lorem Ipsum</label><br>
-            <label th:text="${telefono}">a</label><br>
-            <label th:text="${mail_contacto}">a</label><br>
-            <a th:href="${red_social1}" th:if="${red_social1}">Facebook</a><br>
-			<a th:href="${red_social2}" th:if="${red_social2}">Instagram</a><br>
-		    <a th:href="${red_social3}" th:if="${red_social3}">Otro</a><br>
-        </div>
-
+       
+      	</div>
       </div>
-      <!-- /.row -->
-
-      <!-- Related Projects Row -->
+      
       <h3 class="my-4">Fotos</h3>
 
       <div class="row">

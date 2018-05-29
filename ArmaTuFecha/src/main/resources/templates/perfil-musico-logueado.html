@@ -3,17 +3,19 @@
 
   <head>
 
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta charset="utf-8"></meta>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"></meta>
     
 
     <title th:text="${nombre}"></title>
 
     <!-- Bootstrap core CSS -->
-    <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"></link>
 
     <!-- Custom styles for this template -->
-    <link href="/css/portfolio-item.css" rel="stylesheet">
+    <link href="/css/portfolio-item.css" rel="stylesheet"></link>
+    <link href="css/scrolling-nav.css" rel="stylesheet"></link>
+    <link rel="stylesheet" type="text/css" href="/css/estilos.css"></link>
 
   </head>
 
@@ -35,8 +37,8 @@
 					<li class="nav-item"><a class="nav-link js-scroll-trigger"
 						th:href="'/home/musico/' + ${nombre}">Home</a></li>
 					<li class="nav-item">
-		              <a class="nav-link js-scroll-trigger" th:href="'/locales/' + ${nombre}">Mi Perfil</a>
-		             </li>
+		              <a class="nav-link js-scroll-trigger" th:href="'/musicos/' + ${nombre}">Mi Perfil</a>
+		             </li> 	
 		            <li class="nav-item">
 		              <a class="nav-link js-scroll-trigger" href="/logout">Log out</a>
 		            </li>
@@ -51,42 +53,44 @@
       <!-- Portfolio Item Heading -->
       <h1 class="my-4" th:text="${nombre}">
       </h1>
-
-      <!-- Portfolio Item Row -->
       <div class="row">
-
-        <div class="col-md-8">
-          <img class="img-fluid" src="http://placehold.it/750x500" alt="">
-        
-        </div>
-
-        <div class="col-md-4">
-          <h3 class="my-3">Descripción</h3>
-          <p th:text="${descripcion}">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae. Sed dui lorem, adipiscing in adipiscing et, interdum nec metus. Mauris ultricies, justo eu convallis placerat, felis enim.</p>
-          <h3 class="my-3">Datos de contacto</h3>
-            <label th:text="${ubicacion}">Lorem Ipsum</label><br>
-            <label th:text="${telefono}">a</label><br>
-            <label th:text="${mail_contacto}">a</label><br>
-            <a th:href="${red_social1}" th:if="${red_social1}">Facebook</a><br>
-			<a th:href="${red_social2}" th:if="${red_social2}">Instagram</a><br>
-		    <a th:href="${red_social3}" th:if="${red_social3}">Otro</a><br>
-		    <a th:href="${link_musica1}" th:if="${link_musica1}">YouTube</a><br>
-			<a th:href="${link_musica2}" th:if="${link_musica2}">Bandcamp</a><br>
-			<a th:href="${link_musica3}" th:if="${link_musica3}">Otro</a><br>
-		    <a th:href="'/musicos/mi-perfil/editar/' + ${id_usuario}" >Editar datos del perfil</a><br>
+      	<div class="col-8">
+			<div class="row">
+				<div class="col-md-12">
+					<img class="img-fluid" src="http://placehold.it/750x500" alt="">
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-6">
+					<h3 class="my-3">Datos de contacto</h3>
+		            <label th:text="${ubicacion}">Lorem Ipsum</label><br>
+		            <label th:text="${telefono}">a</label><br>
+		            <label th:text="${mail_contacto}">a</label><br>
+		            <a th:href="${red_social1}" th:if="${red_social1}">Facebook</a><br>
+					<a th:href="${red_social2}" th:if="${red_social2}">Instagram</a><br>
+				    <a th:href="${red_social3}" th:if="${red_social3}">Otro</a><br>
+				    <a th:href="${link_musica1}" th:if="${link_musica1}">YouTube</a><br>
+					<a th:href="${link_musica2}" th:if="${link_musica2}">Bandcamp</a><br>
+					<a th:href="${link_musica3}" th:if="${link_musica3}">Otro</a><br>
+				    <a th:href="'/musicos/mi-perfil/editar/' + ${id_usuario}" >Editar datos del perfil</a><br>
+				</div>
+				<div class="col-6">
+					<h3 class="my-3">Datos de la cuenta</h3>
+				  	<label>Mail:&nbsp;</label><label th:text="${mail}"></label><br>
+				  	<label>Contraseña:&nbsp;</label><label th:text="${contrasenia}"></label><br>
+				  	<a th:href= "'/editar-datos-usuario/' + ${id_usuario}">Editar datos de usuario</a><br></br>
 					
-		    <h3 class="my-3">Datos de la cuenta</h3>
-		  	<label>Mail:&nbsp;</label><label th:text="${mail}"></label><br>
-		  	<label>Contraseña:&nbsp;</label><label th:text="${contrasenia}"></label><br>
-		  	<a th:href= "'/editar-datos-usuario/' + ${id_usuario}">Editar datos de usuario</a><br></br>
-			
-			<a th:href="'/musicos/eliminar-cuenta/' + ${id_usuario}">Eliminar cuenta y perfil</a>		
-        </div>
-
+					<a th:href="'/musicos/eliminar-cuenta/' + ${id_usuario}">Eliminar cuenta y perfil</a>	
+				</div>
+			</div>      	
+      	</div>
+      	<div class="col-md-4">
+      		<h3 class="my-3">Descripción</h3>
+          <p th:text="${descripcion}">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae. Sed dui lorem, adipiscing in adipiscing et, interdum nec metus. Mauris ultricies, justo eu convallis placerat, felis enim.</p>
+       
+      	</div>
       </div>
-      <!-- /.row -->
-
-      <!-- Related Projects Row -->
+      
       <h3 class="my-4">Fotos</h3>
 
       <div class="row">
