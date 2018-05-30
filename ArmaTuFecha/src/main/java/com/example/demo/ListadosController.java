@@ -46,6 +46,8 @@ public class ListadosController {
 		while (resultado.next()) {
 			int id = resultado.getInt("id");
 			String nombre = resultado.getString("nombre");
+			String provincia = resultado.getString("provincia");
+			String localidad = resultado.getString("localidad");
 			String direccion = resultado.getString("direccion");
 			String telefono = resultado.getString("telefono");
 			String mail_contacto = resultado.getString("mail_contacto");
@@ -55,7 +57,7 @@ public class ListadosController {
 			String red_social3 = resultado.getString("red_social3");
 			int id_usuario = resultado.getInt("id_usuario");
 
-			PerfilLocal x = new PerfilLocal(id, nombre, direccion, telefono, mail_contacto, descripcion, red_social1,
+			PerfilLocal x = new PerfilLocal(id, nombre, provincia, localidad, direccion, telefono, mail_contacto, descripcion, red_social1,
 					red_social2, red_social3, id_usuario);
 			listadoLocales.add(x);
 		}
@@ -66,42 +68,6 @@ public class ListadosController {
 	}
 	
 	
-	// ejemplo template con fragments
-		@GetMapping("/listado-locales1")
-		public String listadoLocales1(Model template) throws SQLException {
-
-			Connection connection;
-			connection = DriverManager.getConnection(env.getProperty("spring.datasource.url"),
-					env.getProperty("spring.datasource.username"), env.getProperty("spring.datasource.password"));
-
-			PreparedStatement consulta = connection.prepareStatement("SELECT * FROM perfiles_locales;");
-
-			ResultSet resultado = consulta.executeQuery();
-
-			ArrayList<PerfilLocal> listadoLocales = new ArrayList<PerfilLocal>();
-
-			while (resultado.next()) {
-				int id = resultado.getInt("id");
-				String nombre = resultado.getString("nombre");
-				String direccion = resultado.getString("direccion");
-				String telefono = resultado.getString("telefono");
-				String mail_contacto = resultado.getString("mail_contacto");
-				String descripcion = resultado.getString("descripcion");
-				String red_social1 = resultado.getString("red_social1");
-				String red_social2 = resultado.getString("red_social2");
-				String red_social3 = resultado.getString("red_social3");
-				int id_usuario = resultado.getInt("id_usuario");
-
-				PerfilLocal x = new PerfilLocal(id, nombre, direccion, telefono, mail_contacto, descripcion, red_social1,
-						red_social2, red_social3, id_usuario);
-				listadoLocales.add(x);
-			}
-
-			template.addAttribute("listadoLocales", listadoLocales);
-
-			return "listadolocales1";
-		}
-
 		@GetMapping("/listado-musicos")
 		public String listadoMusicos(Model template) throws SQLException {
 
@@ -118,7 +84,8 @@ public class ListadosController {
 			while (resultado.next()) {
 				int id = resultado.getInt("id");
 				String nombre = resultado.getString("nombre");
-				String ubicacion = resultado.getString("ubicacion");
+				String provincia = resultado.getString("provincia");
+				String localidad = resultado.getString("localidad");
 				String telefono = resultado.getString("telefono");
 				String mail_contacto = resultado.getString("mail_contacto");
 				String descripcion = resultado.getString("descripcion");
@@ -130,14 +97,14 @@ public class ListadosController {
 				String link_musica3 = resultado.getString("link_musica3");
 				int id_usuario = resultado.getInt("id_usuario");
 
-				PerfilMusico x = new PerfilMusico(id, nombre, ubicacion, telefono, mail_contacto, descripcion, red_social1,
+				PerfilMusico x = new PerfilMusico(id, nombre, provincia, localidad,  telefono, mail_contacto, descripcion, red_social1,
 						red_social2, red_social3, link_musica1, link_musica2, link_musica3, id_usuario);
 				listadoMusicos.add(x);
 			}
 
 			template.addAttribute("listadoMusicos", listadoMusicos);
 
-			return "listado-musicos2";
+			return "listado-musicos";
 		}
 	
 	

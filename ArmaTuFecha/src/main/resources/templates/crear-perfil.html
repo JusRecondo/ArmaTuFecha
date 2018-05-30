@@ -64,16 +64,22 @@
 								<label>*Ingresá una dirección de e-mail:&nbsp;</label>
 								<br>
 							
-								<input class="form-control" id="mail" type="email" placeholder="mail..." th:value="${mailCargado}"></input> 
+								<input class="form-control" id="mail" type="email" placeholder="mail..." th:value="${mailCargado}" required></input> 
+								<div class="invalid-feedback">Por favor completa este campo.</div>
+							    <div class="valid-feedback"></div>
 								<br></br> 
-								<div class="alert alert-danger" role="alert" th:text="${aviso_contrasenia}" th:if="${aviso_contrasenia}">
+								<div class="alert alert-danger" role="alert" th:text="${aviso_contrasenia}" th:if="${aviso_contrasenia}" required>
 								</div>	
 								<label>*Ingresá una contraseña:&nbsp;</label>
 								<br>
 								<input class="form-control" id="contrasenia" type="password" placeholder="contraseña..."></input> <br></br>
+								<div class="invalid-feedback">Por favor completa este campo.</div>
+							    <div class="valid-feedback"></div>
 								<label>*Volvé a ingresar la contraseña:&nbsp;</label>
 								<br>
 								<input class="form-control" id="contrasenia2" type="password" placeholder="contraseña..."></input> <br></br>
+								<div class="invalid-feedback">Por favor completa este campo.</div>
+							    <div class="valid-feedback"></div>
 								
 								<!-- TO DO re ingresar contraseña y en caso de no coincidir recargar el formulario -->
 							</div>
@@ -96,25 +102,71 @@
 				<div class="container">
 					<div class="row">
 						<div class="col-lg-8 mx-auto">
-							<form  class="form-group" action="/procesar-perfil/local" method="POST">
+							<form  class="form-group needs-validation" novalidate action="/procesar-perfil/local" method="POST">
 							
 								<h3 class="no-margin-top">Completa los datos para tu perfil</h3>
 								<input class="mail" type="hidden" name="mail"></input>
-								<input class="contrasenia" type="hidden" name="contrasenia"></input>
-								<input class="contrasenia2" type="hidden" name="contrasenia2"></input>
+								<input class="contrasenia" type="hidden" name="contrasenia" required></input>
+								<input class="contrasenia2" type="hidden" name="contrasenia2" required></input>
 								
-								<label>*Nombre del lugar:&nbsp;</label><input class="form-control" name="nombre" type="text" th:value="${nombreCargado}"></input>
+								<label>*Nombre del lugar:&nbsp;</label><input class="form-control" name="nombre" type="text" th:value="${nombreCargado}" required></input>
+								<div class="invalid-feedback">Por favor completa este campo.</div>
+							    <div class="valid-feedback"></div>
 								<br></br>
-								<label>*Dirección (provincia, localidad, calle, altura):&nbsp;</label><input class="form-control" name="direccion" type="text" th:value="${direccionCargada}"></input>
+								<div class="form-group">
+							    <label for="exampleFormControlSelect2">*Provincia:</label>
+							    <select multiple class="form-control" id="exampleFormControlSelect2"  name="provincia" required>
+							      <option>Buenos Aires</option>
+							      <option>Catamarca</option>
+							      <option>Chaco</option>
+							      <option>Chubut</option>
+							      <option>Córdoba</option>
+							      <option>Corrientes</option>
+							      <option>Entre Ríos</option>
+							      <option>Formosa</option>
+							      <option>Jujuy</option>
+							      <option>La Pampa</option>
+							      <option>La Rioja</option>
+							      <option>Mendoza</option>
+							      <option>Misiones</option>
+							      <option>Neuquén</option>
+							      <option>Río Negro</option>
+							      <option>Salta</option>
+							      <option>San Juan</option>
+							      <option>San Luis</option>
+							      <option>Santa Cruz</option>
+							      <option>Santa Fe</option>
+							      <option>Santiago del Estero</option>
+							      <option>Tierra del Fuego</option>
+							      <option>Tucumán</option>
+							      
+							    </select>
+							    <div class="invalid-feedback">Por favor selecciona una provincia.</div>
+							    <div class="valid-feedback"></div>
+							    </div>
+								<label>*Localidad:&nbsp;</label><input class="form-control" name="localidad" type="text" th:value="${localidadCargada}" required></input>
+								<div class="invalid-feedback">Por favor completa este campo.</div>
+							    <div class="valid-feedback"></div>
 								<br></br>
-								<label>*Teléfono de contacto para organizar fechas:&nbsp;</label><input class="form-control" name="telefono" type="text" th:value="${telefonoCargado}"></input>
+								<label>*Dirección:&nbsp;</label><input class="form-control" name="direccion" type="text" th:value="${direccionCargada}" required></input>
+								<div class="invalid-feedback">Por favor completa este campo.</div>
+							    <div class="valid-feedback"></div>
 								<br></br>
-								<label>*e-mail para contacto:&nbsp;</label><input class="form-control" name="mail_contacto" type="email" th:value="${mail_contactoCargado}"></input>
+								<label>*Teléfono de contacto para organizar fechas:&nbsp;</label><input class="form-control" name="telefono" type="text" th:value="${telefonoCargado}" required></input>
+								<div class="invalid-feedback">Por favor completa este campo.</div>
+							    <div class="valid-feedback"></div>
+								<br></br>
+								<label>*e-mail para contacto:&nbsp;</label><input class="form-control" name="mail_contacto" type="email" th:value="${mail_contactoCargado}" required></input>
+								<div class="invalid-feedback">Por favor completa este campo.</div>
+							    <div class="valid-feedback"></div>
 								<br></br>
 								<label>*Descripción del lugar (máx. 1400 caracteres). Debe incluir: tipo de establecimiento, equipamiento de sonido,
 								arreglo con los músicos (puerta para las bandas, arreglo 70-30 o similar por entradas, pago de un cashé, etc.), capacidad, estilos musicales de los shows):</label>
+						
 								<br></br>
-								<textarea class="form-control textarea-height" name="descripcion" type="text" maxlength="1400" th:text="${descripcionCargada}"></textarea>
+								<textarea class="form-control textarea-height" name="descripcion" type="text" maxlength="1400" th:text="${descripcionCargada}" required></textarea>
+								<div class="invalid-feedback">Por favor completa este campo.</div>
+							    <div class="valid-feedback"></div>
 								<br></br>
 								<label>Links a redes sociales:&nbsp;</label><br></br>
 								<label>Facebook:&nbsp;</label><input class="form-control" name="red_social1" type="url" th:value="${red_social1Cargada}"></input><br></br>
@@ -135,26 +187,67 @@
 				<div class="container">
 					<div class="row">
 						<div class="col-lg-8 mx-auto">
-							<form class="form-group" action="/procesar-perfil/musico" method="POST">
+							<form class="form-group needs-validation" novalidate action="/procesar-perfil/musico" method="POST">
 							
 							<h3 class="no-margin-top">Completa los datos para tu perfil</h3>
 							<input class="mail" type="hidden" name="mail"></input>
-							<input class="contrasenia" type="hidden" name="contrasenia"></input>
-							<input class="contrasenia2" type="hidden" name="contrasenia2"></input>
+							<input class="contrasenia" type="hidden" name="contrasenia" required></input>
+							<input class="contrasenia2" type="hidden" name="contrasenia2" required></input>
 							
-							<label>*Nombre de la banda/solista:&nbsp;</label><input class="form-control" name="nombre" type="text" th:value="${nombreCargado}"></input>
+							<label>*Nombre de la banda/solista:&nbsp;</label><input class="form-control" name="nombre" type="text" th:value="${nombreCargado}" required></input>
+							<div class="invalid-feedback">Por favor completa este campo.</div>
+							<div class="valid-feedback"></div>
 							<br></br>
 							
-							<label>*Ubicación (Provincia, localidad):&nbsp;</label><input class="form-control" name="ubicacion" type="text" th:value="${ubicacionCargada}"></input>
+							<div class="form-group">
+							    <label for="exampleFormControlSelect2">*Provincia:</label>
+							    <select multiple class="form-control" id="exampleFormControlSelect2"  name="provincia" required>
+							      <option>Buenos Aires</option>
+							      <option>Catamarca</option>
+							      <option>Chaco</option>
+							      <option>Chubut</option>
+							      <option>Córdoba</option>
+							      <option>Corrientes</option>
+							      <option>Entre Ríos</option>
+							      <option>Formosa</option>
+							      <option>Jujuy</option>
+							      <option>La Pampa</option>
+							      <option>La Rioja</option>
+							      <option>Mendoza</option>
+							      <option>Misiones</option>
+							      <option>Neuquén</option>
+							      <option>Río Negro</option>
+							      <option>Salta</option>
+							      <option>San Juan</option>
+							      <option>San Luis</option>
+							      <option>Santa Cruz</option>
+							      <option>Santa Fe</option>
+							      <option>Santiago del Estero</option>
+							      <option>Tierra del Fuego</option>
+							      <option>Tucumán</option>
+							      
+							    </select>
+							    <div class="invalid-feedback">Por favor selecciona una provincia.</div>
+							    <div class="valid-feedback"></div>
+							    </div>
+							<label>*Localidad:&nbsp;</label><input class="form-control" name="localidad" type="text" th:value="${localidadCargada}" required></input>
+							<div class="invalid-feedback">Por favor completa este campo.</div>
+							<div class="valid-feedback"></div>
 							<br></br>
-							<label>*Teléfono de contacto:&nbsp;</label><input class="form-control" name="telefono" type="text" th:value="${telefonoCargado}"></input>
+							<label>*Teléfono de contacto:&nbsp;</label><input class="form-control" name="telefono" type="text" th:value="${telefonoCargado}" required></input>
+							<div class="invalid-feedback">Por favor completa este campo.</div>
+							<div class="valid-feedback"></div>
 							<br></br>
-							<label>*e-mail para contacto:&nbsp;</label><input class="form-control" name="mail_contacto" type="email" th:value="${mailCargado}"></input>
+							<label>*e-mail para contacto:&nbsp;</label><input class="form-control" name="mail_contacto" type="email" th:value="${mailCargado}" required></input>
+							<div class="invalid-feedback">Por favor completa este campo.</div>
+							<div class="valid-feedback"></div>
 							<br></br>
 							<label>*Descripción del proyecto musical. Debe incluir: requerimientos técnicos de sonido, cantidad de integrantes, estilo musical,
 							cashé o arreglo mínimo que aceptan (puerta, porcentaje de entradas, etc.):</label>
 						    <br></br>
-							<textarea class="form-control textarea-height" name="descripcion" type="text" maxlength="1400" th:text="${descripcionCargada}"></textarea>
+							<textarea class="form-control textarea-height" name="descripcion" type="text" maxlength="1400" th:text="${descripcionCargada}" required></textarea>
+							<div class="invalid-feedback">Por favor completa este campo.</div>
+							<div class="valid-feedback"></div>
 							<br></br>
 							<label>Links a redes sociales:&nbsp;</label><br></br>
 							<label>Facebook:&nbsp;</label><input class="form-control" name="red_social1" type="url" th:value="${red_social1Cargada}"></input><br></br>
@@ -193,6 +286,7 @@
 			<!-- Custom JavaScript for this theme -->
 			<script src="/js/scrolling-nav.js"></script>
 			<script src="/js/formulario.js"></script>
+			<script src="/js/validacionform.js"></script>
 		
 		</body>
 

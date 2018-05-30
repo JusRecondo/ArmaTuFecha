@@ -2,11 +2,12 @@ package com.example.model;
 
 public class PerfilMusico {
 
-	private int id; //si, la tabla genera un id
+	private int id; 
 	private String nombre;
-	private String ubicacion;
+	private String provincia;
+	private String localidad;
 	private String telefono;
-	private String mail_contacto; //mail contacto
+	private String mail_contacto; 
 	private String descripcion; 
 	private String red_social1;
 	private String red_social2;
@@ -17,11 +18,12 @@ public class PerfilMusico {
 	private int id_usuario; 
 	
 
-	public PerfilMusico(int i, String n, String u, String t, String m, String des, String rd1, String rd2, String rd3, String lm1, String lm2, String lm3, int iu){
+	public PerfilMusico(int i, String n, String p, String l, String t, String m, String des, String rd1, String rd2, String rd3, String lm1, String lm2, String lm3, int iu){
 		
 		this.id = i;
 		this.nombre = n;
-		this.ubicacion = u;
+		this.provincia = p;
+		this.localidad = l;
 		this.telefono = t;
 		this.mail_contacto = m;
 		this.descripcion = des; 
@@ -35,6 +37,8 @@ public class PerfilMusico {
 		
 	}
 
+
+	
 
 	public int getId() {
 		return id;
@@ -55,15 +59,25 @@ public class PerfilMusico {
 		this.nombre = nombre;
 	}
 
-
-	public String getUbicacion() {
-		return ubicacion;
+	public String getProvincia() {
+		return provincia;
 	}
 
 
-	public void setUbicacion(String ubicacion) {
-		this.ubicacion = ubicacion;
+	public void setProvincia(String provincia) {
+		this.provincia = provincia;
 	}
+
+
+	public String getLocalidad() {
+		return localidad;
+	}
+
+
+	public void setLocalidad(String localidad) {
+		this.localidad = localidad;
+	}
+
 
 
 	public String getTelefono() {

@@ -47,6 +47,8 @@ CREATE TABLE public.perfiles_locales
 (
     id integer NOT NULL DEFAULT nextval('perfiles_locales_id_seq'::regclass),
     nombre text COLLATE pg_catalog."default",
+    provincia text COLLATE pg_catalog."default",
+	localidad text COLLATE pg_catalog."default",
     direccion text COLLATE pg_catalog."default",
     telefono text COLLATE pg_catalog."default",
     mail_contacto text COLLATE pg_catalog."default",
@@ -83,7 +85,8 @@ CREATE TABLE public.perfiles_musicos
 (
     id integer NOT NULL DEFAULT nextval('perfiles_musicos_id_seq'::regclass),
     nombre text COLLATE pg_catalog."default",
-    ubicacion text COLLATE pg_catalog."default",
+    provincia text COLLATE pg_catalog."default",
+	localidad text COLLATE pg_catalog."default",,
     telefono text COLLATE pg_catalog."default",
     mail_contacto text COLLATE pg_catalog."default",
     descripcion character varying(1400) COLLATE pg_catalog."default",
@@ -111,5 +114,5 @@ ALTER TABLE public.perfiles_musicos
     
 INSERT INTO usuarios (mail, contrasenia, tipo) VALUES ('pruebalocal@gmail.com','admin','local', 'pruebalocal');
 INSERT INTO usuarios (mail, contrasenia, tipo) VALUES ('pruebamusico@gmail.com','admin','musico', 'pruebamusico');
-INSERT INTO perfiles_locales (nombre, direccion, telefono,  mail_contacto, descripcion, id_usuario) VALUES ('pruebalocal','aslkdj','123455','prueba@gmail.com','lasjdfsakfsdf', '1');
-INSERT INTO perfiles_musicos (nombre, ubicacion, telefono,  mail_contacto, descripcion, id_usuario) VALUES ('pruebamusico','aslkdj','123455','prueba@gmail.com','lasjdfsakfsdf', '1');
+INSERT INTO perfiles_locales (nombre, provincia, localidad, direccion, telefono,  mail_contacto, descripcion, id_usuario) VALUES ('pruebalocal','Buenos Aires', 'merlo','123455','prueba@gmail.com','lasjdfsakfsdf', '1');
+INSERT INTO perfiles_musicos (nombre, provincia, localidad, telefono,  mail_contacto, descripcion, id_usuario) VALUES ('pruebamusico', 'Buenos Aires', 'merlo', '123455','prueba@gmail.com','lasjdfsakfsdf', '1');

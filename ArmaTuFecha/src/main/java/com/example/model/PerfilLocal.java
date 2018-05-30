@@ -4,6 +4,8 @@ public class PerfilLocal {
 
 	private int id;
 	private String nombre;
+	private String provincia;
+	private String localidad;
 	private String direccion;
 	private String telefono;
 	private String mail_contacto;
@@ -17,10 +19,12 @@ public class PerfilLocal {
 	
 	
 
-	public PerfilLocal(int i, String n, String d, String t, String m, String des, String rd1, String rd2, String rd3, int iu){
+	public PerfilLocal(int i, String n, String p, String l, String d, String t, String m, String des, String rd1, String rd2, String rd3, int iu){
 		
 		this.id = i;
 		this.nombre = n;
+		this.provincia = p;
+		this.localidad = l;
 		this.direccion = d;
 		this.telefono = t;
 		this.mail_contacto = m;
@@ -31,6 +35,8 @@ public class PerfilLocal {
 		this.id_usuario = iu;
 		
 	}
+
+
 
 
 
@@ -61,7 +67,25 @@ public class PerfilLocal {
 	}
 
 
+	public String getProvincia() {
+		return provincia;
+	}
 
+
+
+	public void setProvincia(String provincia) {
+		this.provincia = provincia;
+	}
+
+	public String getLocalidad() {
+		return localidad;
+	}
+
+
+
+	public void setLocalidad(String localidad) {
+		this.localidad = localidad;
+	}
 
 	public String getDireccion() {
 		return direccion;

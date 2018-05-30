@@ -69,18 +69,19 @@ public class UsuariosController {
 
 	@PostMapping("/procesar-perfil/local")
 	public String procesarPerfilLocal(Model template, @RequestParam String mail,
-			@RequestParam String contrasenia, @RequestParam String contrasenia2, @RequestParam String nombre,
-			@RequestParam String direccion, @RequestParam String telefono, @RequestParam String mail_contacto,
+			@RequestParam String contrasenia, @RequestParam String contrasenia2, @RequestParam String nombre, @RequestParam String provincia, 
+			@RequestParam String localidad, @RequestParam String direccion, @RequestParam String telefono, @RequestParam String mail_contacto,
 			@RequestParam String descripcion, @RequestParam String red_social1, @RequestParam String red_social2,
 			@RequestParam String red_social3) throws SQLException {
 
 		if (mail.length() == 0 || contrasenia.length() == 0 || contrasenia2.length() == 0
-				|| nombre.length() == 0 || direccion.length() == 0 || telefono.length() == 0
+				|| nombre.length() == 0 || provincia.length() == 0 || localidad.length() == 0 || direccion.length() == 0 || telefono.length() == 0
 				|| mail_contacto.length() == 0 || descripcion.length() == 0) {
 
 			template.addAttribute("aviso_incompleto", "Por favor completar los campos obligatorios");
 			template.addAttribute("mailCargado", mail);
 			template.addAttribute("nombreCargado", nombre);
+			template.addAttribute("localidadCargada", localidad);
 			template.addAttribute("direccionCargada", direccion);
 			template.addAttribute("telefonoCargado", telefono);
 			template.addAttribute("mail_contactoCargado", mail_contacto);
@@ -97,6 +98,7 @@ public class UsuariosController {
 			template.addAttribute("aviso_contrasenia", "Las contraseñas ingresadas no coinciden.");
 			template.addAttribute("mailCargado", mail);
 			template.addAttribute("nombreCargado", nombre);
+			template.addAttribute("localidadCargada", localidad);
 			template.addAttribute("direccionCargada", direccion);
 			template.addAttribute("telefonoCargado", telefono);
 			template.addAttribute("mail_contactoCargado", mail_contacto);
@@ -124,6 +126,7 @@ public class UsuariosController {
 
 				template.addAttribute("aviso_mail", "El e-mail ingresado ya esta en uso.");
 				template.addAttribute("nombreCargado", nombre);
+				template.addAttribute("localidadCargada", localidad);
 				template.addAttribute("direccionCargada", direccion);
 				template.addAttribute("telefonoCargado", telefono);
 				template.addAttribute("mail_contactoCargado", mail_contacto);
@@ -160,16 +163,18 @@ public class UsuariosController {
 			consulta.executeUpdate();
 
 			consulta = connection.prepareStatement(
-					"UPDATE perfiles_locales SET nombre = ?, direccion = ?, telefono = ?, mail_contacto = ?, descripcion = ?, red_social1 = ?, red_social2 = ?, red_social3 = ? WHERE id_usuario = ?;");
+					"UPDATE perfiles_locales SET nombre = ?, provincia = ?, localidad = ?, direccion = ?, telefono = ?, mail_contacto = ?, descripcion = ?, red_social1 = ?, red_social2 = ?, red_social3 = ? WHERE id_usuario = ?;");
 			consulta.setString(1, nombre);
-			consulta.setString(2, direccion);
-			consulta.setString(3, telefono);
-			consulta.setString(4, mail_contacto);
-			consulta.setString(5, descripcion);
-			consulta.setString(6, red_social1);
-			consulta.setString(7, red_social2);
-			consulta.setString(8, red_social3);
-			consulta.setInt(9, nuevoIdUsuario);
+			consulta.setString(2, provincia);
+			consulta.setString(3, localidad);
+			consulta.setString(4, direccion);
+			consulta.setString(5, telefono);
+			consulta.setString(6, mail_contacto);
+			consulta.setString(7, descripcion);
+			consulta.setString(8, red_social1);
+			consulta.setString(9, red_social2);
+			consulta.setString(10, red_social3);
+			consulta.setInt(11, nuevoIdUsuario);
 			// faltan fotos
 
 			consulta.executeUpdate();
@@ -184,19 +189,19 @@ public class UsuariosController {
 	@PostMapping("/procesar-perfil/musico")
 	public String procesarPerfilMusico(Model template, @RequestParam String mail,
 			@RequestParam String contrasenia, @RequestParam String contrasenia2, @RequestParam String nombre,
-			@RequestParam String ubicacion, @RequestParam String telefono, @RequestParam String mail_contacto,
+			@RequestParam String provincia, @RequestParam String localidad, @RequestParam String telefono, @RequestParam String mail_contacto,
 			@RequestParam String descripcion, @RequestParam String red_social1, @RequestParam String red_social2,
 			@RequestParam String red_social3, @RequestParam String link_musica1, @RequestParam String link_musica2,
 			@RequestParam String link_musica3) throws SQLException {
 
 		if (mail.length() == 0 || contrasenia.length() == 0 || contrasenia2.length() == 0
-				|| nombre.length() == 0 || ubicacion.length() == 0 || telefono.length() == 0
+				|| nombre.length() == 0 || provincia.length() == 0 || localidad.length() == 0 || telefono.length() == 0
 				|| mail_contacto.length() == 0 || descripcion.length() == 0) {
 
 			template.addAttribute("aviso_incompleto", "Por favor completar los campos obligatorios");
 			template.addAttribute("mailCargado", mail);
 			template.addAttribute("nombreCargado", nombre);
-			template.addAttribute("ubicacionCargada", ubicacion);
+			template.addAttribute("localidadCargada", localidad);
 			template.addAttribute("telefonoCargado", telefono);
 			template.addAttribute("mailCargado", mail_contacto);
 			template.addAttribute("descripcionCargada", descripcion);
@@ -215,7 +220,7 @@ public class UsuariosController {
 			template.addAttribute("aviso_contrasenia", "Las contraseñas ingresadas no coinciden.");
 			template.addAttribute("mailCargado", mail);
 			template.addAttribute("nombreCargado", nombre);
-			template.addAttribute("ubicacionCargada", ubicacion);
+			template.addAttribute("localidadCargada", localidad);
 			template.addAttribute("telefonoCargado", telefono);
 			template.addAttribute("mail_contactoCargado", mail_contacto);
 			template.addAttribute("descripcionCargada", descripcion);
@@ -245,7 +250,7 @@ public class UsuariosController {
 
 				template.addAttribute("aviso_mail", "El e-mail ingresado ya esta en uso.");
 				template.addAttribute("nombreCargado", nombre);
-				template.addAttribute("ubicacionCargada", ubicacion);
+				template.addAttribute("localidadCargada", localidad);
 				template.addAttribute("telefonoCargado", telefono);
 				template.addAttribute("mail_contactoCargado", mail_contacto);
 				template.addAttribute("descripcionCargada", descripcion);
@@ -283,20 +288,21 @@ public class UsuariosController {
 			consulta.executeUpdate();
 
 			consulta = connection.prepareStatement(
-					"UPDATE perfiles_musicos SET nombre = ?, ubicacion = ?, telefono = ?, mail_contacto = ?, descripcion = ?, red_social1 = ?, red_social2 = ?, red_social3 = ?, link_musica1 = ?, link_musica2 = ?, link_musica3 = ? WHERE id_usuario = ?;");
+					"UPDATE perfiles_musicos SET nombre = ?, provincia = ?, localidad = ?, telefono = ?, mail_contacto = ?, descripcion = ?, red_social1 = ?, red_social2 = ?, red_social3 = ?, link_musica1 = ?, link_musica2 = ?, link_musica3 = ? WHERE id_usuario = ?;");
 
 			consulta.setString(1, nombre);
-			consulta.setString(2, ubicacion);
-			consulta.setString(3, telefono);
-			consulta.setString(4, mail_contacto);
-			consulta.setString(5, descripcion);
-			consulta.setString(6, red_social1);
-			consulta.setString(7, red_social2);
-			consulta.setString(8, red_social3);
-			consulta.setString(9, link_musica1);
-			consulta.setString(10, link_musica2);
-			consulta.setString(11, link_musica3);
-			consulta.setInt(12, nuevoIdUsuario);
+			consulta.setString(2, provincia);
+			consulta.setString(3, localidad);
+			consulta.setString(4, telefono);
+			consulta.setString(5, mail_contacto);
+			consulta.setString(6, descripcion);
+			consulta.setString(7, red_social1);
+			consulta.setString(8, red_social2);
+			consulta.setString(9, red_social3);
+			consulta.setString(10, link_musica1);
+			consulta.setString(11, link_musica2);
+			consulta.setString(12, link_musica3);
+			consulta.setInt(13, nuevoIdUsuario);
 
 			consulta.executeUpdate();
 
@@ -325,7 +331,9 @@ public class UsuariosController {
 
 		if (resultado.next()) {
 			String nombre = resultado.getString("nombre");
-			String direccion = resultado.getString("direccion");
+			String direccion = resultado.getString("provincia");
+			String provincia = resultado.getString("localidad");
+			String localidad = resultado.getString("direccion");
 			String telefono = resultado.getString("telefono");
 			String mail_contacto = resultado.getString("mail_contacto");
 			String descripcion = resultado.getString("descripcion");
@@ -335,6 +343,8 @@ public class UsuariosController {
 			// faltan fotos
 
 			template.addAttribute("nombre", nombre);
+			template.addAttribute("provincia", provincia);
+			template.addAttribute("localidad", localidad);
 			template.addAttribute("direccion", direccion);
 			template.addAttribute("telefono", telefono);
 			template.addAttribute("mail_contacto", mail_contacto);
@@ -364,7 +374,8 @@ public class UsuariosController {
 
 		if (resultado.next()) {
 			String nombre = resultado.getString("nombre");
-			String ubicacion = resultado.getString("ubicacion");
+			String provincia = resultado.getString("provincia");
+			String localidad = resultado.getString("localidad");
 			String telefono = resultado.getString("telefono");
 			String mail_contacto = resultado.getString("mail_contacto");
 			String descripcion = resultado.getString("descripcion");
@@ -378,7 +389,8 @@ public class UsuariosController {
 			// faltan fotos
 
 			template.addAttribute("nombre", nombre);
-			template.addAttribute("ubicacion", ubicacion);
+			template.addAttribute("provincia", provincia);
+			template.addAttribute("localidad", localidad);
 			template.addAttribute("telefono", telefono);
 			template.addAttribute("mail_contacto", mail_contacto);
 			template.addAttribute("descripcion", descripcion);
@@ -494,6 +506,8 @@ public class UsuariosController {
 
 		if (resultado.next()) {
 			String nombre1 = resultado.getString("nombre");
+			String provincia = resultado.getString("provincia");
+			String localidad = resultado.getString("localidad");
 			String direccion = resultado.getString("direccion");
 			String telefono = resultado.getString("telefono");
 			String mail_contacto = resultado.getString("mail_contacto");
@@ -507,6 +521,8 @@ public class UsuariosController {
 
 			template.addAttribute("nombre", nombre1);
 			template.addAttribute("direccion", direccion);
+			template.addAttribute("provincia", provincia);
+			template.addAttribute("localidad", localidad);
 			template.addAttribute("telefono", telefono);
 			template.addAttribute("mail_contacto", mail_contacto);
 			template.addAttribute("descripcion", descripcion);
@@ -556,7 +572,8 @@ public class UsuariosController {
 
 		if (resultado.next()) {
 			String nombre1 = resultado.getString("nombre");
-			String ubicacion = resultado.getString("ubicacion");
+			String provincia = resultado.getString("provincia");
+			String localidad = resultado.getString("localidad");
 			String telefono = resultado.getString("telefono");
 			String mail_contacto = resultado.getString("mail_contacto");
 			String descripcion = resultado.getString("descripcion");
@@ -571,7 +588,8 @@ public class UsuariosController {
 			// faltan fotos
 
 			template.addAttribute("nombre", nombre1);
-			template.addAttribute("ubicacion", ubicacion);
+			template.addAttribute("provincia", provincia);
+			template.addAttribute("localidad", localidad);
 			template.addAttribute("telefono", telefono);
 			template.addAttribute("mail_contacto", mail_contacto);
 			template.addAttribute("descripcion", descripcion);
@@ -709,6 +727,8 @@ public class UsuariosController {
 
 		if (resultado.next()) {
 			String nombre = resultado.getString("nombre");
+			String provincia = resultado.getString("provincia");
+			String localidad = resultado.getString("localidad");
 			String direccion = resultado.getString("direccion");
 			String telefono = resultado.getString("telefono");
 			String mail_contacto = resultado.getString("mail_contacto");
@@ -718,6 +738,8 @@ public class UsuariosController {
 			String red_social3 = resultado.getString("red_social3");
 
 			template.addAttribute("nombre", nombre);
+			template.addAttribute("localidad", localidad);
+			template.addAttribute("provincia", provincia);
 			template.addAttribute("direccion", direccion);
 			template.addAttribute("telefono", telefono);
 			template.addAttribute("mail_contacto", mail_contacto);
@@ -732,15 +754,16 @@ public class UsuariosController {
 	}
 
 	@PostMapping("/locales/mi-perfil/procesar-edicion/{id_usuario}")
-	public String procesarEdicionLocal(Model template, @PathVariable int id_usuario, @RequestParam String nombre,
-			@RequestParam String direccion, @RequestParam String telefono, @RequestParam String mail_contacto,
+	public String procesarEdicionLocal(Model template, @PathVariable int id_usuario, @RequestParam String nombre, 
+			@RequestParam String provincia, @RequestParam String localidad,	@RequestParam String direccion, @RequestParam String telefono, @RequestParam String mail_contacto,
 			@RequestParam String descripcion, @RequestParam String red_social1, @RequestParam String red_social2,
 			@RequestParam String red_social3) throws SQLException {
 
-		if (nombre.length() == 0 || direccion.length() == 0 || telefono.length() == 0 || mail_contacto.length() == 0
+		if (nombre.length() == 0 || provincia.length() == 0 || localidad.length() == 0 || direccion.length() == 0 || telefono.length() == 0 || mail_contacto.length() == 0
 				|| descripcion.length() == 0) {
 			template.addAttribute("aviso_incompleto", "Por favor completar los campos obligatorios");
 			template.addAttribute("nombre", nombre);
+			template.addAttribute("localidad", localidad);
 			template.addAttribute("direccion", direccion);
 			template.addAttribute("telefono", telefono);
 			template.addAttribute("mail_contacto", mail_contacto);
@@ -759,17 +782,19 @@ public class UsuariosController {
 					env.getProperty("spring.datasource.username"), env.getProperty("spring.datasource.password"));
 
 			PreparedStatement consulta = connection.prepareStatement(
-					"UPDATE perfiles_locales SET nombre = ?, direccion = ?, telefono = ?, mail_contacto = ?, descripcion = ?, red_social1 = ?, red_social2 = ?, red_social3 = ? WHERE id_usuario = ?;");
+					"UPDATE perfiles_locales SET nombre = ?, provincia = ?, localidad = ?, direccion = ?, telefono = ?, mail_contacto = ?, descripcion = ?, red_social1 = ?, red_social2 = ?, red_social3 = ? WHERE id_usuario = ?;");
 
 			consulta.setString(1, nombre);
-			consulta.setString(2, direccion);
-			consulta.setString(3, telefono);
-			consulta.setString(4, mail_contacto);
-			consulta.setString(5, descripcion);
-			consulta.setString(6, red_social1);
-			consulta.setString(7, red_social2);
-			consulta.setString(8, red_social3);
-			consulta.setInt(9, id_usuario);
+			consulta.setString(2, provincia);
+			consulta.setString(3, localidad);
+			consulta.setString(4, direccion);
+			consulta.setString(5, telefono);
+			consulta.setString(6, mail_contacto);
+			consulta.setString(7, descripcion);
+			consulta.setString(8, red_social1);
+			consulta.setString(9, red_social2);
+			consulta.setString(10, red_social3);
+			consulta.setInt(11, id_usuario);
 			// faltan fotos
 
 			consulta.executeUpdate();
@@ -796,7 +821,8 @@ public class UsuariosController {
 
 		if (resultado.next()) {
 			String nombre = resultado.getString("nombre");
-			String ubicacion = resultado.getString("ubicacion");
+			String provincia = resultado.getString("provincia");
+			String localidad = resultado.getString("localidad");
 			String telefono = resultado.getString("telefono");
 			String mail_contacto = resultado.getString("mail_contacto");
 			String descripcion = resultado.getString("descripcion");
@@ -810,7 +836,8 @@ public class UsuariosController {
 			// faltan fotos
 
 			template.addAttribute("nombre", nombre);
-			template.addAttribute("ubicacion", ubicacion);
+			template.addAttribute("provincia", provincia);
+			template.addAttribute("localidad", localidad);
 			template.addAttribute("telefono", telefono);
 			template.addAttribute("mail_contacto", mail_contacto);
 			template.addAttribute("descripcion", descripcion);
@@ -827,17 +854,17 @@ public class UsuariosController {
 	}
 
 	@PostMapping("/musicos/mi-perfil/procesar-edicion/{id_usuario}")
-	public String procesarEdicionLocal(Model template, @PathVariable int id_usuario, @RequestParam String nombre,
-			@RequestParam String ubicacion, @RequestParam String telefono, @RequestParam String mail_contacto,
+	public String procesarEdicionLocal(Model template, @PathVariable int id_usuario, @RequestParam String nombre, @RequestParam String provincia, 
+			@RequestParam String localidad, @RequestParam String telefono, @RequestParam String mail_contacto,
 			@RequestParam String descripcion, @RequestParam String red_social1, @RequestParam String red_social2,
 			@RequestParam String red_social3, @RequestParam String link_musica1, @RequestParam String link_musica2,
 			@RequestParam String link_musica3) throws SQLException {
 
-		if (nombre.length() == 0 || ubicacion.length() == 0 || telefono.length() == 0 || mail_contacto.length() == 0
+		if (nombre.length() == 0 || provincia.length() == 0 || localidad.length() == 0 || telefono.length() == 0 || mail_contacto.length() == 0
 				|| descripcion.length() == 0) {
 			template.addAttribute("aviso_incompleto", "Por favor completar los campos obligatorios");
 			template.addAttribute("nombre", nombre);
-			template.addAttribute("ubicacion", ubicacion);
+			template.addAttribute("localidad", localidad);
 			template.addAttribute("telefono", telefono);
 			template.addAttribute("mail_contacto", mail_contacto);
 			template.addAttribute("descripcion", descripcion);
@@ -857,20 +884,21 @@ public class UsuariosController {
 					env.getProperty("spring.datasource.username"), env.getProperty("spring.datasource.password"));
 
 			PreparedStatement consulta = connection.prepareStatement(
-					"UPDATE perfiles_musicos SET nombre = ?, ubicacion = ?, telefono = ?, mail_contacto = ?, descripcion = ?, red_social1 = ?, red_social2 = ?, red_social3 = ?, link_musica1 = ?, link_musica2 = ?, link_musica3 = ? WHERE id_usuario = ?;");
+					"UPDATE perfiles_musicos SET nombre = ?, provincia = ?, localidad = ?, telefono = ?, mail_contacto = ?, descripcion = ?, red_social1 = ?, red_social2 = ?, red_social3 = ?, link_musica1 = ?, link_musica2 = ?, link_musica3 = ? WHERE id_usuario = ?;");
 
 			consulta.setString(1, nombre);
-			consulta.setString(2, ubicacion);
-			consulta.setString(3, telefono);
-			consulta.setString(4, mail_contacto);
-			consulta.setString(5, descripcion);
-			consulta.setString(6, red_social1);
-			consulta.setString(7, red_social2);
-			consulta.setString(8, red_social3);
-			consulta.setString(9, link_musica1);
-			consulta.setString(10, link_musica2);
-			consulta.setString(11, link_musica3);
-			consulta.setInt(12, id_usuario);
+			consulta.setString(2, provincia);
+			consulta.setString(3, localidad);
+			consulta.setString(4, telefono);
+			consulta.setString(5, mail_contacto);
+			consulta.setString(6, descripcion);
+			consulta.setString(7, red_social1);
+			consulta.setString(8, red_social2);
+			consulta.setString(9, red_social3);
+			consulta.setString(10, link_musica1);
+			consulta.setString(11, link_musica2);
+			consulta.setString(12, link_musica3);
+			consulta.setInt(13, id_usuario);
 
 			consulta.executeUpdate();
 

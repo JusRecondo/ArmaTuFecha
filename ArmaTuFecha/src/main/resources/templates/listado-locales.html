@@ -66,7 +66,7 @@
                 <a th:href="'/vista-perfil-local/' + ${perfilLocal.id_usuario}" th:text="${perfilLocal.nombre}">Project One</a>
               </h4>
               <p class="card-text" >
-                    <label>Dirección:&nbsp; </label><label th:text="${perfilLocal.direccion}">Dirección</label><br>
+                    <label th:text="${perfilLocal.provincia} + ', '"></label>&nbsp;<label th:text="${perfilLocal.localidad}"></label><br>
 					<label>Teléfono:&nbsp; </label><label th:text="${perfilLocal.telefono}">Teléfono</label><br>
 					<label>Mail:&nbsp; </label><label th:text="${perfilLocal.mail_contacto}">Mail</label><br>
 					<a th:href="${perfilLocal.red_social1}">Facebook</a><br></br>
