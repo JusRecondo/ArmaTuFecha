@@ -442,7 +442,7 @@ public class UsuariosController {
 	}
 
 	@PostMapping("/procesar-login")
-	public String procesarLogin(HttpSession session, @RequestParam String mail, @RequestParam String contrasenia)
+	public String procesarLogin(HttpSession session, Model template, @RequestParam String mail, @RequestParam String contrasenia)
 			throws SQLException {
 		boolean correcto = UsuariosHelper.IntentarLoguearse(session, mail, contrasenia);
 
@@ -471,8 +471,9 @@ public class UsuariosController {
 			}
 			return "redirect:/";
 		} else {
-
-			return "redirect:/login";
+			
+			template.addAttribute("login_incorrecto", "El mail o contraseña ingresados son incorrectos");
+			return "login";
 
 		}
 	}

@@ -16,6 +16,7 @@
     <link href="/css/3-col-portfolio.css" rel="stylesheet"></link>
     <link href="css/scrolling-nav.css" rel="stylesheet"></link>
     <link rel="stylesheet" type="text/css" href="/css/estilos.css"></link>
+    
 
   </head>
 
@@ -43,34 +44,52 @@
 		</div>
 	</nav>
 
-	<header class="bg-primary text-white bootstrap-override-header" id="color1">
+	<header class="bg-primary text-white" id="color1">
 		      <div class="container text-center">    
 		        <div class="row">
-		        	<div class="col-12">
-		        		<h1>Revisa los perfiles y encontrá las mejores bandas<br>para armar tu fecha</h1>
+		        	<div class="col-12" id="bootstrap-override-col4" >
+		        		<h1>Revisa los perfiles y encontrá el mejor lugar<br>para hacer tu fecha</h1>
 		        	</div>
+		        	
 		        </div>
-		       </div> 
-	 <!-- TO DO select para buscar/"filtrar" por provincia y localidad, y generos musicales-->             
+		      </div>
+	 <!-- TO DO select para buscar/"filtrar" por provincia y localidad-->             
      </header>
     <!-- Page Content -->
-    <section id="about" class="bootstrap-override-section">
+    <section id="about" class="bootstrap-override-section2">
     <div class="container">
-
+	 <div class="row">
+				<div class="col-12" id="bootstrap-override-col3">
+					<h5>O probá nuestras opciones de búsqueda...</h5>
+					<br>                        <!-- cambiar action -->
+					<form class="form-group" action="/locales/busqueda/procesar">
+						<div class="col">
+							<input name="busquedaLocalidad" type="text" class="form-control"
+								placeholder="Buscá por localidad..."></input><br>
+						</div>
+						
+							<div class="col text-center">
+								<input class="btn btn-outline-dark btn-lg" type="submit"
+									value="Buscar"></input>
+							
+						</div>
+					</form>
+				</div>
+			</div>
       <!-- Page Heading -->
       <div class="row">
-        <div class="col-lg-4 col-sm-6 portfolio-item" th:each="perfilMusico:${listadoMusicos}">
+        <div class="col-lg-4 col-sm-6 portfolio-item" th:each="perfilLocal:${listadoLocales}">
           <div class="card h-100">
             <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
             <div class="card-body">
               <h4 class="card-title">
-                <a th:href="'/vista-perfil-musico/' + ${perfilMusico.id_usuario}" th:text="${perfilMusico.nombre}">Project One</a>
+                <a th:href="'/vista-perfil-local/' + ${perfilLocal.id_usuario}" th:text="${perfilLocal.nombre}">Project One</a>
               </h4>
               <p class="card-text" >
-                    <label th:text="${perfilMusico.provincia} + ', '"></label>&nbsp;<label th:text="${perfilMusico.localidad}"></label><br>
-					<label>Teléfono:&nbsp; </label><label th:text="${perfilMusico.telefono}">Teléfono</label><br>
-					<label>Mail:&nbsp; </label><label th:text="${perfilMusico.mail_contacto}">Mail</label><br>
-					<a th:href="${perfilMusico.red_social1}">Facebook</a><br></br>
+                    <label th:text="${perfilLocal.provincia} + ', '"></label>&nbsp;<label th:text="${perfilLocal.localidad}"></label><br>
+					<label>Teléfono:&nbsp; </label><label th:text="${perfilLocal.telefono}">Teléfono</label><br>
+					<label>Mail:&nbsp; </label><label th:text="${perfilLocal.mail_contacto}">Mail</label><br>
+					<a th:href="${perfilLocal.red_social1}">Facebook</a><br></br>
               </p>
             </div>
           </div>
