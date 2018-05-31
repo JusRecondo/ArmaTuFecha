@@ -7,7 +7,6 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -20,9 +19,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import com.example.model.PerfilLocal;
-import com.example.model.PerfilMusico;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class UsuariosController {
@@ -35,7 +32,7 @@ public class UsuariosController {
 
 	@GetMapping("/")
 	public String paginaPrincipal(HttpServletRequest request, Model template) throws MalformedURLException {
-	   //no funciona, porque la ruta tiene una parte variable	
+	 
 		String referer = request.getHeader("Referer");
 		if (referer != null) {
 			URL url = new URL(referer);
@@ -48,6 +45,10 @@ public class UsuariosController {
 		return "pagina-principal";
 	}
 
+	
+	
+	
+	
 	// TODO poner comprobacion de sesion, en vista local logueado poner link en
 	// "home"
 	@GetMapping("/home/local/{nombre}")
@@ -72,7 +73,7 @@ public class UsuariosController {
 			@RequestParam String contrasenia, @RequestParam String contrasenia2, @RequestParam String nombre, @RequestParam String provincia, 
 			@RequestParam String localidad, @RequestParam String direccion, @RequestParam String telefono, @RequestParam String mail_contacto,
 			@RequestParam String descripcion, @RequestParam String red_social1, @RequestParam String red_social2,
-			@RequestParam String red_social3) throws SQLException {
+			@RequestParam String red_social3, RedirectAttributes redirectAttribute) throws SQLException {
 
 		if (mail.length() == 0 || contrasenia.length() == 0 || contrasenia2.length() == 0
 				|| nombre.length() == 0 || provincia.length() == 0 || localidad.length() == 0 || direccion.length() == 0 || telefono.length() == 0
@@ -181,6 +182,8 @@ public class UsuariosController {
 
 			connection.close();
 
+			redirectAttribute.addFlashAttribute("mensaje_bienvenida", "Gracias por unirte!");	
+			
 			return "redirect:/login";
 		}
 
@@ -308,6 +311,7 @@ public class UsuariosController {
 
 			connection.close();
 
+			
 			return "redirect:/login";
 
 		}
@@ -429,15 +433,15 @@ public class UsuariosController {
 
 	@GetMapping("/login")
 	public String login(HttpServletRequest request, Model template) throws MalformedURLException {
-		String referer = request.getHeader("Referer");
-		if (referer != null) {
-			URL url = new URL(referer);
+		//String referer = request.getHeader("Referer");
+		// if (referer != null) {
+		//	URL url = new URL(referer);
 
-			if (url.getPath().equals("/crear-perfil")) {
+	    //		if (url.getPath().equals("/crear-perfil")) {
 				
-				template.addAttribute("mensaje_bienvenida", "¡Gracias por unirte!");
-			}
-		}
+		//		template.addAttribute("mensaje_bienvenida", "¡Gracias por unirte!");
+		//	}
+	//	}
 		return "login";
 	}
 
@@ -909,6 +913,7 @@ public class UsuariosController {
 
 		}
 	}
+	
     //no funciona el volver
 	@GetMapping("/locales/eliminar-cuenta/{id_usuario}")
 	public String eliminarCuentaLocal(HttpServletRequest request, Model template, @PathVariable int id_usuario) throws MalformedURLException {
@@ -924,6 +929,9 @@ public class UsuariosController {
 		return "eliminar-cuenta-local";
 	}
 
+	
+	
+	
 	@GetMapping("/musicos/eliminar-cuenta/{id_usuario}")
 	public String eliminarCuentaMusico(Model template, @PathVariable int id_usuario) {
 		template.addAttribute("id_usuario", id_usuario);
@@ -932,7 +940,7 @@ public class UsuariosController {
 	}
 
 	@GetMapping("/locales/confirmacion-eliminar-perfil/{id_usuario}")
-	public String eliminarPerfilLocal(@PathVariable int id_usuario) throws SQLException {
+	public String eliminarPerfilLocal(@PathVariable int id_usuario, RedirectAttributes redirectAttribute) throws SQLException {
 
 		Connection connection;
 		connection = DriverManager.getConnection(env.getProperty("spring.datasource.url"),
@@ -949,6 +957,8 @@ public class UsuariosController {
 		consulta.executeUpdate();
 
 		connection.close();
+		
+		redirectAttribute.addFlashAttribute("cuenta_eliminada", "Perfil y datos de usuario eliminados");
 
 		return "redirect:/";
 	}

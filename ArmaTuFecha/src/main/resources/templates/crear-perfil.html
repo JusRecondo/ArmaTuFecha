@@ -17,8 +17,13 @@
 		<link href="/css/scrolling-nav.css" rel="stylesheet"></link>
 		<link rel="stylesheet" type="text/css" href="/css/estilos.css"></link>
 		
+
+	    <script src="//widget.cloudinary.com/global/all.js" type="text/javascript"></script>
+	    
+     
 		
-	</head>
+
+</head>
 
 		<body id="page-top">
 		
@@ -144,7 +149,7 @@
 							    <div class="invalid-feedback">Por favor selecciona una provincia.</div>
 							    <div class="valid-feedback"></div>
 							    </div>
-								<label>*Localidad:&nbsp;</label><input class="form-control" name="localidad" type="text" th:value="${localidadCargada}" required></input>
+								<label>*Localidad/Ciudad:&nbsp;</label><input class="form-control" name="localidad" type="text" th:value="${localidadCargada}" required></input>
 								<div class="invalid-feedback">Por favor completa este campo.</div>
 							    <div class="valid-feedback"></div>
 								<br></br>
@@ -162,12 +167,13 @@
 								<br></br>
 								<label>*Descripción del lugar (máx. 1400 caracteres). Debe incluir: tipo de establecimiento, equipamiento de sonido,
 								arreglo con los músicos (puerta para las bandas, arreglo 70-30 o similar por entradas, pago de un cashé, etc.), capacidad, estilos musicales de los shows):</label>
-						
 								<br></br>
 								<textarea class="form-control textarea-height" name="descripcion" type="text" maxlength="1400" th:text="${descripcionCargada}" required></textarea>
 								<div class="invalid-feedback">Por favor completa este campo.</div>
 							    <div class="valid-feedback"></div>
 								<br></br>
+								
+								<a href="#" id="upload_widget_opener">Cargá tus fotos</a><br></br>
 								<label>Links a redes sociales:&nbsp;</label><br></br>
 								<label>Facebook:&nbsp;</label><input class="form-control" name="red_social1" type="url" th:value="${red_social1Cargada}"></input><br></br>
 								<label>Instagram:&nbsp;</label><input class="form-control" name="red_social2" type="url" th:value="${red_social2Cargada}"></input><br></br>							
@@ -200,8 +206,8 @@
 							<br></br>
 							
 							<div class="form-group">
-							    <label for="exampleFormControlSelect2">*Provincia:</label>
-							    <select multiple class="form-control" id="exampleFormControlSelect2"  name="provincia" required>
+							    <label for="exampleFormControlSelect3">*Provincia:</label>
+							    <select multiple class="form-control" id="exampleFormControlSelect3"  name="provincia" required>
 							      <option>Buenos Aires</option>
 							      <option>Catamarca</option>
 							      <option>Chaco</option>
@@ -230,7 +236,7 @@
 							    <div class="invalid-feedback">Por favor selecciona una provincia.</div>
 							    <div class="valid-feedback"></div>
 							    </div>
-							<label>*Localidad:&nbsp;</label><input class="form-control" name="localidad" type="text" th:value="${localidadCargada}" required></input>
+							<label>*Localidad/Ciudad:&nbsp;</label><input class="form-control" name="localidad" type="text" th:value="${localidadCargada}" required></input>
 							<div class="invalid-feedback">Por favor completa este campo.</div>
 							<div class="valid-feedback"></div>
 							<br></br>
@@ -287,6 +293,10 @@
 			<script src="/js/scrolling-nav.js"></script>
 			<script src="/js/formulario.js"></script>
 			<script src="/js/validacionform.js"></script>
+			<script src="/js/cloudinary.js"></script>
+			
+			<script src="//widget.cloudinary.com/global/all.js" type="text/javascript"></script>  
+			<script src='//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
 		
 		</body>
 

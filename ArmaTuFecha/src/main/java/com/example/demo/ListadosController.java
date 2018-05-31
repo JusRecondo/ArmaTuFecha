@@ -111,8 +111,7 @@ public class ListadosController {
 		@GetMapping("/locales/busqueda/procesar")
 		public String procesarBusqueda (Model template, @RequestParam(required = false) String busquedaNombre, 
 				@RequestParam(required = false) String busquedaProvincia) throws SQLException {
-			System.out.println(busquedaNombre);
-			System.out.println(busquedaProvincia);
+			
 			
 			if ( busquedaNombre.length() != 0 & busquedaProvincia.length() == 0 ) {
 				
@@ -120,10 +119,10 @@ public class ListadosController {
 				connection = DriverManager.getConnection(env.getProperty("spring.datasource.url"),
 						env.getProperty("spring.datasource.username"), env.getProperty("spring.datasource.password"));
 
-				//no se si va a funcionar el %?%
-				PreparedStatement consulta = connection.prepareStatement("SELECT * FROM perfiles_locales WHERE nombre LIKE ?;");
 				
-				consulta.setString(1, busquedaNombre);
+				PreparedStatement consulta = connection.prepareStatement("SELECT * FROM perfiles_locales WHERE LOWER (nombre) LIKE ?;");
+				
+				consulta.setString(1, "%" + busquedaNombre.toLowerCase() + "%");
 			
 				ResultSet resultado = consulta.executeQuery();
 				
@@ -158,10 +157,11 @@ public class ListadosController {
 				connection = DriverManager.getConnection( env.getProperty("spring.datasource.url"),
 						env.getProperty("spring.datasource.username"), env.getProperty("spring.datasource.password") );
 
-				//no se si va a funcionar el %?%
-				PreparedStatement consulta = connection.prepareStatement("SELECT * FROM perfiles_locales WHERE provincia LIKE ?;");
 				
-				consulta.setString(1, busquedaProvincia);
+				PreparedStatement consulta = connection.prepareStatement("SELECT * FROM perfiles_locales WHERE LOWER (provincia) LIKE ?;");
+				
+				consulta.setString(1, "%" + busquedaProvincia.toLowerCase() + "%");
+				
 			
 				ResultSet resultado = consulta.executeQuery();
 				
@@ -196,11 +196,11 @@ public class ListadosController {
 				connection = DriverManager.getConnection( env.getProperty("spring.datasource.url"),
 						env.getProperty("spring.datasource.username"), env.getProperty("spring.datasource.password") );
 
-				//no se si va a funcionar el %?%
-				PreparedStatement consulta = connection.prepareStatement("SELECT * FROM perfiles_locales WHERE nombre LIKE ? AND provincia LIKE ?;");
 				
-				consulta.setString(1, busquedaNombre);
-				consulta.setString(2, busquedaProvincia);
+				PreparedStatement consulta = connection.prepareStatement("SELECT * FROM perfiles_locales WHERE LOWER(nombre) LIKE ? AND LOWER(provincia) LIKE ?;");
+				
+				consulta.setString(1, "%" + busquedaNombre.toLowerCase() + "%");
+				consulta.setString(2, "%" + busquedaProvincia.toLowerCase() + "%");
 			
 				ResultSet resultado = consulta.executeQuery();
 				
