@@ -72,7 +72,8 @@ public class UsuariosController {
 	public String procesarPerfilLocal(Model template, @RequestParam String mail,
 			@RequestParam String contrasenia, @RequestParam String contrasenia2, @RequestParam String nombre, @RequestParam String provincia, 
 			@RequestParam String localidad, @RequestParam String direccion, @RequestParam String telefono, @RequestParam String mail_contacto,
-			@RequestParam String descripcion, @RequestParam String red_social1, @RequestParam String red_social2,
+			@RequestParam String descripcion, @RequestParam(required=false)String foto1, @RequestParam(required=false)String foto2, @RequestParam(required=false) String foto3, 
+			@RequestParam String red_social1, @RequestParam String red_social2,
 			@RequestParam String red_social3, RedirectAttributes redirectAttribute) throws SQLException {
 
 		if (mail.length() == 0 || contrasenia.length() == 0 || contrasenia2.length() == 0
@@ -87,6 +88,10 @@ public class UsuariosController {
 			template.addAttribute("telefonoCargado", telefono);
 			template.addAttribute("mail_contactoCargado", mail_contacto);
 			template.addAttribute("descripcionCargada", descripcion);
+			template.addAttribute("aviso_fotos", "No es necesario que vuelvas a cargar las fotos!");
+			template.addAttribute("foto1", foto1);
+			template.addAttribute("foto2", foto2);
+			template.addAttribute("foto3", foto3);
 			template.addAttribute("red_social1Cargada", red_social1);
 			template.addAttribute("red_social2Cargada", red_social2);
 			template.addAttribute("red_social3Cargada", red_social3);
@@ -101,6 +106,10 @@ public class UsuariosController {
 			template.addAttribute("nombreCargado", nombre);
 			template.addAttribute("localidadCargada", localidad);
 			template.addAttribute("direccionCargada", direccion);
+			template.addAttribute("aviso_fotos", "No es necesario que vuelvas a cargar las fotos!");
+			template.addAttribute("foto1", foto1);
+			template.addAttribute("foto2", foto2 );
+			template.addAttribute("foto3", foto3);
 			template.addAttribute("telefonoCargado", telefono);
 			template.addAttribute("mail_contactoCargado", mail_contacto);
 			template.addAttribute("descripcionCargada", descripcion);
@@ -132,6 +141,10 @@ public class UsuariosController {
 				template.addAttribute("telefonoCargado", telefono);
 				template.addAttribute("mail_contactoCargado", mail_contacto);
 				template.addAttribute("descripcionCargada", descripcion);
+				template.addAttribute("aviso_fotos", "No es necesario que vuelvas a cargar las fotos!");
+				template.addAttribute("foto1", foto1);
+				template.addAttribute("foto2", foto2 );
+				template.addAttribute("foto3", foto3);
 				template.addAttribute("red_social1Cargada", red_social1);
 				template.addAttribute("red_social2Cargada", red_social2);
 				template.addAttribute("red_social3Cargada", red_social3);
@@ -139,7 +152,7 @@ public class UsuariosController {
 				return "crear-perfil";
 
 			}
-
+           
 			consulta = connection.prepareStatement(
 					"INSERT INTO usuarios (mail, contrasenia, tipo, nombre) VALUES (?, ?, 'local', ?);",
 					PreparedStatement.RETURN_GENERATED_KEYS);
@@ -164,7 +177,8 @@ public class UsuariosController {
 			consulta.executeUpdate();
 
 			consulta = connection.prepareStatement(
-					"UPDATE perfiles_locales SET nombre = ?, provincia = ?, localidad = ?, direccion = ?, telefono = ?, mail_contacto = ?, descripcion = ?, red_social1 = ?, red_social2 = ?, red_social3 = ? WHERE id_usuario = ?;");
+					"UPDATE perfiles_locales SET nombre = ?, provincia = ?, localidad = ?, direccion = ?, telefono = ?, mail_contacto = ?, descripcion = ?, foto1 = ?,"
+					+ "foto2 = ?, foto3 = ?, red_social1 = ?, red_social2 = ?, red_social3 = ? WHERE id_usuario = ?;");
 			consulta.setString(1, nombre);
 			consulta.setString(2, provincia);
 			consulta.setString(3, localidad);
@@ -172,10 +186,13 @@ public class UsuariosController {
 			consulta.setString(5, telefono);
 			consulta.setString(6, mail_contacto);
 			consulta.setString(7, descripcion);
-			consulta.setString(8, red_social1);
-			consulta.setString(9, red_social2);
-			consulta.setString(10, red_social3);
-			consulta.setInt(11, nuevoIdUsuario);
+			consulta.setString(8, foto1);
+			consulta.setString(9, foto2);
+			consulta.setString(10, foto3);
+			consulta.setString(13, red_social1);
+			consulta.setString(14, red_social2);
+			consulta.setString(15, red_social3);
+			consulta.setInt(16, nuevoIdUsuario);
 			// faltan fotos
 
 			consulta.executeUpdate();
@@ -193,7 +210,8 @@ public class UsuariosController {
 	public String procesarPerfilMusico(Model template, @RequestParam String mail,
 			@RequestParam String contrasenia, @RequestParam String contrasenia2, @RequestParam String nombre,
 			@RequestParam String provincia, @RequestParam String localidad, @RequestParam String telefono, @RequestParam String mail_contacto,
-			@RequestParam String descripcion, @RequestParam String red_social1, @RequestParam String red_social2,
+			@RequestParam String descripcion, @RequestParam(required=false) String foto1, @RequestParam(required=false) String foto2, @RequestParam(required=false) String foto3, 
+			@RequestParam String red_social1, @RequestParam String red_social2,
 			@RequestParam String red_social3, @RequestParam String link_musica1, @RequestParam String link_musica2,
 			@RequestParam String link_musica3) throws SQLException {
 
@@ -208,6 +226,10 @@ public class UsuariosController {
 			template.addAttribute("telefonoCargado", telefono);
 			template.addAttribute("mailCargado", mail_contacto);
 			template.addAttribute("descripcionCargada", descripcion);
+			template.addAttribute("aviso_fotos", "No es necesario que vuelvas a cargar las fotos!");
+			template.addAttribute("foto1", foto1);
+			template.addAttribute("foto2", foto2 );
+			template.addAttribute("foto3", foto3);
 			template.addAttribute("red_social1Cargada", red_social1);
 			template.addAttribute("red_social2Cargada", red_social2);
 			template.addAttribute("red_social3Cargada", red_social3);
@@ -227,6 +249,10 @@ public class UsuariosController {
 			template.addAttribute("telefonoCargado", telefono);
 			template.addAttribute("mail_contactoCargado", mail_contacto);
 			template.addAttribute("descripcionCargada", descripcion);
+			template.addAttribute("aviso_fotos", "No es necesario que vuelvas a cargar las fotos!");
+			template.addAttribute("foto1", foto1);
+			template.addAttribute("foto2", foto2 );
+			template.addAttribute("foto3", foto3);
 			template.addAttribute("red_social1Cargada", red_social1);
 			template.addAttribute("red_social2Cargada", red_social2);
 			template.addAttribute("red_social3Cargada", red_social3);
@@ -257,6 +283,10 @@ public class UsuariosController {
 				template.addAttribute("telefonoCargado", telefono);
 				template.addAttribute("mail_contactoCargado", mail_contacto);
 				template.addAttribute("descripcionCargada", descripcion);
+				template.addAttribute("aviso_fotos", "No es necesario que vuelvas a cargar las fotos!");
+				template.addAttribute("foto1", foto1);
+				template.addAttribute("foto2", foto2 );
+				template.addAttribute("foto3", foto3);
 				template.addAttribute("red_social1Cargada", red_social1);
 				template.addAttribute("red_social2Cargada", red_social2);
 				template.addAttribute("red_social3Cargada", red_social3);
@@ -291,7 +321,8 @@ public class UsuariosController {
 			consulta.executeUpdate();
 
 			consulta = connection.prepareStatement(
-					"UPDATE perfiles_musicos SET nombre = ?, provincia = ?, localidad = ?, telefono = ?, mail_contacto = ?, descripcion = ?, red_social1 = ?, red_social2 = ?, red_social3 = ?, link_musica1 = ?, link_musica2 = ?, link_musica3 = ? WHERE id_usuario = ?;");
+					"UPDATE perfiles_musicos SET nombre = ?, provincia = ?, localidad = ?, telefono = ?, mail_contacto = ?, descripcion = ?, "
+					+ "foto1 = ?, foto2 = ?, foto3 = ?, red_social1 = ?, red_social2 = ?, red_social3 = ?, link_musica1 = ?, link_musica2 = ?, link_musica3 = ? WHERE id_usuario = ?;");
 
 			consulta.setString(1, nombre);
 			consulta.setString(2, provincia);
@@ -299,13 +330,16 @@ public class UsuariosController {
 			consulta.setString(4, telefono);
 			consulta.setString(5, mail_contacto);
 			consulta.setString(6, descripcion);
-			consulta.setString(7, red_social1);
-			consulta.setString(8, red_social2);
-			consulta.setString(9, red_social3);
-			consulta.setString(10, link_musica1);
-			consulta.setString(11, link_musica2);
-			consulta.setString(12, link_musica3);
-			consulta.setInt(13, nuevoIdUsuario);
+			consulta.setString(7, foto1);
+			consulta.setString(8, foto2);
+			consulta.setString(9, foto3);
+			consulta.setString(12, red_social1);
+			consulta.setString(13, red_social2);
+			consulta.setString(14, red_social3);
+			consulta.setString(15, link_musica1);
+			consulta.setString(16, link_musica2);
+			consulta.setString(17, link_musica3);
+			consulta.setInt(18, nuevoIdUsuario);
 
 			consulta.executeUpdate();
 
@@ -335,12 +369,15 @@ public class UsuariosController {
 
 		if (resultado.next()) {
 			String nombre = resultado.getString("nombre");
-			String direccion = resultado.getString("provincia");
-			String provincia = resultado.getString("localidad");
-			String localidad = resultado.getString("direccion");
+			String provincia = resultado.getString("provincia");
+			String localidad = resultado.getString("localidad");
+			String direccion = resultado.getString("direccion");
 			String telefono = resultado.getString("telefono");
 			String mail_contacto = resultado.getString("mail_contacto");
 			String descripcion = resultado.getString("descripcion");
+			String foto1 = resultado.getString("foto1");
+			String foto2 = resultado.getString("foto2");
+			String foto3 = resultado.getString("foto3");
 			String red_social1 = resultado.getString("red_social1");
 			String red_social2 = resultado.getString("red_social2");
 			String red_social3 = resultado.getString("red_social3");
@@ -353,6 +390,9 @@ public class UsuariosController {
 			template.addAttribute("telefono", telefono);
 			template.addAttribute("mail_contacto", mail_contacto);
 			template.addAttribute("descripcion", descripcion);
+			template.addAttribute("foto1", foto1);
+			template.addAttribute("foto2", foto2 );
+			template.addAttribute("foto3", foto3);
 			template.addAttribute("red_social1", red_social1);
 			template.addAttribute("red_social2", red_social2);
 			template.addAttribute("red_social3", red_social3);
