@@ -189,10 +189,10 @@ public class UsuariosController {
 			consulta.setString(8, foto1);
 			consulta.setString(9, foto2);
 			consulta.setString(10, foto3);
-			consulta.setString(13, red_social1);
-			consulta.setString(14, red_social2);
-			consulta.setString(15, red_social3);
-			consulta.setInt(16, nuevoIdUsuario);
+			consulta.setString(11, red_social1);
+			consulta.setString(12, red_social2);
+			consulta.setString(13, red_social3);
+			consulta.setInt(14, nuevoIdUsuario);
 			// faltan fotos
 
 			consulta.executeUpdate();
@@ -333,13 +333,13 @@ public class UsuariosController {
 			consulta.setString(7, foto1);
 			consulta.setString(8, foto2);
 			consulta.setString(9, foto3);
-			consulta.setString(12, red_social1);
-			consulta.setString(13, red_social2);
-			consulta.setString(14, red_social3);
-			consulta.setString(15, link_musica1);
-			consulta.setString(16, link_musica2);
-			consulta.setString(17, link_musica3);
-			consulta.setInt(18, nuevoIdUsuario);
+			consulta.setString(10, red_social1);
+			consulta.setString(11, red_social2);
+			consulta.setString(12, red_social3);
+			consulta.setString(13, link_musica1);
+			consulta.setString(14, link_musica2);
+			consulta.setString(15, link_musica3);
+			consulta.setInt(16, nuevoIdUsuario);
 
 			consulta.executeUpdate();
 
@@ -391,7 +391,7 @@ public class UsuariosController {
 			template.addAttribute("mail_contacto", mail_contacto);
 			template.addAttribute("descripcion", descripcion);
 			template.addAttribute("foto1", foto1);
-			template.addAttribute("foto2", foto2 );
+			template.addAttribute("foto2", foto2);
 			template.addAttribute("foto3", foto3);
 			template.addAttribute("red_social1", red_social1);
 			template.addAttribute("red_social2", red_social2);
@@ -423,6 +423,9 @@ public class UsuariosController {
 			String telefono = resultado.getString("telefono");
 			String mail_contacto = resultado.getString("mail_contacto");
 			String descripcion = resultado.getString("descripcion");
+			String foto1 = resultado.getString("foto1");
+			String foto2 = resultado.getString("foto2");
+			String foto3 = resultado.getString("foto3");
 			String red_social1 = resultado.getString("red_social1");
 			String red_social2 = resultado.getString("red_social2");
 			String red_social3 = resultado.getString("red_social3");
@@ -438,6 +441,9 @@ public class UsuariosController {
 			template.addAttribute("telefono", telefono);
 			template.addAttribute("mail_contacto", mail_contacto);
 			template.addAttribute("descripcion", descripcion);
+			template.addAttribute("foto1", foto1);
+			template.addAttribute("foto2", foto2);
+			template.addAttribute("foto3", foto3);
 			template.addAttribute("red_social1", red_social1);
 			template.addAttribute("red_social2", red_social2);
 			template.addAttribute("red_social3", red_social3);
@@ -557,6 +563,9 @@ public class UsuariosController {
 			String telefono = resultado.getString("telefono");
 			String mail_contacto = resultado.getString("mail_contacto");
 			String descripcion = resultado.getString("descripcion");
+			String foto1 = resultado.getString("foto1");
+			String foto2 = resultado.getString("foto2");
+			String foto3 = resultado.getString("foto3");
 			String red_social1 = resultado.getString("red_social1");
 			String red_social2 = resultado.getString("red_social2");
 			String red_social3 = resultado.getString("red_social3");
@@ -571,6 +580,9 @@ public class UsuariosController {
 			template.addAttribute("telefono", telefono);
 			template.addAttribute("mail_contacto", mail_contacto);
 			template.addAttribute("descripcion", descripcion);
+			template.addAttribute("foto1", foto1);
+			template.addAttribute("foto2", foto2);
+			template.addAttribute("foto3", foto3);
 			template.addAttribute("red_social1", red_social1);
 			template.addAttribute("red_social2", red_social2);
 			template.addAttribute("red_social3", red_social3);
@@ -622,6 +634,9 @@ public class UsuariosController {
 			String telefono = resultado.getString("telefono");
 			String mail_contacto = resultado.getString("mail_contacto");
 			String descripcion = resultado.getString("descripcion");
+			String foto1 = resultado.getString("foto1");
+			String foto2 = resultado.getString("foto2");
+			String foto3 = resultado.getString("foto3");
 			String red_social1 = resultado.getString("red_social1");
 			String red_social2 = resultado.getString("red_social2");
 			String red_social3 = resultado.getString("red_social3");
@@ -638,9 +653,12 @@ public class UsuariosController {
 			template.addAttribute("telefono", telefono);
 			template.addAttribute("mail_contacto", mail_contacto);
 			template.addAttribute("descripcion", descripcion);
+			template.addAttribute("foto1", foto1);
+			template.addAttribute("foto2", foto2);
+			template.addAttribute("foto3", foto3);
 			template.addAttribute("red_social1", red_social1);
 			template.addAttribute("red_social2", red_social2);
-			template.addAttribute("red_Social3", red_social3);
+			template.addAttribute("red_social3", red_social3);
 			template.addAttribute("link_musica1", link_musica1);
 			template.addAttribute("link_musica2", link_musica2);
 			template.addAttribute("link_musica3", link_musica3);

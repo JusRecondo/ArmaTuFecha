@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"></meta>
    
 
-    <title>Lugares donde tocar</title>
+    <title>Músicos</title>
 
     <!-- Bootstrap core CSS -->
     <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"></link>
@@ -61,18 +61,18 @@
 	
       <!-- Page Heading -->
       <div class="row">
-        <div class="col-lg-4 col-sm-6 portfolio-item" th:each="perfilLocal:${listadoLocales}">
+        <div class="col-lg-4 col-sm-6 portfolio-item" th:each="perfilMusico:${listadoMusicos}">
           <div class="card h-100">
-            <a th:href="'/vista-perfil-local/' + ${perfilLocal.id_usuario}"><img class="card-img-top" th:src="${perfilLocal.foto1}" alt=""></a>
+            <a href="#"><img class="card-img-top" th:src="${perfilMusico.foto1}" alt=""></a>
             <div class="card-body">
               <h4 class="card-title">
-                <a th:href="'/vista-perfil-local/' + ${perfilLocal.id_usuario}" th:text="${perfilLocal.nombre}">Project One</a>
+                <a th:href="'/vista-perfil-musico/' + ${perfilMusico.id_usuario}" th:text="${perfilMusico.nombre}">Project One</a>
               </h4>
               <p class="card-text" >
-                    <label th:text="${perfilLocal.provincia} + ', '"></label>&nbsp;<label th:text="${perfilLocal.localidad}"></label><br>
-					<label>Teléfono:&nbsp; </label><label th:text="${perfilLocal.telefono}">Teléfono</label><br>
-					<label>Mail:&nbsp; </label><label th:text="${perfilLocal.mail_contacto}">Mail</label><br>
-					<a th:href="${perfilLocal.red_social1}">Facebook</a><br></br>
+                    <label th:text="${perfilMusico.provincia} + ', '"></label>&nbsp;<label th:text="${perfilMusico.localidad}"></label><br>
+					<label>Teléfono:&nbsp; </label><label th:text="${perfilMusico.telefono}">Teléfono</label><br>
+					<label>Mail:&nbsp; </label><label th:text="${perfilMusico.mail_contacto}">Mail</label><br>
+					<a th:href="${perfilMusico.red_social1}">Facebook</a><br></br>
               </p>
             </div>
           </div>

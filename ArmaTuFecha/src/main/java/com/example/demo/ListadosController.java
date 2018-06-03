@@ -53,12 +53,15 @@ public class ListadosController {
 			String telefono = resultado.getString("telefono");
 			String mail_contacto = resultado.getString("mail_contacto");
 			String descripcion = resultado.getString("descripcion");
+			String foto1 = resultado.getString("foto1");
+			String foto2 = resultado.getString("foto2");
+			String foto3 = resultado.getString("foto3");
 			String red_social1 = resultado.getString("red_social1");
 			String red_social2 = resultado.getString("red_social2");
 			String red_social3 = resultado.getString("red_social3");
 			int id_usuario = resultado.getInt("id_usuario");
 
-			PerfilLocal x = new PerfilLocal(id, nombre, provincia, localidad, direccion, telefono, mail_contacto, descripcion, red_social1,
+			PerfilLocal x = new PerfilLocal(id, nombre, provincia, localidad, direccion, telefono, mail_contacto, descripcion, foto1, foto2, foto3, red_social1,
 					red_social2, red_social3, id_usuario);
 			listadoLocales.add(x);
 		}
@@ -66,6 +69,138 @@ public class ListadosController {
 		template.addAttribute("listadoLocales", listadoLocales);
 
 		return "listado-locales";
+	}
+	
+	@GetMapping("/locales/busqueda-nombre/procesar")
+	public String procesarBusquedaLocalesNombre (Model template, @RequestParam String busquedaNombre) throws SQLException {
+		
+		Connection connection;
+		connection = DriverManager.getConnection(env.getProperty("spring.datasource.url"),
+				env.getProperty("spring.datasource.username"), env.getProperty("spring.datasource.password"));
+
+		
+		PreparedStatement consulta = connection.prepareStatement("SELECT * FROM perfiles_locales WHERE LOWER (nombre) LIKE ?;");
+		
+		consulta.setString(1, "%" + busquedaNombre.toLowerCase() + "%");
+	
+		ResultSet resultado = consulta.executeQuery();
+		
+		ArrayList<PerfilLocal> listadoLocales = new ArrayList<PerfilLocal>();
+		
+		while (resultado.next()) {
+			int id = resultado.getInt("id");
+			String nombre = resultado.getString("nombre");
+			String provincia = resultado.getString("provincia");
+			String localidad = resultado.getString("localidad");
+			String direccion = resultado.getString("direccion");
+			String telefono = resultado.getString("telefono");
+			String mail_contacto = resultado.getString("mail_contacto");
+			String descripcion = resultado.getString("descripcion");
+			String foto1 = resultado.getString("foto1");
+			String foto2 = resultado.getString("foto2");
+			String foto3 = resultado.getString("foto3");
+			String red_social1 = resultado.getString("red_social1");
+			String red_social2 = resultado.getString("red_social2");
+			String red_social3 = resultado.getString("red_social3");
+			int id_usuario = resultado.getInt("id_usuario");
+
+			PerfilLocal x = new PerfilLocal(id, nombre, provincia, localidad, direccion, telefono, mail_contacto, descripcion, foto1, foto2, foto3,
+					red_social1, red_social2, red_social3, id_usuario);
+			listadoLocales.add(x);
+		}
+
+		template.addAttribute("listadoLocales", listadoLocales);
+
+		return "resultado-busqueda-locales-nombre";
+	}
+	
+
+	@GetMapping("/locales/busqueda-provincia/procesar")
+	public String procesarBusquedaLocalesProvincia (Model template, @RequestParam String busquedaProvincia) throws SQLException {
+		
+		Connection connection;
+		connection = DriverManager.getConnection( env.getProperty("spring.datasource.url"),
+				env.getProperty("spring.datasource.username"), env.getProperty("spring.datasource.password") );
+
+		
+		PreparedStatement consulta = connection.prepareStatement("SELECT * FROM perfiles_locales WHERE LOWER (provincia) LIKE ?;");
+		
+		consulta.setString(1, "%" + busquedaProvincia.toLowerCase() + "%");
+		
+	
+		ResultSet resultado = consulta.executeQuery();
+		
+		ArrayList<PerfilLocal> listadoLocales = new ArrayList<PerfilLocal>();
+		
+		while (resultado.next()) {
+			int id = resultado.getInt("id");
+			String nombre = resultado.getString("nombre");
+			String provincia = resultado.getString("provincia");
+			String localidad = resultado.getString("localidad");
+			String direccion = resultado.getString("direccion");
+			String telefono = resultado.getString("telefono");
+			String mail_contacto = resultado.getString("mail_contacto");
+			String descripcion = resultado.getString("descripcion");
+			String foto1 = resultado.getString("foto1");
+			String foto2 = resultado.getString("foto2");
+			String foto3 = resultado.getString("foto3");
+			String red_social1 = resultado.getString("red_social1");
+			String red_social2 = resultado.getString("red_social2");
+			String red_social3 = resultado.getString("red_social3");
+			int id_usuario = resultado.getInt("id_usuario");
+
+			PerfilLocal x = new PerfilLocal(id, nombre, provincia, localidad, direccion, telefono, mail_contacto, descripcion, foto1, foto2, foto3,
+					red_social1, red_social2, red_social3, id_usuario);
+			listadoLocales.add(x);
+		}
+
+		template.addAttribute("listadoLocales", listadoLocales);
+
+		return "resultado-busqueda-locales-provincia";
+	}
+	
+	@GetMapping("/locales/busqueda-localidad/procesar")
+	public String procesarBusquedaLocalesLocalidad (Model template, @RequestParam String busquedaLocalidad) throws SQLException {
+		
+		Connection connection;
+		connection = DriverManager.getConnection( env.getProperty("spring.datasource.url"),
+				env.getProperty("spring.datasource.username"), env.getProperty("spring.datasource.password") );
+
+		
+		PreparedStatement consulta = connection.prepareStatement("SELECT * FROM perfiles_locales WHERE LOWER (localidad) LIKE ?;");
+		
+		consulta.setString(1, "%" + busquedaLocalidad.toLowerCase() + "%");
+		
+	
+		ResultSet resultado = consulta.executeQuery();
+		
+		ArrayList<PerfilLocal> listadoLocales = new ArrayList<PerfilLocal>();
+		
+		while (resultado.next()) {
+			int id = resultado.getInt("id");
+			String nombre = resultado.getString("nombre");
+			String provincia = resultado.getString("provincia");
+			String localidad = resultado.getString("localidad");
+			String direccion = resultado.getString("direccion");
+			String telefono = resultado.getString("telefono");
+			String mail_contacto = resultado.getString("mail_contacto");
+			String descripcion = resultado.getString("descripcion");
+			String foto1 = resultado.getString("foto1");
+			String foto2 = resultado.getString("foto2");
+			String foto3 = resultado.getString("foto3");
+			String red_social1 = resultado.getString("red_social1");
+			String red_social2 = resultado.getString("red_social2");
+			String red_social3 = resultado.getString("red_social3");
+			int id_usuario = resultado.getInt("id_usuario");
+
+			PerfilLocal x = new PerfilLocal(id, nombre, provincia, localidad, direccion, telefono, mail_contacto, descripcion, foto1, foto2, foto3,
+					red_social1, red_social2, red_social3, id_usuario);
+			listadoLocales.add(x);
+		}
+
+		template.addAttribute("listadoLocales", listadoLocales);
+
+		return "resultado-busqueda-locales-localidad";
 	}
 	
 	
@@ -90,6 +225,9 @@ public class ListadosController {
 				String telefono = resultado.getString("telefono");
 				String mail_contacto = resultado.getString("mail_contacto");
 				String descripcion = resultado.getString("descripcion");
+				String foto1 = resultado.getString("foto1");
+				String foto2 = resultado.getString("foto2");
+				String foto3 = resultado.getString("foto3");
 				String red_social1 = resultado.getString("red_social1");
 				String red_social2 = resultado.getString("red_social2");
 				String red_social3 = resultado.getString("red_social3");
@@ -98,8 +236,8 @@ public class ListadosController {
 				String link_musica3 = resultado.getString("link_musica3");
 				int id_usuario = resultado.getInt("id_usuario");
 
-				PerfilMusico x = new PerfilMusico(id, nombre, provincia, localidad,  telefono, mail_contacto, descripcion, red_social1,
-						red_social2, red_social3, link_musica1, link_musica2, link_musica3, id_usuario);
+				PerfilMusico x = new PerfilMusico(id, nombre, provincia, localidad,  telefono, mail_contacto, descripcion, foto1, foto2, foto3,
+						red_social1, red_social2, red_social3, link_musica1, link_musica2, link_musica3, id_usuario);
 				listadoMusicos.add(x);
 			}
 
@@ -108,141 +246,144 @@ public class ListadosController {
 			return "listado-musicos";
 		}
 	
-		@GetMapping("/locales/busqueda/procesar")
-		public String procesarBusqueda (Model template, @RequestParam(required = false) String busquedaNombre, 
-				@RequestParam(required = false) String busquedaProvincia) throws SQLException {
+	
+		@GetMapping("/musicos/busqueda-nombre/procesar")
+		public String procesarBusquedaMusicosNombre (Model template, @RequestParam String busquedaNombre) throws SQLException {
 			
+			Connection connection;
+			connection = DriverManager.getConnection(env.getProperty("spring.datasource.url"),
+					env.getProperty("spring.datasource.username"), env.getProperty("spring.datasource.password"));
+
 			
-			if ( busquedaNombre.length() != 0 & busquedaProvincia.length() == 0 ) {
-				
-				Connection connection;
-				connection = DriverManager.getConnection(env.getProperty("spring.datasource.url"),
-						env.getProperty("spring.datasource.username"), env.getProperty("spring.datasource.password"));
-
-				
-				PreparedStatement consulta = connection.prepareStatement("SELECT * FROM perfiles_locales WHERE LOWER (nombre) LIKE ?;");
-				
-				consulta.setString(1, "%" + busquedaNombre.toLowerCase() + "%");
+			PreparedStatement consulta = connection.prepareStatement("SELECT * FROM perfiles_musicos WHERE LOWER (nombre) LIKE ?;");
 			
-				ResultSet resultado = consulta.executeQuery();
-				
-				ArrayList<PerfilLocal> listadoLocales = new ArrayList<PerfilLocal>();
-				
-				while (resultado.next()) {
-					int id = resultado.getInt("id");
-					String nombre = resultado.getString("nombre");
-					String provincia = resultado.getString("provincia");
-					String localidad = resultado.getString("localidad");
-					String direccion = resultado.getString("direccion");
-					String telefono = resultado.getString("telefono");
-					String mail_contacto = resultado.getString("mail_contacto");
-					String descripcion = resultado.getString("descripcion");
-					String red_social1 = resultado.getString("red_social1");
-					String red_social2 = resultado.getString("red_social2");
-					String red_social3 = resultado.getString("red_social3");
-					int id_usuario = resultado.getInt("id_usuario");
-
-					PerfilLocal x = new PerfilLocal(id, nombre, provincia, localidad, direccion, telefono, mail_contacto, descripcion, red_social1,
-							red_social2, red_social3, id_usuario);
-					listadoLocales.add(x);
-				}
-
-				template.addAttribute("listadoLocales", listadoLocales);
-
-				return "resultado-busqueda-locales-nombre";
-				
-			} else if ( busquedaProvincia.length() != 0 & busquedaNombre.length() == 0  ) {
-				
-				Connection connection;
-				connection = DriverManager.getConnection( env.getProperty("spring.datasource.url"),
-						env.getProperty("spring.datasource.username"), env.getProperty("spring.datasource.password") );
-
-				
-				PreparedStatement consulta = connection.prepareStatement("SELECT * FROM perfiles_locales WHERE LOWER (provincia) LIKE ?;");
-				
-				consulta.setString(1, "%" + busquedaProvincia.toLowerCase() + "%");
-				
+			consulta.setString(1, "%" + busquedaNombre.toLowerCase() + "%");
+		
+			ResultSet resultado = consulta.executeQuery();
 			
-				ResultSet resultado = consulta.executeQuery();
-				
-				ArrayList<PerfilLocal> listadoLocales = new ArrayList<PerfilLocal>();
-				
-				while (resultado.next()) {
-					int id = resultado.getInt("id");
-					String nombre = resultado.getString("nombre");
-					String provincia = resultado.getString("provincia");
-					String localidad = resultado.getString("localidad");
-					String direccion = resultado.getString("direccion");
-					String telefono = resultado.getString("telefono");
-					String mail_contacto = resultado.getString("mail_contacto");
-					String descripcion = resultado.getString("descripcion");
-					String red_social1 = resultado.getString("red_social1");
-					String red_social2 = resultado.getString("red_social2");
-					String red_social3 = resultado.getString("red_social3");
-					int id_usuario = resultado.getInt("id_usuario");
-
-					PerfilLocal x = new PerfilLocal(id, nombre, provincia, localidad, direccion, telefono, mail_contacto, descripcion, red_social1,
-							red_social2, red_social3, id_usuario);
-					listadoLocales.add(x);
-				}
-
-				template.addAttribute("listadoLocales", listadoLocales);
-
-				return "resultado-busqueda-locales-provincia";
-				
-			} else if ( busquedaProvincia.length() != 0 & busquedaNombre.length() != 0 ) {
-				
-				Connection connection;
-				connection = DriverManager.getConnection( env.getProperty("spring.datasource.url"),
-						env.getProperty("spring.datasource.username"), env.getProperty("spring.datasource.password") );
-
-				
-				PreparedStatement consulta = connection.prepareStatement("SELECT * FROM perfiles_locales WHERE LOWER(nombre) LIKE ? AND LOWER(provincia) LIKE ?;");
-				
-				consulta.setString(1, "%" + busquedaNombre.toLowerCase() + "%");
-				consulta.setString(2, "%" + busquedaProvincia.toLowerCase() + "%");
+			ArrayList<PerfilMusico> listadoMusicos = new ArrayList<PerfilMusico>();
 			
-				ResultSet resultado = consulta.executeQuery();
-				
-				ArrayList<PerfilLocal> listadoLocales = new ArrayList<PerfilLocal>();
-				
-				while (resultado.next()) {
-					int id = resultado.getInt("id");
-					String nombre = resultado.getString("nombre");
-					String provincia = resultado.getString("provincia");
-					String localidad = resultado.getString("localidad");
-					String direccion = resultado.getString("direccion");
-					String telefono = resultado.getString("telefono");
-					String mail_contacto = resultado.getString("mail_contacto");
-					String descripcion = resultado.getString("descripcion");
-					String red_social1 = resultado.getString("red_social1");
-					String red_social2 = resultado.getString("red_social2");
-					String red_social3 = resultado.getString("red_social3");
-					int id_usuario = resultado.getInt("id_usuario");
+			while (resultado.next()) {
+				int id = resultado.getInt("id");
+				String nombre = resultado.getString("nombre");
+				String provincia = resultado.getString("provincia");
+				String localidad = resultado.getString("localidad");
+				String telefono = resultado.getString("telefono");
+				String mail_contacto = resultado.getString("mail_contacto");
+				String descripcion = resultado.getString("descripcion");
+				String foto1 = resultado.getString("foto1");
+				String foto2 = resultado.getString("foto2");
+				String foto3 = resultado.getString("foto3");
+				String red_social1 = resultado.getString("red_social1");
+				String red_social2 = resultado.getString("red_social2");
+				String red_social3 = resultado.getString("red_social3");
+				String link_musica1 = resultado.getString("link_musica1");
+				String link_musica2 = resultado.getString("link_musica2");
+				String link_musica3 = resultado.getString("link_musica3");
+				int id_usuario = resultado.getInt("id_usuario");
 
-					PerfilLocal x = new PerfilLocal(id, nombre, provincia, localidad, direccion, telefono, mail_contacto, descripcion, red_social1,
-							red_social2, red_social3, id_usuario);
-					listadoLocales.add(x);
-				}
-
-				template.addAttribute("listadoLocales", listadoLocales);
-
-				return "resultado-busqueda-locales-nombre-provincia";
-				
+				PerfilMusico x = new PerfilMusico(id, nombre, provincia, localidad,  telefono, mail_contacto, descripcion, foto1, foto2, foto3,
+						red_social1, red_social2, red_social3, link_musica1, link_musica2, link_musica3, id_usuario);
+				listadoMusicos.add(x);
 			}
-			
-			
-			return "listado-locales";
+
+			template.addAttribute("listadoMusicos", listadoMusicos);
+
+			return "resultado-busqueda-musicos-nombre";
 		}
-	
-	
 		
+
+		@GetMapping("/musicos/busqueda-provincia/procesar")
+		public String procesarBusquedaMusicosProvincia (Model template, @RequestParam String busquedaProvincia) throws SQLException {
+			
+			Connection connection;
+			connection = DriverManager.getConnection( env.getProperty("spring.datasource.url"),
+					env.getProperty("spring.datasource.username"), env.getProperty("spring.datasource.password") );
+
+			
+			PreparedStatement consulta = connection.prepareStatement("SELECT * FROM perfiles_musicos WHERE LOWER (provincia) LIKE ?;");
+			
+			consulta.setString(1, "%" + busquedaProvincia.toLowerCase() + "%");
+			
 		
+			ResultSet resultado = consulta.executeQuery();
+			
+			ArrayList<PerfilMusico> listadoMusicos = new ArrayList<PerfilMusico>();
+			
+			while (resultado.next()) {
+				int id = resultado.getInt("id");
+				String nombre = resultado.getString("nombre");
+				String provincia = resultado.getString("provincia");
+				String localidad = resultado.getString("localidad");
+				String telefono = resultado.getString("telefono");
+				String mail_contacto = resultado.getString("mail_contacto");
+				String descripcion = resultado.getString("descripcion");
+				String foto1 = resultado.getString("foto1");
+				String foto2 = resultado.getString("foto2");
+				String foto3 = resultado.getString("foto3");
+				String red_social1 = resultado.getString("red_social1");
+				String red_social2 = resultado.getString("red_social2");
+				String red_social3 = resultado.getString("red_social3");
+				String link_musica1 = resultado.getString("link_musica1");
+				String link_musica2 = resultado.getString("link_musica2");
+				String link_musica3 = resultado.getString("link_musica3");
+				int id_usuario = resultado.getInt("id_usuario");
+
+				PerfilMusico x = new PerfilMusico(id, nombre, provincia, localidad,  telefono, mail_contacto, descripcion, foto1, foto2, foto3,
+						red_social1, red_social2, red_social3, link_musica1, link_musica2, link_musica3, id_usuario);
+				listadoMusicos.add(x);
+			}
+
+			template.addAttribute("listadoMusicos", listadoMusicos);
+
+			return "resultado-busqueda-musicos-provincia";
+		}
 		
+		@GetMapping("/musicos/busqueda-localidad/procesar")
+		public String procesarBusquedaMusicosLocalidad (Model template, @RequestParam String busquedaLocalidad) throws SQLException {
+			
+			Connection connection;
+			connection = DriverManager.getConnection( env.getProperty("spring.datasource.url"),
+					env.getProperty("spring.datasource.username"), env.getProperty("spring.datasource.password") );
+
+			
+			PreparedStatement consulta = connection.prepareStatement("SELECT * FROM perfiles_musicos WHERE LOWER (localidad) LIKE ?;");
+			
+			consulta.setString(1, "%" + busquedaLocalidad.toLowerCase() + "%");
+			
 		
-		
-		
-		
+			ResultSet resultado = consulta.executeQuery();
+			
+			ArrayList<PerfilMusico> listadoMusicos = new ArrayList<PerfilMusico>();
+			
+			while (resultado.next()) {
+				int id = resultado.getInt("id");
+				String nombre = resultado.getString("nombre");
+				String provincia = resultado.getString("provincia");
+				String localidad = resultado.getString("localidad");
+				String telefono = resultado.getString("telefono");
+				String mail_contacto = resultado.getString("mail_contacto");
+				String descripcion = resultado.getString("descripcion");
+				String foto1 = resultado.getString("foto1");
+				String foto2 = resultado.getString("foto2");
+				String foto3 = resultado.getString("foto3");
+				String red_social1 = resultado.getString("red_social1");
+				String red_social2 = resultado.getString("red_social2");
+				String red_social3 = resultado.getString("red_social3");
+				String link_musica1 = resultado.getString("link_musica1");
+				String link_musica2 = resultado.getString("link_musica2");
+				String link_musica3 = resultado.getString("link_musica3");
+				int id_usuario = resultado.getInt("id_usuario");
+
+				PerfilMusico x = new PerfilMusico(id, nombre, provincia, localidad,  telefono, mail_contacto, descripcion, foto1, foto2, foto3,
+						red_social1, red_social2, red_social3, link_musica1, link_musica2, link_musica3, id_usuario);
+				listadoMusicos.add(x);
+			}
+
+			template.addAttribute("listadoMusicos", listadoMusicos);
+
+			return "resultado-busqueda-musicos-localidad";
+		}
 		
 	
 }

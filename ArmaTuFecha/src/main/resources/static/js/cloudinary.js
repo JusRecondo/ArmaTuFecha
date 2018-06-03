@@ -73,7 +73,7 @@ $(document).ready(function() {
 			upload_preset : 'oj92lbou',
 			cloud_name : 'drxc4iyfs',
 			theme : 'white',
-			multiple : true,
+			multiple : false,
 			max_image_width : 750,
 			max_image_height : 500,
 			max_files : 5,
@@ -89,16 +89,15 @@ $(document).ready(function() {
 		})
 	})
 
-	$("#upload_widget_opener4").click(function() {
+	$("#upload_widget_opener5").click(function() {
 		cloudinary.openUploadWidget({
 
 			upload_preset : 'oj92lbou',
 			cloud_name : 'drxc4iyfs',
 			theme : 'white',
-			multiple : true,
+			multiple : false,
 			max_image_width : 750,
 			max_image_height : 500,
-			max_files : 5,
 			folder : 'perfiles_musicos',
 			sources : [ 'local', 'url', 'facebook' ],
 		}, function(error, result) {
@@ -110,16 +109,15 @@ $(document).ready(function() {
 
 		})
 	})
-	$("#upload_widget_opener4").click(function() {
+	$("#upload_widget_opener6").click(function() {
 		cloudinary.openUploadWidget({
 
 			upload_preset : 'oj92lbou',
 			cloud_name : 'drxc4iyfs',
 			theme : 'white',
-			multiple : true,
+			multiple : false,
 			max_image_width : 750,
 			max_image_height : 500,
-			max_files : 5,
 			folder : 'perfiles_musicos',
 			sources : [ 'local', 'url', 'facebook' ],
 		}, function(error, result) {
@@ -131,6 +129,7 @@ $(document).ready(function() {
 
 		})
 	})
+	
 
 })
 

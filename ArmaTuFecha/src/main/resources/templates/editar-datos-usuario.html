@@ -60,19 +60,25 @@
 					
 					<div class="row">
 						<div class="col-12">
-							<form  class="form-group" th:action="'/procesar-edicion-usuario/' + ${id}" method="POST" >			   
+							<form  class="form-group needs-validation" th:action="'/procesar-edicion-usuario/' + ${id}" method="POST" >			   
 								<div class="alert alert-danger" role="alert" th:text="${aviso_mail}" th:if="${aviso_mail}">
 								</div>
-								<label>*Editar e-mail:&nbsp;</label><input class="form-control" name="mail" type="email" th:value="${mailCargado}"></input>
+								<label>*Editar e-mail:&nbsp;</label><input class="form-control" name="mail" type="email" th:value="${mailCargado}" required></input>
+								<div class="invalid-feedback">Por favor completa este campo.</div>
+							    <div class="valid-feedback"></div>
 								<br></br>
 								<div class="alert alert-danger" role="alert" th:text="${aviso_contrasenia}" th:if="${aviso_contrasenia}">
 								</div>	
-								<label>*Editar contraseña:&nbsp;</label><input class="form-control" name="contrasenia" type="password" th:value="${contrasenia}"></input>
+								<label>*Editar contraseña:&nbsp;</label><input class="form-control" name="contrasenia" type="password" th:value="${contrasenia}" required></input>
+								<div class="invalid-feedback">Por favor completa este campo.</div>
+							    <div class="valid-feedback"></div>
 								<br></br>
-								<label>*Volvé a ingresar la contraseña:&nbsp;</label><input class="form-control" name="contrasenia2" type="password" placeholder="repetir contraseña..."></input>
+								<label>*Volvé a ingresar la contraseña:&nbsp;</label><input class="form-control" name="contrasenia2" type="password" placeholder="repetir contraseña..." required></input>
+								<div class="invalid-feedback">Por favor completa este campo.</div>
+							    <div class="valid-feedback"></div>
 								<br></br>
 								
-								<input class="btn btn-default" type="submit" value="Guardar cambios"></input>
+								<input class="btn btn-outline-light btn-lg" type="submit" value="Guardar cambios"></input>
 								<!-- TO DO boton volver, usar referer -->
 								<br></br>
 								<br></br>

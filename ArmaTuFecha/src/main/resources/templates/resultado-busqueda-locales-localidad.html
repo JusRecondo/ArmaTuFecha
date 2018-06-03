@@ -14,7 +14,7 @@
 
     <!-- Custom styles for this template -->
     <link href="/css/3-col-portfolio.css" rel="stylesheet"></link>
-    <link href="/css/scrolling-nav.css" rel="stylesheet"></link>
+    <link href="css/scrolling-nav.css" rel="stylesheet"></link>
     <link rel="stylesheet" type="text/css" href="/css/estilos.css"></link>
     
 
@@ -56,9 +56,24 @@
 	 <!-- TO DO select para buscar/"filtrar" por provincia y localidad-->             
      </header>
     <!-- Page Content -->
-    <section id="about" class="bootstrap-override-section">
+    <section id="about" class="bootstrap-override-section2">
     <div class="container">
-	
+	 	<div class="row">
+				<div class="col text-center" id="bootstrap-override-col3">
+				                               
+					<form class="form-group" action="/locales/busqueda-nombre/procesar">
+						<div class="col text-center">
+							<input name="busquedaNombre" type="text" class="form-control"
+								placeholder="Buscá un lugar por su nombre..."></input><br>
+						</div>
+							<div class="col text-center">
+								<input class="btn btn-outline-dark btn-lg" type="submit"
+									value="Buscar"></input>
+							</div>
+						
+					</form>
+				</div>
+			</div>
       <!-- Page Heading -->
       <div class="row">
         <div class="col-lg-4 col-sm-6 portfolio-item" th:each="perfilLocal:${listadoLocales}">

@@ -36,8 +36,14 @@
 	margin-top: 0px;
 	
 }
+
 .bootstrap-override-header {
 	padding-bottom: 80px !important;
+}
+
+.bootstrap-override-header2 {
+	padding-top: 100px;
+	padding-bottom: 100px;
 }
 
 

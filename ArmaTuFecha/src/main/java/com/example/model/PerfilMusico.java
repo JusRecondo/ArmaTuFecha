@@ -8,7 +8,10 @@ public class PerfilMusico {
 	private String localidad;
 	private String telefono;
 	private String mail_contacto; 
-	private String descripcion; 
+	private String descripcion;
+	private String foto1;
+	private String foto2;
+	private String foto3;
 	private String red_social1;
 	private String red_social2;
 	private String red_social3;
@@ -18,7 +21,7 @@ public class PerfilMusico {
 	private int id_usuario; 
 	
 
-	public PerfilMusico(int i, String n, String p, String l, String t, String m, String des, String rd1, String rd2, String rd3, String lm1, String lm2, String lm3, int iu){
+	public PerfilMusico(int i, String n, String p, String l, String t, String m, String des, String f1, String f2, String f3, String rd1, String rd2, String rd3, String lm1, String lm2, String lm3, int iu){
 		
 		this.id = i;
 		this.nombre = n;
@@ -26,7 +29,10 @@ public class PerfilMusico {
 		this.localidad = l;
 		this.telefono = t;
 		this.mail_contacto = m;
-		this.descripcion = des; 
+		this.descripcion = des;
+		this.foto1 = f1;
+		this.foto2 = f2;
+		this.foto3 = f3;
 		this.red_social1 = rd1;
 		this.red_social2 = rd2;
 		this.red_social3 = rd3;
@@ -38,7 +44,6 @@ public class PerfilMusico {
 	}
 
 
-	
 
 	public int getId() {
 		return id;
@@ -108,6 +113,46 @@ public class PerfilMusico {
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
+	
+	public String getFoto1() {
+		return foto1;
+	}
+
+
+
+
+	public void setFoto1(String foto1) {
+		this.foto1 = foto1;
+	}
+
+
+
+
+	public String getFoto2() {
+		return foto2;
+	}
+
+
+
+
+	public void setFoto2(String foto2) {
+		this.foto2 = foto2;
+	}
+
+
+
+
+	public String getFoto3() {
+		return foto3;
+	}
+
+
+
+
+	public void setFoto3(String foto3) {
+		this.foto3 = foto3;
+	}
+
 
 
 	public String getRed_social1() {

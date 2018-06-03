@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"></meta>
    
 
-    <title>Lugares donde tocar</title>
+    <title>Músicos</title>
 
     <!-- Bootstrap core CSS -->
     <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"></link>
@@ -43,25 +43,70 @@
 		</div>
 	</nav>
 
-	<header class="bg-primary text-white bootstrap-override-header" id="color1">
+	<header class="bg-primary text-white bootstrap-override-header2" id="color1">
 		      <div class="container text-center">    
 		        <div class="row">
-		        	<div class="col-12">
-		        		<h1>Revisa los perfiles y encontrá las mejores bandas<br>para armar tu fecha</h1>
+		        	<div class="col" >
+		        		<h1>Revisa los perfiles y encontrá el mejor lugar<br>para hacer tu fecha</h1>
 		        	</div>
-		        </div>
-		       </div> 
-	 <!-- TO DO select para buscar/"filtrar" por provincia y localidad, y generos musicales-->             
+		        </div>	
+				
+		       </div>
+		      
+	 <!-- TO DO select para buscar/"filtrar" por provincia y localidad-->             
      </header>
     <!-- Page Content -->
-    <section id="about" class="bootstrap-override-section">
+    <section id="about" class="bootstrap-override-section2">
     <div class="container">
-
+			<div class="row">
+				<div class="col text-center" id="bootstrap-override-col3">
+					<h5>Buscar por..</h5><br>
+						<div class="row">	
+							<div class="col-md-4">
+								<form class="form-group" action="/musicos/busqueda-nombre/procesar">
+									<div class="col text-center">
+										<input name="busquedaNombre" type="text" class="form-control"
+											placeholder="Buscá un lugar por su nombre..."></input><br>	
+									</div>
+									<div class="col text-center">
+										<input class="btn btn-outline-dark" type="submit"
+												value="Buscar"></input>
+									</div>					
+								</form>	
+							</div>
+							<div class="col-md-4">
+								<form class="form-group" action="/musicos/busqueda-provincia/procesar">	
+									<div class="col text-center">
+										<input name="busquedaProvincia" type="text" class="form-control"
+											placeholder="Buscá por provincia..."></input><br>
+									</div>
+									<div class="col text-center">
+										<input class="btn btn-outline-dark" type="submit"
+													value="Buscar"></input>
+									</div>
+								</form>	
+							</div>
+							<div class="col-md-4">
+								<form class="form-group" action="/musicos/busqueda-localidad/procesar">	
+									<div class="col text-center">
+										<input name="busquedaLocalidad" type="text" class="form-control"
+											placeholder="Buscá por localidad..."></input><br>
+									</div>
+									<div class="col text-center">
+											<input class="btn btn-outline-dark" type="submit"
+												value="Buscar"></input>
+									</div>
+								</form>
+							</div>	
+						</div>
+							
+				</div>
+			</div>
       <!-- Page Heading -->
       <div class="row">
         <div class="col-lg-4 col-sm-6 portfolio-item" th:each="perfilMusico:${listadoMusicos}">
           <div class="card h-100">
-            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+            <a href="#"><img class="card-img-top" th:src="${perfilMusico.foto1}" alt=""></a>
             <div class="card-body">
               <h4 class="card-title">
                 <a th:href="'/vista-perfil-musico/' + ${perfilMusico.id_usuario}" th:text="${perfilMusico.nombre}">Project One</a>

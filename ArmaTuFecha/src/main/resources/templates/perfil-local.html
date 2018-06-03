@@ -50,7 +50,7 @@
       <h1 class="my-4" th:text="${nombre}">
       </h1>
       <div class="row">
-      	<div class="col-8">
+      	<div class="col-md-8">
 			<div class="row">
 				<div class="col-md-12">
 					<div id="carouselExampleIndicators" class="carousel slide my-4" data-ride="carousel">
@@ -98,12 +98,13 @@
 		            <label th:text="${direccion}">Lorem Ipsum</label><br>
 		            <label th:text="${telefono}">a</label><br>
 		            <label th:text="${mail_contacto}">a</label><br>
+		            
 				    
 				</div>
 			</div>
 			<div class="row">	
 				<div class="col">
-					<h3 class="my-3">Redes Sociales</h3>
+					<h3 class="my-3">Redes sociales</h3>
 					<a th:href="${red_social1}" th:if="${red_social1}">Facebook</a><br><br>
 					<a th:href="${red_social2}" th:if="${red_social2}">Instagram</a><br><br>
 				    <a th:href="${red_social3}" th:if="${red_social3}">Otro</a><br><br>
