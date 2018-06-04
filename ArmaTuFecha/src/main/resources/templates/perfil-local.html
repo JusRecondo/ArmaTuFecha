@@ -105,9 +105,9 @@
 			<div class="row">	
 				<div class="col">
 					<h3 class="my-3">Redes sociales</h3>
-					<a th:href="${red_social1}" th:if="${red_social1}">Facebook</a><br><br>
-					<a th:href="${red_social2}" th:if="${red_social2}">Instagram</a><br><br>
-				    <a th:href="${red_social3}" th:if="${red_social3}">Otro</a><br><br>
+					<a th:href="${red_social1}" th:if="${red_social1 != null && red_social1 != ''}" th:text="${red_social1}">Facebook</a><br><br>
+					<a th:href="${red_social2}" th:if="${red_social2 != null && red_social2 != ''}" th:text="${red_social2}">Instagram</a><br><br>
+				    <a th:href="${red_social3}" th:if="${red_social3 != null && red_social3 != ''}" th:text="${red_social3}">Otro</a><br><br>
 				</div>
 			</div>      	
       	</div>

@@ -48,6 +48,7 @@
 		        <div class="row">
 		        	<div class="col" >
 		        		<h1>Revisa los perfiles y encontrá el mejor lugar<br>para hacer tu fecha</h1>
+		        		<h5 th:text="${mensaje_logout}"></h5>
 		        	</div>
 		        </div>	
 				
@@ -115,7 +116,7 @@
                     <label th:text="${perfilMusico.provincia} + ', '"></label>&nbsp;<label th:text="${perfilMusico.localidad}"></label><br>
 					<label>Teléfono:&nbsp; </label><label th:text="${perfilMusico.telefono}">Teléfono</label><br>
 					<label>Mail:&nbsp; </label><label th:text="${perfilMusico.mail_contacto}">Mail</label><br>
-					<a th:href="${perfilMusico.red_social1}">Facebook</a><br></br>
+					<a th:href="${perfilMusico.red_social1}" th:if="${perfilMusico.red_social1 != null && perfilMusico.red_social1 != ''}" th:text="${perfilMusico.red_social1}">Facebook</a><br><br>
               </p>
             </div>
           </div>

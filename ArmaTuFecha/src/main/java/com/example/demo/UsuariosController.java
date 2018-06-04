@@ -11,6 +11,9 @@ import java.sql.SQLException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.simplejavamail.email.Email;
+import org.simplejavamail.email.EmailBuilder;
+import org.simplejavamail.mailer.MailerBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
@@ -31,37 +34,21 @@ public class UsuariosController {
 	private UsuariosHelper UsuariosHelper;
 
 	@GetMapping("/")
-	public String paginaPrincipal(HttpServletRequest request, Model template) throws MalformedURLException {
-	 
-		String referer = request.getHeader("Referer");
-		if (referer != null) {
-			URL url = new URL(referer);
-            System.out.println(url.getPath());
-			if (url.getPath().equals("/locales/confirmacion-eliminar-perfil/{}") || url.getPath().equals("/musicos/confirmacion-eliminar-perfil/{}") ) {
-				
-				template.addAttribute("mensaje_eliminado", "Perfil y datos de usuario eliminados.");
-			}
+	public String paginaPrincipal (HttpSession session, Model template, RedirectAttributes redirectAttribute) throws SQLException  {
+		
+		int idLogueado = UsuariosHelper.usuarioLogueado(session);
+
+		if (idLogueado != 0) {
+			
+			UsuariosHelper.cerrarSesion(session);
+			redirectAttribute.addFlashAttribute("mensaje_logout", "Tu sesion se ha cerrado!");	
+			
+			return "redirect:/";
 		}
+		
 		return "pagina-principal";
 	}
-
 	
-	
-	
-	
-	// TODO poner comprobacion de sesion, en vista local logueado poner link en
-	// "home"
-	@GetMapping("/home/local/{nombre}")
-	public String paginaPrincipalLocalLogueado(Model template, @PathVariable String nombre) {
-		template.addAttribute("nombre", nombre);
-		return "pagina-principal-local-logueado";
-	}
-
-	@GetMapping("/home/musico/{nombre}")
-	public String paginaPrincipalMusicoLogueado(Model template, @PathVariable String nombre) {
-		template.addAttribute("nombre", nombre);
-		return "pagina-principal-musico-logueado";
-	}
 
 	@GetMapping("/crear-perfil")
 	public String crearPerfil() {
@@ -197,10 +184,23 @@ public class UsuariosController {
 
 			consulta.executeUpdate();
 
+			Email email = EmailBuilder.startingBlank()
+				    .from("app", "pepe@gmail.com")
+				    //se puede poner el mail del usuario que se acaba de registrar
+				    .to("asd", "pepe@gmail.com")
+				    .withSubject("[Arma Tu Fecha]prueba mail")
+				    .withPlainText("Esto es un mensaje de prueba")
+				    .buildEmail();
+
+				MailerBuilder
+				  .withSMTPServer("smtp.sendgrid.net", 587, "apikey", env.getProperty("sendgrid.apikey") )
+				  .buildMailer()
+				  .sendMail(email);
+			
 			connection.close();
 
 			redirectAttribute.addFlashAttribute("mensaje_bienvenida", "Gracias por unirte!");	
-			
+				
 			return "redirect:/login";
 		}
 
@@ -343,6 +343,19 @@ public class UsuariosController {
 
 			consulta.executeUpdate();
 
+			Email email = EmailBuilder.startingBlank()
+				    .from("app", "pepe@gmail.com")
+				    //se puede poner el mail del usuario que se acaba de registrar
+				    .to("asd", "pepe@gmail.com")
+				    .withSubject("[Arma Tu Fecha]prueba mail")
+				    .withPlainText("Esto es un mensaje de prueba")
+				    .buildEmail();
+
+				MailerBuilder
+				  .withSMTPServer("smtp.sendgrid.net", 587, "apikey", env.getProperty("sendgrid.apikey") )
+				  .buildMailer()
+				  .sendMail(email);
+			
 			connection.close();
 
 			
@@ -457,38 +470,46 @@ public class UsuariosController {
 
 	
 
-	
 
-	@GetMapping("/index")
-	public String estructura() {
-		return "index";
-	}
 
-	// pruebas fragments
-
-	@GetMapping("/A")
-	public String A() {
-		return "A";
-
-	}
-
-	@GetMapping("/prueba-formulario")
-	public String pruebaFormulario() {
-		return "prueba-formulario";
-	}
 
 	@GetMapping("/login")
-	public String login(HttpServletRequest request, Model template) throws MalformedURLException {
-		//String referer = request.getHeader("Referer");
-		// if (referer != null) {
-		//	URL url = new URL(referer);
+	public String login(HttpSession session) throws SQLException {
 
-	    //		if (url.getPath().equals("/crear-perfil")) {
-				
-		//		template.addAttribute("mensaje_bienvenida", "¡Gracias por unirte!");
-		//	}
-	//	}
+		int idLogueado = UsuariosHelper.usuarioLogueado(session);
+
+		if (idLogueado != 0) {
+			
+			String codigo = (String)session.getAttribute("codigo-autorizacion");
+			
+			Connection connection;
+			connection = DriverManager.getConnection( env.getProperty("spring.datasource.url"),
+					env.getProperty("spring.datasource.username"), env.getProperty("spring.datasource.password") );
+			
+			PreparedStatement consulta = 
+					connection.prepareStatement("SELECT tipo, nombre FROM usuarios WHERE codigo = ?;");
+			                                                  
+			consulta.setString(1, codigo);
+			
+			ResultSet resultado = consulta.executeQuery();
+			
+				if (resultado.next()) {
+					String tipo = resultado.getString("tipo");
+					String nombre = resultado.getString("nombre");
+	
+					if (tipo.equals("musico")) {
+						return "redirect:/musicos/" + nombre;
+	
+					} else if (tipo.equals("local")) {
+						return "redirect:/locales/" + nombre;
+					}
+				}
+			return "redirect:/";
+		} else {
+		
 		return "login";
+		
+		}
 	}
 
 	@PostMapping("/procesar-login")
@@ -529,8 +550,10 @@ public class UsuariosController {
 	}
 
 	@GetMapping("/logout")
-	public String logout(HttpSession session) throws SQLException {
+	public String logout(HttpSession session, Model template, RedirectAttributes redirectAttribute) throws SQLException {
 		UsuariosHelper.cerrarSesion(session);
+		
+		redirectAttribute.addFlashAttribute("mensaje_logout", "Tu sesion se ha cerrado!");
 		return "redirect:/";
 	}
 

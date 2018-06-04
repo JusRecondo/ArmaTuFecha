@@ -7,12 +7,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.model.PerfilLocal;
 import com.example.model.PerfilMusico;
@@ -26,14 +29,20 @@ public class ListadosController {
 	@Autowired
 	private UsuariosHelper UsuariosHelper;
 
-	@GetMapping ("/listado2")
-	public String listado() {
-		return "listado"; 
-	}
-	
-	@GetMapping("/listado-locales")
-	public String listadoLocales(Model template) throws SQLException {
 
+	@GetMapping("/listado-locales")
+	public String listadoLocales(HttpSession session, Model template, RedirectAttributes redirectAttribute) throws SQLException {
+
+		int idLogueado = UsuariosHelper.usuarioLogueado(session);
+
+		if (idLogueado != 0) {
+			
+			UsuariosHelper.cerrarSesion(session);
+			redirectAttribute.addFlashAttribute("mensaje_logout", "Tu sesion se ha cerrado!");	
+			
+			return "redirect:/listado-locales";
+		}
+		
 		Connection connection;
 		connection = DriverManager.getConnection(env.getProperty("spring.datasource.url"),
 				env.getProperty("spring.datasource.username"), env.getProperty("spring.datasource.password"));
@@ -205,8 +214,18 @@ public class ListadosController {
 	
 	
 		@GetMapping("/listado-musicos")
-		public String listadoMusicos(Model template) throws SQLException {
+		public String listadoMusicos(HttpSession session, Model template, RedirectAttributes redirectAttribute) throws SQLException {
 
+			int idLogueado = UsuariosHelper.usuarioLogueado(session);
+
+			if (idLogueado != 0) {
+				
+				UsuariosHelper.cerrarSesion(session);
+				redirectAttribute.addFlashAttribute("mensaje_logout", "Tu sesion se ha cerrado!");	
+				
+				return "redirect:/listado-musicos";
+			}
+			
 			Connection connection;
 			connection = DriverManager.getConnection(env.getProperty("spring.datasource.url"),
 					env.getProperty("spring.datasource.username"), env.getProperty("spring.datasource.password"));

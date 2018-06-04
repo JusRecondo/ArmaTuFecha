@@ -72,7 +72,7 @@
                     <label th:text="${perfilLocal.provincia} + ', '"></label>&nbsp;<label th:text="${perfilLocal.localidad}"></label><br>
 					<label>Teléfono:&nbsp; </label><label th:text="${perfilLocal.telefono}">Teléfono</label><br>
 					<label>Mail:&nbsp; </label><label th:text="${perfilLocal.mail_contacto}">Mail</label><br>
-					<a th:href="${perfilLocal.red_social1}">Facebook</a><br></br>
+					<a th:href="${perfilLocal.red_social1}" th:if="${perfilLocal.red_social1 != null && {perfilLocal.red_social1 != ''}" th:text="${perfilLocal.red_social1}">Facebook</a><br><br>
               </p>
             </div>
           </div>

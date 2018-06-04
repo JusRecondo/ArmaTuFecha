@@ -32,7 +32,8 @@ $(document).ready(function() {
 			multiple : false,
 			max_image_width : 750,
 			max_image_height : 500,
-			max_files : 5,
+			min_image_width : 750,
+			min_image_height : 500,
 			folder : 'perfiles_locales',
 			sources : [ 'local', 'url', 'facebook' ],
 		}, function(error, result) {
@@ -54,7 +55,8 @@ $(document).ready(function() {
 			multiple : false,
 			max_image_width : 750,
 			max_image_height : 500,
-			max_files : 5,
+			min_image_width : 750,
+			min_image_height : 500,
 			folder : 'perfiles_locales',
 			sources : [ 'local', 'url', 'facebook' ],
 		}, function(error, result) {
@@ -76,7 +78,8 @@ $(document).ready(function() {
 			multiple : false,
 			max_image_width : 750,
 			max_image_height : 500,
-			max_files : 5,
+			min_image_width : 750,
+			min_image_height : 500,
 			folder : 'perfiles_musicos',
 			sources : [ 'local', 'url', 'facebook' ],
 		}, function(error, result) {
@@ -98,6 +101,8 @@ $(document).ready(function() {
 			multiple : false,
 			max_image_width : 750,
 			max_image_height : 500,
+			min_image_width : 750,
+			min_image_height : 500,
 			folder : 'perfiles_musicos',
 			sources : [ 'local', 'url', 'facebook' ],
 		}, function(error, result) {
@@ -118,6 +123,8 @@ $(document).ready(function() {
 			multiple : false,
 			max_image_width : 750,
 			max_image_height : 500,
+			min_image_width : 750,
+			min_image_height : 500,
 			folder : 'perfiles_musicos',
 			sources : [ 'local', 'url', 'facebook' ],
 		}, function(error, result) {
