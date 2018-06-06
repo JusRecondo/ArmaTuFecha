@@ -8,7 +8,7 @@
 			content="width=device-width, initial-scale=1, shrink-to-fit=no"></meta>
 		
 		
-		<title>Editar Usuario</title>
+		<title>Eliminar cuenta</title>
 		
 		<!-- Bootstrap core CSS -->
 		<link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"></link>
@@ -45,44 +45,24 @@
 				</div>
 			</nav>
 			
-			<header class="bg-primary text-white bootstrap-override-header" id="color1">
+			<header class="bg-primary text-white bootstrap-override-header3" id="color1">
 				<div class="container text-center">
 					<div class="row">
-						<div class="col-12">
+						<div class="col">
 							<h1>
-								Modifica tus datos de usuario
-							</h1>
-							<h5>(Los campos marcados con * son obligatorios)</h5>
-							<div class="alert alert-danger" role="alert" th:text="${aviso_incompleto}" th:if="${aviso_incompleto}">
-							</div>
+								¿Estas seguro de eliminar tu cuenta y perfil?
+							</h1><br><br>
+						
 						</div>
 					</div>
 					
 					<div class="row">
-						<div class="col-12">
-							<form  class="form-group needs-validation" th:action="'/procesar-edicion-usuario/' + ${nombre} + '/' + ${id_usuario}" method="POST" >			   
-								<div class="alert alert-danger" role="alert" th:text="${aviso_mail}" th:if="${aviso_mail}">
-								</div>
-								<label>*Editar e-mail:&nbsp;</label><input class="form-control" name="mail" type="email" th:value="${mailCargado}" required></input>
-								<div class="invalid-feedback">Por favor completa este campo.</div>
-							    <div class="valid-feedback"></div>
-								<br></br>
-								<div class="alert alert-danger" role="alert" th:text="${aviso_contrasenia}" th:if="${aviso_contrasenia}">
-								</div>	
-								<label>*Editar contraseña:&nbsp;</label><input class="form-control" name="contrasenia" type="password" th:value="${contrasenia}" required></input>
-								<div class="invalid-feedback">Por favor completa este campo.</div>
-							    <div class="valid-feedback"></div>
-								<br></br>
-								<label>*Volvé a ingresar la contraseña:&nbsp;</label><input class="form-control" name="contrasenia2" type="password" placeholder="repetir contraseña..." required></input>
-								<div class="invalid-feedback">Por favor completa este campo.</div>
-							    <div class="valid-feedback"></div>
-								<br></br>
-								
-								<input class="btn btn-outline-light btn-lg" type="submit" value="Guardar cambios"></input><br><br>
-								<a class="btn btn-outline-light btn" href="./">Volver</a>
+						<div class="col">
+								<a class="btn btn-outline-light btn-lg" th:href="'/' + ${nombre} + '/' + ${id_usuario} + '/eliminar-cuenta'">Sí, eliminar cuenta y perfil.</a>
+								<a class="btn btn-outline-light btn-lg" href="./">No, volver</a>
 								<br></br>
 								<br></br>
-							</form>			
+									
 						</div>
 					  </div> 
 					</div>

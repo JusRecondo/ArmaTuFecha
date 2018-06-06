@@ -23,11 +23,10 @@
 				<div class="col-12">
 			
 					<label>¿Estas seguro de eliminar tu cuenta y perfil?</label><br></br>
-                    <a th:href="'/musicos/confirmacion-eliminar-perfil/' + ${id_usuario}">Sí, eliminar cuenta y perfil.</a>
+                    <a th:href="'/' + ${nombre} + '/' + ${id_usuario} + '/eliminar-cuenta'">Sí, eliminar cuenta y perfil.</a>
                     <br></br>
                    
                     <a href="./">Volver.</a>
-					
 					
 				</div>
 			</div>

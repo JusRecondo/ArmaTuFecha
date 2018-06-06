@@ -29,11 +29,9 @@
 		        </button>
 		        <div class="collapse navbar-collapse" id="navbarResponsive">
 		          <ul class="navbar-nav ml-auto">
+		           
 		            <li class="nav-item">
-		              <a class="nav-link js-scroll-trigger" href="/">Home</a>
-		            </li>
-		            <li class="nav-item">
-		              <a class="nav-link js-scroll-trigger" href="/login">Log in</a>
+		              <a class="nav-link js-scroll-trigger" th:href="'/' + ${nombre} + '/' + ${id_usuario} + '/mi-perfil'">Mi Perfil</a>
 		            </li>
 		          </ul>
 		        </div>
@@ -52,10 +50,10 @@
 		        </div>
 		        <div class="row">
 					<div class="col-lg-6 mx-auto text-center" id="bootstrap-override-col1">
-						<a href="/listado-locales" id="btn1" class="btn btn-outline-light">Lugares donde<br> tocar</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<a th:href="'/' + ${nombre} + '/' + ${id_usuario} + '/logout'" id="btn1" class="btn btn-outline-light">Lugares donde<br> tocar</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					</div>                
 			    	<div class="col-lg-6 mx-auto text-center" id="bootstrap-override-col2">
-			    		<a href="/listado-musicos" id="btn2" class="btn btn-outline-light">Bandas/musicos solistas/etc.<br>para armar fechas</a>			
+			    		<a th:href="'/' + ${nombre} + '/' + ${id_usuario} + '/logout'" id="btn2" class="btn btn-outline-light">Bandas/musicos solistas/etc.<br>para armar fechas</a>			
 			    	</div> 
 		 		</div>		
 		 	  </div>     
@@ -74,7 +72,7 @@
 									<br>
 									También podes crear un perfil para tu banda para que te encuentren en el listado otrxs músicxs u organizadores.
 				    </p>
-					<a href="/crear-perfil" class="btn btn-outline-dark btn-lg">Crear un perfil</a>          
+					          
 		          </div>
 		        </div>
 		      </div>

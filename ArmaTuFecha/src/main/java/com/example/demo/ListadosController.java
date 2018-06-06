@@ -31,16 +31,14 @@ public class ListadosController {
 
 
 	@GetMapping("/listado-locales")
-	public String listadoLocales(HttpSession session, Model template, RedirectAttributes redirectAttribute) throws SQLException {
+	public String listadoLocales(HttpSession session, Model template) throws SQLException {
 
 		int idLogueado = UsuariosHelper.usuarioLogueado(session);
 
 		if (idLogueado != 0) {
 			
-			UsuariosHelper.cerrarSesion(session);
-			redirectAttribute.addFlashAttribute("mensaje_logout", "Tu sesion se ha cerrado!");	
-			
-			return "redirect:/listado-locales";
+			return "redirect:/cerrar-sesion";
+		
 		}
 		
 		Connection connection;
@@ -79,6 +77,9 @@ public class ListadosController {
 
 		return "listado-locales";
 	}
+	
+	
+	
 	
 	@GetMapping("/locales/busqueda-nombre/procesar")
 	public String procesarBusquedaLocalesNombre (Model template, @RequestParam String busquedaNombre) throws SQLException {
@@ -220,10 +221,8 @@ public class ListadosController {
 
 			if (idLogueado != 0) {
 				
-				UsuariosHelper.cerrarSesion(session);
-				redirectAttribute.addFlashAttribute("mensaje_logout", "Tu sesion se ha cerrado!");	
-				
-				return "redirect:/listado-musicos";
+				return "redirect:/cerrar-sesion";
+			
 			}
 			
 			Connection connection;
