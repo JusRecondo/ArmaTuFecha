@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" layout:decorate="estructura-listado">
+<html lang="es">
 
 <head>
 
@@ -7,8 +7,6 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no"></meta>
 
-
-<title>Lugares donde tocar</title>
 
 <!-- Bootstrap core CSS -->
 <link rel="stylesheet"
@@ -27,56 +25,36 @@
 <body>
 
 	<!-- Navigation -->
-
-
-	<header class="bg-primary text-white bootstrap-override-header2"
-		id="color1" layout:fragment="header-listado">
-		<div class="container text-center">
-			<div class="row">
-				<div class="col">
-					<h1>
-						Revisa los perfiles y encontrá el mejor lugar<br>para hacer
-						tu fecha
-					</h1>
-				</div>
-
+	<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top"
+		id="mainNav">
+		<div class="container">
+			<a class="navbar-brand js-scroll-trigger" href="#page-top">Arma
+				Tu Fecha</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse"
+				data-target="#navbarResponsive" aria-controls="navbarResponsive"
+				aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarResponsive">
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item"><a class="nav-link js-scroll-trigger"
+						href="/">Home</a></li>
+					<li class="nav-item"><a class="nav-link js-scroll-trigger"
+						href="/login">Log in</a></li>
+				</ul>
 			</div>
 		</div>
+	</nav>
+
+	<header class="bg-primary text-white bootstrap-override-header2"
+		id="color1"  layout:fragment="header-listado">
+		
+
 
 	</header>
 	<!-- Page Content -->
-	<section id="about" class="bootstrap-override-section"
-		layout:fragment="seccion-listado">
-		<div class="container">
-
-			<!-- Page Heading -->
-			<div class="row">
-				<div class="col-lg-4 col-sm-6 portfolio-item"
-					th:each="perfilLocal:${listadoLocales}">
-					<div class="card h-100">
-						<a th:href="'/' + ${perfilLocal.nombre} + '/' + ${perfilLocal.id_usuario}"><img
-							class="card-img-top" th:src="${perfilLocal.foto1}" alt=""></a>
-						<div class="card-body">
-							<h4 class="card-title">
-								<a th:href="'/' + ${perfilLocal.nombre} + '/' + ${perfilLocal.id_usuario}"
-									th:text="${perfilLocal.nombre}">Project One</a>
-							</h4>
-							<p class="card-text">
-								<label th:text="${perfilLocal.provincia} + ', '"></label>&nbsp;<label
-									th:text="${perfilLocal.localidad}"></label><br> <label>Teléfono:&nbsp;
-								</label><label th:text="${perfilLocal.telefono}">Teléfono</label><br>
-								<label>Mail:&nbsp; </label><label
-									th:text="${perfilLocal.mail_contacto}">Mail</label><br> <a
-									th:href="${perfilLocal.red_social1}"
-									th:if="${perfilLocal.red_social1 != null && perfilLocal.red_social1 != ''}"
-									th:text="${perfilLocal.red_social1}">Facebook</a><br>
-								<br>
-							</p>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+	<section id="about" class="bootstrap-override-section2" layout:fragment="seccion-listado">
+		
 	</section>
 	<!-- /.row -->
 
@@ -99,7 +77,13 @@
 	<!-- /.container -->
 
 	<!-- Footer -->
-	
+	<footer class="py-5 bg-dark">
+		<div class="container">
+			<p class="m-0 text-center text-white">Copyright &copy; Your
+				Website 2018</p>
+		</div>
+		<!-- /.container -->
+	</footer>
 
 	<!-- Bootstrap core JavaScript -->
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -113,6 +97,7 @@
 		src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"
 		integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
 		crossorigin="anonymous"></script>
+
 
 </body>
 

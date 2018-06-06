@@ -372,8 +372,8 @@ public class UsuariosController {
 	}
 
 	// vista publica, modifcar ruta por /{nombre} y modificar donde haga falta
-	@GetMapping("/vista-perfil-local/{id_usuario}")
-	public String perfilLocal(Model template, @PathVariable int id_usuario) throws SQLException {
+	@GetMapping("/{nombre}/{id_usuario}")
+	public String perfilLocal(Model template, @PathVariable String nombre, @PathVariable int id_usuario) throws SQLException {
 
 		Connection connection;
 		connection = DriverManager.getConnection(env.getProperty("spring.datasource.url"),
@@ -387,7 +387,7 @@ public class UsuariosController {
 		ResultSet resultado = consulta.executeQuery();
 
 		if (resultado.next()) {
-			String nombre = resultado.getString("nombre");
+			String nombre1 = resultado.getString("nombre");
 			String provincia = resultado.getString("provincia");
 			String localidad = resultado.getString("localidad");
 			String direccion = resultado.getString("direccion");
@@ -400,9 +400,9 @@ public class UsuariosController {
 			String red_social1 = resultado.getString("red_social1");
 			String red_social2 = resultado.getString("red_social2");
 			String red_social3 = resultado.getString("red_social3");
-			// faltan fotos
+			
 
-			template.addAttribute("nombre", nombre);
+			template.addAttribute("nombre", nombre1);
 			template.addAttribute("provincia", provincia);
 			template.addAttribute("localidad", localidad);
 			template.addAttribute("direccion", direccion);
@@ -452,7 +452,7 @@ public class UsuariosController {
 			String link_musica2 = resultado.getString("link_musica2");
 			String link_musica3 = resultado.getString("link_musica3");
 
-			// faltan fotos
+			
 
 			template.addAttribute("nombre", nombre);
 			template.addAttribute("provincia", provincia);
@@ -705,9 +705,14 @@ public class UsuariosController {
 	
 	
 
-	// falta comprobacion de sesion iniciada
 	@GetMapping("/{nombre}/{id_usuario}/mi-perfil/editar-datos-usuario")
-	public String editarUsuario(Model template, @PathVariable String nombre, @PathVariable int id_usuario) throws SQLException {
+	public String editarUsuario(HttpSession session, Model template, @PathVariable String nombre, @PathVariable int id_usuario) throws SQLException {
+		
+		int idLogueado = UsuariosHelper.usuarioLogueado(session);
+
+		if (idLogueado == 0) {
+			return "redirect:/login";
+		}
 		
 		template.addAttribute("nombre", nombre);
 		
@@ -771,7 +776,13 @@ public class UsuariosController {
 	}
 	
 	@GetMapping("/{nombre}/{id_usuario}/mi-perfil/editar")
-	public String editarPerfil(Model template, @PathVariable String nombre, @PathVariable int id_usuario) throws SQLException {
+	public String editarPerfil(HttpSession session, Model template, @PathVariable String nombre, @PathVariable int id_usuario) throws SQLException {
+		
+		int idLogueado = UsuariosHelper.usuarioLogueado(session);
+
+		if (idLogueado == 0) {
+			return "redirect:/login";
+		}
 		
 		Connection connection = DriverManager.getConnection(env.getProperty("spring.datasource.url"),
 				env.getProperty("spring.datasource.username"), env.getProperty("spring.datasource.password"));
@@ -991,13 +1002,19 @@ public class UsuariosController {
 	
     
 	@GetMapping("/{nombre}/{id_usuario}/mi-perfil/eliminar-cuenta")
-	public String eliminarCuenta (Model template, @PathVariable String nombre, @PathVariable int id_usuario) {
+	public String eliminarCuenta (HttpSession session, Model template, @PathVariable String nombre, @PathVariable int id_usuario) throws SQLException {
 
+		int idLogueado = UsuariosHelper.usuarioLogueado(session);
+
+		if (idLogueado == 0) {
+			return "redirect:/login";
+		}	
+		
 			template.addAttribute("nombre", nombre);
 			template.addAttribute("id_usuario", id_usuario);
 			
 			
-		return "eliminar-cuenta2";
+		return "eliminar-cuenta";
 	}
 
 	//procesar eliminar cuenta

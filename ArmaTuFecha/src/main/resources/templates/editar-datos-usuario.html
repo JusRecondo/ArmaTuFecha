@@ -1,112 +1,101 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" layout:decorate="estructura-logueado">
 
-	<head>
+<head>
 
-		<meta charset="utf-8"></meta>
-		<meta name="viewport"
-			content="width=device-width, initial-scale=1, shrink-to-fit=no"></meta>
-		
-		
-		<title>Editar Usuario</title>
-		
-		<!-- Bootstrap core CSS -->
-		<link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"></link>
-		
-		<!-- Custom styles for this template -->
-		<link href="/css/scrolling-nav.css" rel="stylesheet"></link>
-		<link rel="stylesheet" type="text/css" href="/css/estilos.css"></link>
-		
-		
-	</head>
+<meta charset="utf-8"></meta>
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no"></meta>
 
-		<body id="page-top">
-		
-			<!-- Navigation -->
-			<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top"
-				id="mainNav">
-				<div class="container">
-					<a class="navbar-brand js-scroll-trigger" href="#page-top">Arma
-						Tu Fecha</a>
-					<button class="navbar-toggler" type="button" data-toggle="collapse"
-						data-target="#navbarResponsive" aria-controls="navbarResponsive"
-						aria-expanded="false" aria-label="Toggle navigation">
-						<span class="navbar-toggler-icon"></span>
-					</button>
-					<div class="collapse navbar-collapse" id="navbarResponsive">
-						<ul class="navbar-nav ml-auto">
-							<li class="nav-item"><a class="nav-link js-scroll-trigger"
-								th:href="'/home/local/' + ${nombre}">Home</a></li>
-							<li class="nav-item">
-				              <a class="nav-link js-scroll-trigger" th:href="'/locales/' + ${nombre}">Mi Perfil</a>
-				             </li> 	
-						</ul>
-					</div>
+
+<title>Editar Usuario</title>
+
+<!-- Bootstrap core CSS -->
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+	integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
+	crossorigin="anonymous"></link>
+
+<!-- Custom styles for this template -->
+<link href="/css/scrolling-nav.css" rel="stylesheet"></link>
+<link rel="stylesheet" type="text/css" href="/css/estilos.css"></link>
+
+
+</head>
+
+<body id="page-top">
+
+	<!-- Navigation -->
+
+	<header class="bg-primary text-white bootstrap-override-header"
+		id="color1" layout:fragment="header-logueado">
+		<div class="container text-center">
+			<div class="row">
+				<div class="col-12">
+					<h1>Modifica tus datos de usuario</h1>
+					<h5>(Los campos marcados con * son obligatorios)</h5>
+					<div class="alert alert-danger" role="alert"
+						th:text="${aviso_incompleto}" th:if="${aviso_incompleto}"></div>
 				</div>
-			</nav>
-			
-			<header class="bg-primary text-white bootstrap-override-header" id="color1">
-				<div class="container text-center">
-					<div class="row">
-						<div class="col-12">
-							<h1>
-								Modifica tus datos de usuario
-							</h1>
-							<h5>(Los campos marcados con * son obligatorios)</h5>
-							<div class="alert alert-danger" role="alert" th:text="${aviso_incompleto}" th:if="${aviso_incompleto}">
-							</div>
+			</div>
+
+			<div class="row">
+				<div class="col-12">
+					<form class="form-group needs-validation"
+						th:action="'/procesar-edicion-usuario/' + ${nombre} + '/' + ${id_usuario}"
+						method="POST">
+						<div class="alert alert-danger" role="alert"
+							th:text="${aviso_mail}" th:if="${aviso_mail}"></div>
+						<label>*Editar e-mail:&nbsp;</label><input class="form-control"
+							name="mail" type="email" th:value="${mailCargado}" required></input>
+						<div class="invalid-feedback">Por favor completa este campo.</div>
+						<div class="valid-feedback"></div>
+						<br></br>
+						<div class="alert alert-danger" role="alert"
+							th:text="${aviso_contrasenia}" th:if="${aviso_contrasenia}">
 						</div>
-					</div>
-					
-					<div class="row">
-						<div class="col-12">
-							<form  class="form-group needs-validation" th:action="'/procesar-edicion-usuario/' + ${nombre} + '/' + ${id_usuario}" method="POST" >			   
-								<div class="alert alert-danger" role="alert" th:text="${aviso_mail}" th:if="${aviso_mail}">
-								</div>
-								<label>*Editar e-mail:&nbsp;</label><input class="form-control" name="mail" type="email" th:value="${mailCargado}" required></input>
-								<div class="invalid-feedback">Por favor completa este campo.</div>
-							    <div class="valid-feedback"></div>
-								<br></br>
-								<div class="alert alert-danger" role="alert" th:text="${aviso_contrasenia}" th:if="${aviso_contrasenia}">
-								</div>	
-								<label>*Editar contraseña:&nbsp;</label><input class="form-control" name="contrasenia" type="password" th:value="${contrasenia}" required></input>
-								<div class="invalid-feedback">Por favor completa este campo.</div>
-							    <div class="valid-feedback"></div>
-								<br></br>
-								<label>*Volvé a ingresar la contraseña:&nbsp;</label><input class="form-control" name="contrasenia2" type="password" placeholder="repetir contraseña..." required></input>
-								<div class="invalid-feedback">Por favor completa este campo.</div>
-							    <div class="valid-feedback"></div>
-								<br></br>
-								
-								<input class="btn btn-outline-light btn-lg" type="submit" value="Guardar cambios"></input><br><br>
-								<a class="btn btn-outline-light btn" href="./">Volver</a>
-								<br></br>
-								<br></br>
-							</form>			
-						</div>
-					  </div> 
-					</div>
-				</header>	
-			<!-- Footer -->
-			<footer class="py-5 bg-dark">
-				<div class="container">
-					<p class="m-0 text-center text-white">Copyright &copy; Your
-						Website 2017</p>
+						<label>*Editar contraseña:&nbsp;</label><input
+							class="form-control" name="contrasenia" type="password"
+							th:value="${contrasenia}" required></input>
+						<div class="invalid-feedback">Por favor completa este campo.</div>
+						<div class="valid-feedback"></div>
+						<br></br> <label>*Volvé a ingresar la contraseña:&nbsp;</label><input
+							class="form-control" name="contrasenia2" type="password"
+							placeholder="repetir contraseña..." required></input>
+						<div class="invalid-feedback">Por favor completa este campo.</div>
+						<div class="valid-feedback"></div>
+						<br></br> <input class="btn btn-outline-light btn-lg"
+							type="submit" value="Guardar cambios"></input><br>
+						<br> <a class="btn btn-outline-light btn" href="./">Volver</a>
+						<br></br> <br></br>
+					</form>
 				</div>
-				<!-- /.container -->
-			</footer>
-		
-			<!-- Bootstrap core JavaScript -->
-			<script src="/vendor/jquery/jquery.min.js"></script>
-			<script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-		
-			<!-- Plugin JavaScript -->
-			<script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
-		
-			<!-- Custom JavaScript for this theme -->
-			<script src="/js/scrolling-nav.js"></script>
-			<script src="/js/formulario.js"></script>
-		
-		</body>
+			</div>
+		</div>
+	</header>
+	<!-- Footer -->
+
+
+	<!-- Bootstrap core JavaScript -->
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+		integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"
+		integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
+		crossorigin="anonymous"></script>
+
+	<!-- Plugin JavaScript -->
+	<script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+	<!-- Custom JavaScript for this theme -->
+	<script src="/js/scrolling-nav.js"></script>
+	<script src="/js/formulario.js"></script>
+
+</body>
 
 </html>

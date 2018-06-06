@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" layout:decorate="estructura-logueado">
+<html lang="es">
 
 <head>
 
@@ -8,50 +8,57 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no"></meta>
 
 
-<title>Eliminar cuenta</title>
-
 <!-- Bootstrap core CSS -->
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
 	integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
 	crossorigin="anonymous"></link>
+
+
 <!-- Custom styles for this template -->
 <link href="/css/scrolling-nav.css" rel="stylesheet"></link>
 <link rel="stylesheet" type="text/css" href="/css/estilos.css"></link>
-
-
 </head>
 
 <body id="page-top">
 
 	<!-- Navigation -->
-
-
-	<header class="bg-primary text-white bootstrap-override-header3"
-		id="color1" layout:fragment="header-logueado">
-		<div class="container text-center">
-			<div class="row">
-				<div class="col">
-					<h1>¿Estas seguro de eliminar tu cuenta y perfil?</h1>
-					<br>
-					<br>
-
-				</div>
-			</div>
-
-			<div class="row">
-				<div class="col">
-					<a class="btn btn-outline-light btn-lg"
-						th:href="'/' + ${nombre} + '/' + ${id_usuario} + '/eliminar-cuenta'">Sí,
-						eliminar cuenta y perfil.</a> <a class="btn btn-outline-light btn-lg"
-						href="./">No, volver</a> <br></br> <br></br>
-
-				</div>
+	<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top"
+		id="mainNav">
+		<div class="container">
+			<a class="navbar-brand js-scroll-trigger" href="#page-top">Arma
+				Tu Fecha</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse"
+				data-target="#navbarResponsive" aria-controls="navbarResponsive"
+				aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarResponsive">
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item"><a class="nav-link js-scroll-trigger"
+						href="/">Home</a></li>
+					<li class="nav-item"><a class="nav-link js-scroll-trigger"
+						href="/login">Log in</a></li>
+				</ul>
 			</div>
 		</div>
-	</header>
-	<!-- Footer -->
+	</nav>
 
+	<header class="bg-primary text-white" id="color1"
+		layout:fragment="header1"> </header>
+
+	<section id="about" layout:fragment="section1" ></section>
+
+
+
+	<!-- Footer -->
+	<footer class="py-5 bg-dark">
+		<div class="container">
+			<p class="m-0 text-center text-white">Copyright &copy; Your
+				Website 2018</p>
+		</div>
+		<!-- /.container -->
+	</footer>
 
 	<!-- Bootstrap core JavaScript -->
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -71,8 +78,9 @@
 
 	<!-- Custom JavaScript for this theme -->
 	<script src="/js/scrolling-nav.js"></script>
-	<script src="/js/formulario.js"></script>
 
 </body>
+
+
 
 </html>

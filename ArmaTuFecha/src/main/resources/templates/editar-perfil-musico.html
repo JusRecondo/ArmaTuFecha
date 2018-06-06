@@ -1,160 +1,160 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" layout:decorate="estructura-logueado">
 
-	<head>
+<head>
 
-		<meta charset="utf-8"></meta>
-		<meta name="viewport"
-			content="width=device-width, initial-scale=1, shrink-to-fit=no"></meta>
-		
-		
-		<title>Editar Perfil</title>
-		
-		<!-- Bootstrap core CSS -->
-		<link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"></link>
-		
-		<!-- Custom styles for this template -->
-		<link href="/css/scrolling-nav.css" rel="stylesheet"></link>
-		<link rel="stylesheet" type="text/css" href="/css/estilos.css"></link>
-		
-		
-	</head>
+<meta charset="utf-8"></meta>
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no"></meta>
 
-		<body id="page-top">
-		
-			<!-- Navigation -->
-			<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top"
-				id="mainNav">
-				<div class="container">
-					<a class="navbar-brand js-scroll-trigger" href="#page-top">Arma
-						Tu Fecha</a>
-					<button class="navbar-toggler" type="button" data-toggle="collapse"
-						data-target="#navbarResponsive" aria-controls="navbarResponsive"
-						aria-expanded="false" aria-label="Toggle navigation">
-						<span class="navbar-toggler-icon"></span>
-					</button>
-					<div class="collapse navbar-collapse" id="navbarResponsive">
-						<ul class="navbar-nav ml-auto">
-							<li class="nav-item"><a class="nav-link js-scroll-trigger"
-								th:href="'/home/musico/' + ${nombre}">Home</a></li>
-							<li class="nav-item">
-				              <a class="nav-link js-scroll-trigger" th:href="'/musicos/' + ${nombre}">Mi Perfil</a>
-				             </li> 	
-						</ul>
-					</div>
+
+<title>Editar Perfil</title>
+
+<!-- Bootstrap core CSS -->
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+	integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
+	crossorigin="anonymous"></link>
+
+<!-- Custom styles for this template -->
+<link href="/css/scrolling-nav.css" rel="stylesheet"></link>
+<link rel="stylesheet" type="text/css" href="/css/estilos.css"></link>
+
+
+</head>
+
+<body id="page-top">
+
+	<!-- Navigation -->
+
+
+	<header class="bg-primary text-white bootstrap-override-header"
+		id="color1" layout:fragment="header-logueado">
+		<div class="container text-center">
+			<div class="row">
+				<div class="col-12">
+					<h1>Modifica los datos de tu perfil</h1>
+					<h5>(Los campos marcados con * son obligatorios)</h5>
+					<div class="alert alert-danger" role="alert"
+						th:text="${aviso_incompleto}" th:if="${aviso_incompleto}"></div>
 				</div>
-			</nav>
-			
-			<header class="bg-primary text-white bootstrap-override-header" id="color1">
-				<div class="container text-center">
-					<div class="row">
-						<div class="col-12">
-							<h1>
-								Modifica los datos de tu perfil
-							</h1>
-							<h5>(Los campos marcados con * son obligatorios)</h5>
-							<div class="alert alert-danger" role="alert" th:text="${aviso_incompleto}" th:if="${aviso_incompleto}">
-							</div>
+			</div>
+
+			<div class="row">
+				<div class="col-12">
+					<form class="form-group needs-validation" novalidate
+						th:action="'/musicos/mi-perfil/procesar-edicion/' + ${id_usuario}"
+						method="POST">
+
+						<label>*Nombre del lugar:&nbsp;</label><input class="form-control"
+							name="nombre" type="text" th:value="${nombre}" required></input>
+						<div class="invalid-feedback">Por favor completa este campo.</div>
+						<div class="valid-feedback"></div>
+						<br></br>
+						<div class="form-group">
+							<label for="exampleFormControlSelect2">*Provincia:</label> <select
+								multiple class="form-control" id="exampleFormControlSelect2"
+								name="provincia" required>
+								<option>Buenos Aires</option>
+								<option>Catamarca</option>
+								<option>Chaco</option>
+								<option>Chubut</option>
+								<option>Córdoba</option>
+								<option>Corrientes</option>
+								<option>Entre Ríos</option>
+								<option>Formosa</option>
+								<option>Jujuy</option>
+								<option>La Pampa</option>
+								<option>La Rioja</option>
+								<option>Mendoza</option>
+								<option>Misiones</option>
+								<option>Neuquén</option>
+								<option>Río Negro</option>
+								<option>Salta</option>
+								<option>San Juan</option>
+								<option>San Luis</option>
+								<option>Santa Cruz</option>
+								<option>Santa Fe</option>
+								<option>Santiago del Estero</option>
+								<option>Tierra del Fuego</option>
+								<option>Tucumán</option>
+
+							</select>
+							<div class="invalid-feedback">Por favor selecciona una
+								provincia.</div>
+							<div class="valid-feedback"></div>
 						</div>
-					</div>
-					
-					<div class="row">
-						<div class="col-12">
-							<form class="form-group needs-validation" novalidate th:action="'/musicos/mi-perfil/procesar-edicion/' + ${id_usuario}" method="POST">
-								
-								<label>*Nombre del lugar:&nbsp;</label><input class="form-control" name="nombre" type="text" th:value="${nombre}" required></input>
-								<div class="invalid-feedback">Por favor completa este campo.</div>
-								<div class="valid-feedback"></div>
-								<br></br>
-								<div class="form-group">
-							    <label for="exampleFormControlSelect2">*Provincia:</label>
-							    <select multiple class="form-control" id="exampleFormControlSelect2"  name="provincia" required>
-							      <option>Buenos Aires</option>
-							      <option>Catamarca</option>
-							      <option>Chaco</option>
-							      <option>Chubut</option>
-							      <option>Córdoba</option>
-							      <option>Corrientes</option>
-							      <option>Entre Ríos</option>
-							      <option>Formosa</option>
-							      <option>Jujuy</option>
-							      <option>La Pampa</option>
-							      <option>La Rioja</option>
-							      <option>Mendoza</option>
-							      <option>Misiones</option>
-							      <option>Neuquén</option>
-							      <option>Río Negro</option>
-							      <option>Salta</option>
-							      <option>San Juan</option>
-							      <option>San Luis</option>
-							      <option>Santa Cruz</option>
-							      <option>Santa Fe</option>
-							      <option>Santiago del Estero</option>
-							      <option>Tierra del Fuego</option>
-							      <option>Tucumán</option>
-							      
-							    </select>
-							    <div class="invalid-feedback">Por favor selecciona una provincia.</div>
-							    <div class="valid-feedback"></div>
-							    </div>
-								<label>*Localidad:&nbsp;</label><input class="form-control" name="localidad" type="text" th:value="${localidad}" required></input>
-								<div class="invalid-feedback">Por favor completa este campo.</div>
-							    <div class="valid-feedback"></div>
-								<br></br>
-								
-								<label>*Teléfono de contacto para organizar fechas:&nbsp;</label><input class="form-control" name="telefono" type="text" th:value="${telefono}" required></input>
-								<div class="invalid-feedback">Por favor completa este campo.</div>
-							    <div class="valid-feedback"></div>
-								<br></br>
-								<label>*e-mail para contacto:&nbsp;</label><input class="form-control" name="mail_contacto" type="email" th:value="${mail_contacto}" required></input>
-								<div class="invalid-feedback">Por favor completa este campo.</div>
-								<div class="valid-feedback"></div>
-								<br></br>
-								<label>*Descripción del lugar (máx. 1400 caracteres). Debe incluir: tipo de establecimiento, equipamiento de sonido,
-								arreglo con los músicos (puerta para las bandas, arreglo 70-30 o similar por entradas, pago de un cashé, etc.), capacidad, estilos musicales de los shows):</label>
-								<br></br>
-								<textarea class="form-control textarea-height" name="descripcion" type="text" maxlength="1400" th:text="${descripcion}" required></textarea>
-								<div class="invalid-feedback">Por favor completa este campo.</div>
-								<div class="valid-feedback"></div>
-								<br></br>
-								<label>Links a redes sociales:&nbsp;</label><br></br>
-								<label>Facebook:&nbsp;</label><input class="form-control" name="red_social1" type="url" th:value="${red_social1}"></input><br></br>
-								<label>Instagram:&nbsp;</label><input class="form-control" name="red_social2" type="url" th:value="${red_social2}"></input><br></br>							
-								<label>Otro:&nbsp;</label><input class="form-control" name="red_social3" type="url" th:value="${red_social3}"></input><br></br>						
-								<label>YouTube:&nbsp;</label><input class="form-control" name="link_musica1" type="url" th:value="${link_musica1}"></input><br></br>	
-								<label>Bandcamp:&nbsp;</label><input class="form-control" name="link_musica2" type="url" th:value="${link_musica2}"></input><br></br>						
-								<label>Otro:&nbsp;</label><input class="form-control" name="link_musica3" type="url" th:value="${link_musica3}"></input><br></br>	
-								
-								<div class="text-center">
-									<input class="btn btn-outline-light btn-lg" type="submit" value="Guardar cambios"></input><br><br>
-								<a class="btn btn-outline-light btn" href="./">Volver</a>	
-								</div>
-							</form>			
+						<label>*Localidad:&nbsp;</label><input class="form-control"
+							name="localidad" type="text" th:value="${localidad}" required></input>
+						<div class="invalid-feedback">Por favor completa este campo.</div>
+						<div class="valid-feedback"></div>
+						<br></br> <label>*Teléfono de contacto para organizar
+							fechas:&nbsp;</label><input class="form-control" name="telefono"
+							type="text" th:value="${telefono}" required></input>
+						<div class="invalid-feedback">Por favor completa este campo.</div>
+						<div class="valid-feedback"></div>
+						<br></br> <label>*e-mail para contacto:&nbsp;</label><input
+							class="form-control" name="mail_contacto" type="email"
+							th:value="${mail_contacto}" required></input>
+						<div class="invalid-feedback">Por favor completa este campo.</div>
+						<div class="valid-feedback"></div>
+						<br></br> <label>*Descripción del lugar (máx. 1400
+							caracteres). Debe incluir: tipo de establecimiento, equipamiento
+							de sonido, arreglo con los músicos (puerta para las bandas,
+							arreglo 70-30 o similar por entradas, pago de un cashé, etc.),
+							capacidad, estilos musicales de los shows):</label> <br></br>
+						<textarea class="form-control textarea-height" name="descripcion"
+							type="text" maxlength="1400" th:text="${descripcion}" required></textarea>
+						<div class="invalid-feedback">Por favor completa este campo.</div>
+						<div class="valid-feedback"></div>
+						<br></br> <label>Links a redes sociales:&nbsp;</label><br></br> <label>Facebook:&nbsp;</label><input
+							class="form-control" name="red_social1" type="url"
+							th:value="${red_social1}"></input><br></br> <label>Instagram:&nbsp;</label><input
+							class="form-control" name="red_social2" type="url"
+							th:value="${red_social2}"></input><br></br> <label>Otro:&nbsp;</label><input
+							class="form-control" name="red_social3" type="url"
+							th:value="${red_social3}"></input><br></br> <label>YouTube:&nbsp;</label><input
+							class="form-control" name="link_musica1" type="url"
+							th:value="${link_musica1}"></input><br></br> <label>Bandcamp:&nbsp;</label><input
+							class="form-control" name="link_musica2" type="url"
+							th:value="${link_musica2}"></input><br></br> <label>Otro:&nbsp;</label><input
+							class="form-control" name="link_musica3" type="url"
+							th:value="${link_musica3}"></input><br></br>
+
+						<div class="text-center">
+							<input class="btn btn-outline-light btn-lg" type="submit"
+								value="Guardar cambios"></input><br>
+							<br> <a class="btn btn-outline-light btn" href="./">Volver</a>
 						</div>
-					  </div> 
-					</div>
-				</header>	
-			<!-- Footer -->
-			<footer class="py-5 bg-dark">
-				<div class="container">
-					<p class="m-0 text-center text-white">Copyright &copy; Your
-						Website 2017</p>
+					</form>
 				</div>
-				<!-- /.container -->
-			</footer>
-		
-			<!-- Bootstrap core JavaScript -->
-			<script src="/vendor/jquery/jquery.min.js"></script>
-			<script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-		
-			<!-- Plugin JavaScript -->
-			<script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
-		
-			<!-- Custom JavaScript for this theme -->
-			<script src="/js/scrolling-nav.js"></script>
-			<script src="/js/formulario.js"></script>
-			<script src="/js/validacionform.js"></script>
-		
-		</body>
+			</div>
+		</div>
+	</header>
+	<!-- Footer -->
+
+
+	<!-- Bootstrap core JavaScript -->
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+		integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"
+		integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
+		crossorigin="anonymous"></script>
+
+	<!-- Plugin JavaScript -->
+	<script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+	<!-- Custom JavaScript for this theme -->
+	<script src="/js/scrolling-nav.js"></script>
+	<script src="/js/formulario.js"></script>
+	<script src="/js/validacionform.js"></script>
+
+</body>
 
 </html>
