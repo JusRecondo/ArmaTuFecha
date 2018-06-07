@@ -52,6 +52,7 @@
 					<h1 th:text="${mensaje_bienvenida}"></h1>
 					<h1>Log in</h1>
 					<h4 th:text="${login_incorrecto}"></h4>
+					<h4 th:text="${mensaje_contrasenia}"></h4>					
 				</div>
 			</div>
 			<form class="form-group" action="/procesar-login" method="POST">
@@ -67,7 +68,10 @@
 				</div>
 				<div>
 					<input class="btn btn-outline-light" type="submit"
-						value="Iniciar Sesión"></input>
+						value="Iniciar Sesión"></input><br>
+				</div>
+				<div>
+					<a th:href="'/recuperar-contraseña/' + ${mail}">Olvidé mi contraseña</a>
 				</div>
 			</form>
 		</div>

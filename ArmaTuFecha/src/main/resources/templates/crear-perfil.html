@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" th:fragment="estructura-nologueado">
+<html lang="es">
 
 <head>
 
@@ -20,6 +20,38 @@
 <!-- Custom styles for this template -->
 <link href="/css/scrolling-nav.css" rel="stylesheet"></link>
 <link rel="stylesheet" type="text/css" href="/css/estilos.css"></link>
+
+
+
+<!-- Bootstrap core JavaScript -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+	integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+	integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+	crossorigin="anonymous"></script>
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"
+	integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
+	crossorigin="anonymous"></script>
+
+
+<!-- Plugin JavaScript -->
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.compatibility.min.js.map"></script>
+
+<!-- Custom JavaScript for this theme -->
+<script src="/js/scrolling-nav.js"></script>
+<script src="/js/formulario.js"></script>
+<script src="/js/validacionform.js"></script>
+
+<script src="/js/cloudinary.js"></script>
+
+<script src="//widget.cloudinary.com/global/all.js"
+	type="text/javascript"></script>
+<script
+	src='//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
 
 
 
@@ -111,7 +143,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-8 mx-auto">
-					<form class="form-group needs-validation" novalidate
+					<form class="form-group needs-validation"
 						action="/procesar-perfil/local" method="POST">
 
 						<h3 class="no-margin-top">Completa los datos para tu perfil</h3>
@@ -128,29 +160,29 @@
 							<label for="exampleFormControlSelect2">*Provincia:</label> <select
 								multiple class="form-control" id="exampleFormControlSelect2"
 								name="provincia" required>
-								<option>Buenos Aires</option>
-								<option>Catamarca</option>
-								<option>Chaco</option>
-								<option>Chubut</option>
-								<option>Córdoba</option>
-								<option>Corrientes</option>
-								<option>Entre Ríos</option>
-								<option>Formosa</option>
-								<option>Jujuy</option>
-								<option>La Pampa</option>
-								<option>La Rioja</option>
-								<option>Mendoza</option>
-								<option>Misiones</option>
-								<option>Neuquén</option>
-								<option>Río Negro</option>
-								<option>Salta</option>
-								<option>San Juan</option>
-								<option>San Luis</option>
-								<option>Santa Cruz</option>
-								<option>Santa Fe</option>
-								<option>Santiago del Estero</option>
-								<option>Tierra del Fuego</option>
-								<option>Tucumán</option>
+								<option value="Buenos Aires" th:selected="${provincia} == 'Buenos Aires'" >Buenos Aires</option>
+								<option value="Catamarca" th:selected="${provincia} == 'Catamarca'">Catamarca</option>
+								<option value="Chaco" th:selected="${provincia} == 'Chaco'" >Chaco</option>
+								<option value="Chubut" th:selected="${provincia} == 'Chubut'" >Chubut</option>
+								<option value="Córdoba" th:selected="${provincia} == 'Córdoba'">Córdoba</option>
+								<option value="Corrientes" th:selected="${provincia} == 'Corrientes'">Corrientes</option>
+								<option value="Entre Ríos" th:selected="${provincia} == 'Entre Ríos'">Entre Ríos</option>
+								<option value="Formosa" th:selected="${provincia} == 'Formosa'">Formosa</option>
+								<option value="Jujuy" th:selected="${provincia} == 'Jujuy'">Jujuy</option>
+								<option value="La Pampa" th:selected="${provincia} == 'La Pampa'">La Pampa</option>
+								<option value="La Rioja" th:selected="${provincia} == 'La Rioja'">La Rioja</option>
+								<option value="Mendoza" th:selected="${provincia} == 'Mendoza'">Mendoza</option>
+								<option value="Misiones" th:selected="${provincia} == 'Misiones'">Misiones</option>
+								<option value="Neuquén" th:selected="${provincia} == 'Neuquén'">Neuquén</option>
+								<option value="Río Negro" th:selected="${provincia} == 'Río Negro'">Río Negro</option>
+								<option value="Salta" th:selected="${provincia} == 'Salta'">Salta</option>
+								<option value="San Juan" th:selected="${provincia} == 'San Juan'">San Juan</option>
+								<option value="San Luis" th:selected="${provincia} == 'San Luis'">San Luis</option>
+								<option value="Santa Cruz" th:selected="${provincia} == 'Santa Cruz'">Santa Cruz</option>
+								<option value="Santa Fe" th:selected="${provincia} == 'Santa Fe'">Santa Fe</option>
+								<option value="Santiago del Estero" th:selected="${provincia} == 'Santiago del Estero'">Santiago del Estero</option>
+								<option value="Tierra del Fuego" th:selected="${provincia} == 'Tierra del Fuego'">Tierra del Fuego</option>
+								<option value="Tucumán" th:selected="${provincia} == 'Tucumán'">Tucumán</option>
 
 							</select>
 							<div class="invalid-feedback">Por favor selecciona una
@@ -224,7 +256,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-8 mx-auto">
-					<form class="form-group needs-validation" novalidate
+					<form class="form-group needs-validation"
 						action="/procesar-perfil/musico" method="POST">
 
 						<h3 class="no-margin-top">Completa los datos para tu perfil</h3>
@@ -232,8 +264,8 @@
 							class="contrasenia" type="hidden" name="contrasenia" required></input>
 						<input class="contrasenia2" type="hidden" name="contrasenia2"
 							required></input> <label>*Nombre de la
-							banda/solista/etc.:&nbsp;</label><input class="form-control" name="nombre"
-							type="text" th:value="${nombreCargado}" required></input>
+							banda/solista/etc.:&nbsp;</label><input class="form-control"
+							name="nombre" type="text" th:value="${nombreCargado}" required></input>
 						<div class="invalid-feedback">Por favor completa este campo.</div>
 						<div class="valid-feedback"></div>
 						<br></br>
@@ -242,29 +274,29 @@
 							<label for="exampleFormControlSelect3">*Provincia:</label> <select
 								multiple class="form-control" id="exampleFormControlSelect3"
 								name="provincia" required>
-								<option>Buenos Aires</option>
-								<option>Catamarca</option>
-								<option>Chaco</option>
-								<option>Chubut</option>
-								<option>Córdoba</option>
-								<option>Corrientes</option>
-								<option>Entre Ríos</option>
-								<option>Formosa</option>
-								<option>Jujuy</option>
-								<option>La Pampa</option>
-								<option>La Rioja</option>
-								<option>Mendoza</option>
-								<option>Misiones</option>
-								<option>Neuquén</option>
-								<option>Río Negro</option>
-								<option>Salta</option>
-								<option>San Juan</option>
-								<option>San Luis</option>
-								<option>Santa Cruz</option>
-								<option>Santa Fe</option>
-								<option>Santiago del Estero</option>
-								<option>Tierra del Fuego</option>
-								<option>Tucumán</option>
+								<option value="Buenos Aires" th:selected="${provincia} == 'Buenos Aires'" >Buenos Aires</option>
+								<option value="Catamarca" th:selected="${provincia} == 'Catamarca'">Catamarca</option>
+								<option value="Chaco" th:selected="${provincia} == 'Chaco'" >Chaco</option>
+								<option value="Chubut" th:selected="${provincia} == 'Chubut'" >Chubut</option>
+								<option value="Córdoba" th:selected="${provincia} == 'Córdoba'">Córdoba</option>
+								<option value="Corrientes" th:selected="${provincia} == 'Corrientes'">Corrientes</option>
+								<option value="Entre Ríos" th:selected="${provincia} == 'Entre Ríos'">Entre Ríos</option>
+								<option value="Formosa" th:selected="${provincia} == 'Formosa'">Formosa</option>
+								<option value="Jujuy" th:selected="${provincia} == 'Jujuy'">Jujuy</option>
+								<option value="La Pampa" th:selected="${provincia} == 'La Pampa'">La Pampa</option>
+								<option value="La Rioja" th:selected="${provincia} == 'La Rioja'">La Rioja</option>
+								<option value="Mendoza" th:selected="${provincia} == 'Mendoza'">Mendoza</option>
+								<option value="Misiones" th:selected="${provincia} == 'Misiones'">Misiones</option>
+								<option value="Neuquén" th:selected="${provincia} == 'Neuquén'">Neuquén</option>
+								<option value="Río Negro" th:selected="${provincia} == 'Río Negro'">Río Negro</option>
+								<option value="Salta" th:selected="${provincia} == 'Salta'">Salta</option>
+								<option value="San Juan" th:selected="${provincia} == 'San Juan'">San Juan</option>
+								<option value="San Luis" th:selected="${provincia} == 'San Luis'">San Luis</option>
+								<option value="Santa Cruz" th:selected="${provincia} == 'Santa Cruz'">Santa Cruz</option>
+								<option value="Santa Fe" th:selected="${provincia} == 'Santa Fe'">Santa Fe</option>
+								<option value="Santiago del Estero" th:selected="${provincia} == 'Santiago del Estero'">Santiago del Estero</option>
+								<option value="Tierra del Fuego" th:selected="${provincia} == 'Tierra del Fuego'">Tierra del Fuego</option>
+								<option value="Tucumán" th:selected="${provincia} == 'Tucumán'">Tucumán</option>
 
 							</select>
 							<div class="invalid-feedback">Por favor selecciona una
@@ -286,20 +318,23 @@
 							th:value="${mailCargado}" required></input>
 						<div class="invalid-feedback">Por favor completa este campo.</div>
 						<div class="valid-feedback"></div>
-						<br></br> 
+						<br></br>
 						<div class="form-group">
-							<label for="exampleFormControlSelect3">Por favor, selecciona uno o dos géneros musicales<br>
-							(esto es para simplificar la busqueda, podes explayarte mas en la descripción):</label><br>
-							 <label>Género 1:</label><select multiple class="form-control" id="exampleFormControlSelect3"
+							<label for="exampleFormControlSelect3">Por favor,
+								selecciona uno o dos géneros musicales<br> (esto es para
+								simplificar la busqueda, podes explayarte mas en la
+								descripción):
+							</label><br> <label>Género 1:</label><select multiple
+								class="form-control" id="exampleFormControlSelect4"
 								name="genero1">
 								<option>Blues</option>
-								<option>Bossa Nova</option> 
+								<option>Bossa Nova</option>
 								<option>Cancion</option>
-								<option>Country</option> 
-								<option>Cumbia</option> 
+								<option>Country</option>
+								<option>Cumbia</option>
 								<option>Disco</option>
 								<option>Electrónica</option>
-								<option>Folklore</option> 
+								<option>Folklore</option>
 								<option>Folk</option>
 								<option>Funk</option>
 								<option>Free Jazz</option>
@@ -308,10 +343,10 @@
 								<option>Grunge</option>
 								<option>Hardcore</option>
 								<option>Hard Rock</option>
-								<option>Heavy Metal</option> 
+								<option>Heavy Metal</option>
 								<option>Hip Hop</option>
 								<option>House</option>
-								<option>Indie​</option> 
+								<option>Indie​</option>
 								<option>Jazz</option>​
 								<option>Pop</option>
 								<option>Punk</option>
@@ -335,18 +370,17 @@
 								<option>Trap</option>
 								<option>Trash Metal</option>
 								<option>Trip hop</option>
-								
-							</select>
-							<label>Género 2:</label><select multiple class="form-control" id="exampleFormControlSelect3"
-								name="genero2">
+
+							</select><br> <label>Género 2:</label><select multiple class="form-control"
+								id="exampleFormControlSelect5" name="genero2">
 								<option>Blues</option>
-								<option>Bossa Nova</option> 
+								<option>Bossa Nova</option>
 								<option>Cancion</option>
-								<option>Country</option> 
-								<option>Cumbia</option> 
+								<option>Country</option>
+								<option>Cumbia</option>
 								<option>Disco</option>
 								<option>Electrónica</option>
-								<option>Folklore</option> 
+								<option>Folklore</option>
 								<option>Folk</option>
 								<option>Funk</option>
 								<option>Free Jazz</option>
@@ -355,10 +389,10 @@
 								<option>Grunge</option>
 								<option>Hardcore</option>
 								<option>Hard Rock</option>
-								<option>Heavy Metal</option> 
+								<option>Heavy Metal</option>
 								<option>Hip Hop</option>
 								<option>House</option>
-								<option>Indie​</option> 
+								<option>Indie​</option>
 								<option>Jazz</option>​
 								<option>Pop</option>
 								<option>Punk</option>
@@ -382,14 +416,14 @@
 								<option>Trap</option>
 								<option>Trash Metal</option>
 								<option>Trip hop</option>
-								
-							</select>
-						<br><br>	
+
+							</select> <br>
+							<br>
 						</div>
-						<label>*Descripción del proyecto musical. Debe
-							incluir: requerimientos técnicos de sonido, cantidad de
-							integrantes, estilo musical, cashé o arreglo mínimo que aceptan
-							(puerta, porcentaje de entradas, etc.):</label> <br></br>
+						<label>*Descripción del proyecto musical. Debe incluir:
+							requerimientos técnicos de sonido, cantidad de integrantes,
+							estilo musical, cashé o arreglo mínimo que aceptan (puerta,
+							porcentaje de entradas, etc.):</label> <br></br>
 						<textarea class="form-control textarea-height" name="descripcion"
 							type="text" maxlength="1400" th:text="${descripcionCargada}"
 							required></textarea>
@@ -442,37 +476,6 @@
 		</div>
 		<!-- /.container -->
 	</footer>
-
-
-    
-	<!-- Bootstrap core JavaScript -->
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
-		integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"
-		integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
-		crossorigin="anonymous"></script>
-
-
-	<!-- Plugin JavaScript -->
-	<script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
-
-	<!-- Custom JavaScript for this theme -->
-	<script src="/js/scrolling-nav.js"></script>
-	<script src="/js/formulario.js"></script>
-	<script src="/js/validacionform.js"></script>
-	
-	<script src="/js/cloudinary.js"></script>
-
-	<script src="//widget.cloudinary.com/global/all.js"
-		type="text/javascript"></script>
-	<script
-		src='//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
 
 
 </body>

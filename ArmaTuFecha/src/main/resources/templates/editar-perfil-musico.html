@@ -10,15 +10,6 @@
 
 <title>Editar Perfil</title>
 
-<!-- Bootstrap core CSS -->
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
-	integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
-	crossorigin="anonymous"></link>
-
-<!-- Custom styles for this template -->
-<link href="/css/scrolling-nav.css" rel="stylesheet"></link>
-<link rel="stylesheet" type="text/css" href="/css/estilos.css"></link>
 
 
 </head>
@@ -42,7 +33,7 @@
 
 			<div class="row">
 				<div class="col-12">
-					<form class="form-group needs-validation" novalidate
+					<form class="form-group needs-validation" 
 						th:action="'/musicos/mi-perfil/procesar-edicion/' + ${id_usuario}"
 						method="POST">
 
@@ -55,29 +46,29 @@
 							<label for="exampleFormControlSelect2">*Provincia:</label> <select
 								multiple class="form-control" id="exampleFormControlSelect2"
 								name="provincia" required>
-								<option>Buenos Aires</option>
-								<option>Catamarca</option>
-								<option>Chaco</option>
-								<option>Chubut</option>
-								<option>Córdoba</option>
-								<option>Corrientes</option>
-								<option>Entre Ríos</option>
-								<option>Formosa</option>
-								<option>Jujuy</option>
-								<option>La Pampa</option>
-								<option>La Rioja</option>
-								<option>Mendoza</option>
-								<option>Misiones</option>
-								<option>Neuquén</option>
-								<option>Río Negro</option>
-								<option>Salta</option>
-								<option>San Juan</option>
-								<option>San Luis</option>
-								<option>Santa Cruz</option>
-								<option>Santa Fe</option>
-								<option>Santiago del Estero</option>
-								<option>Tierra del Fuego</option>
-								<option>Tucumán</option>
+								<option value="Buenos Aires" th:selected="${provincia} == 'Buenos Aires'" >Buenos Aires</option>
+								<option value="Catamarca" th:selected="${provincia} == 'Catamarca'">Catamarca</option>
+								<option value="Chaco" th:selected="${provincia} == 'Chaco'" >Chaco</option>
+								<option value="Chubut" th:selected="${provincia} == 'Chubut'" >Chubut</option>
+								<option value="Córdoba" th:selected="${provincia} == 'Córdoba'">Córdoba</option>
+								<option value="Corrientes" th:selected="${provincia} == 'Corrientes'">Corrientes</option>
+								<option value="Entre Ríos" th:selected="${provincia} == 'Entre Ríos'">Entre Ríos</option>
+								<option value="Formosa" th:selected="${provincia} == 'Formosa'">Formosa</option>
+								<option value="Jujuy" th:selected="${provincia} == 'Jujuy'">Jujuy</option>
+								<option value="La Pampa" th:selected="${provincia} == 'La Pampa'">La Pampa</option>
+								<option value="La Rioja" th:selected="${provincia} == 'La Rioja'">La Rioja</option>
+								<option value="Mendoza" th:selected="${provincia} == 'Mendoza'">Mendoza</option>
+								<option value="Misiones" th:selected="${provincia} == 'Misiones'">Misiones</option>
+								<option value="Neuquén" th:selected="${provincia} == 'Neuquén'">Neuquén</option>
+								<option value="Río Negro" th:selected="${provincia} == 'Río Negro'">Río Negro</option>
+								<option value="Salta" th:selected="${provincia} == 'Salta'">Salta</option>
+								<option value="San Juan" th:selected="${provincia} == 'San Juan'">San Juan</option>
+								<option value="San Luis" th:selected="${provincia} == 'San Luis'">San Luis</option>
+								<option value="Santa Cruz" th:selected="${provincia} == 'Santa Cruz'">Santa Cruz</option>
+								<option value="Santa Fe" th:selected="${provincia} == 'Santa Fe'">Santa Fe</option>
+								<option value="Santiago del Estero" th:selected="${provincia} == 'Santiago del Estero'">Santiago del Estero</option>
+								<option value="Tierra del Fuego" th:selected="${provincia} == 'Tierra del Fuego'">Tierra del Fuego</option>
+								<option value="Tucumán" th:selected="${provincia} == 'Tucumán'">Tucumán</option>
 
 							</select>
 							<div class="invalid-feedback">Por favor selecciona una
@@ -235,26 +226,8 @@
 	<!-- Footer -->
 
 
-	<!-- Bootstrap core JavaScript -->
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
-		integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"
-		integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
-		crossorigin="anonymous"></script>
-
-	<!-- Plugin JavaScript -->
-	<script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
-
-	<!-- Custom JavaScript for this theme -->
-	<script src="/js/scrolling-nav.js"></script>
-	<script src="/js/formulario.js"></script>
-	<script src="/js/validacionform.js"></script>
+	
+	
 
 </body>
 

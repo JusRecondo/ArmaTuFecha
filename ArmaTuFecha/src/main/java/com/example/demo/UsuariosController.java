@@ -1,13 +1,11 @@
 package com.example.demo;
 
 
-import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
 
 import javax.servlet.http.HttpSession;
 
@@ -24,6 +22,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.example.model.Usuario;
+
 @Controller
 public class UsuariosController {
 
@@ -35,6 +35,7 @@ public class UsuariosController {
 
 	@GetMapping("/")
 	public String paginaPrincipal () {
+		
 		
 		return "pagina-principal";
 	}
@@ -56,6 +57,42 @@ public class UsuariosController {
 		return "logout";
 	}
 
+	@GetMapping("/recuperar-contraseña/{mail}")
+	public String recuperarContrasenia (@PathVariable String mail, RedirectAttributes redirectAttribute) throws SQLException{
+		
+		Connection connection;
+		connection = DriverManager.getConnection(env.getProperty("spring.datasource.url"),
+				env.getProperty("spring.datasource.username"), env.getProperty("spring.datasource.password"));
+
+		PreparedStatement consulta = connection.prepareStatement("SELECT contrasenia FROM usuarios WHERE mail = ?;");
+
+		consulta.setString(1, mail);
+
+		ResultSet resultado = consulta.executeQuery();
+
+		if (resultado.next()) {
+			String contrasenia = resultado.getString("contrasenia");
+        
+
+		Email email = EmailBuilder.startingBlank()
+			    .from("Arma Tu Fecha", "armatufecha@gmail.com")
+			    .to("Usuario", "justina.recondo@gmail.com")
+			    .withSubject("[Arma Tu Fecha]Datos de registro")
+			    .withPlainText("Los datos de tu cuenta son los siguientes: "
+			    		+ "Mail:" + mail
+			    		+ "Contraseña:" + contrasenia)
+			    .buildEmail();
+
+			MailerBuilder
+			  .withSMTPServer("smtp.sendgrid.net", 587, "apikey", env.getProperty("sendgrid.apikey") )
+			  .buildMailer()
+			  .sendMail(email);
+		}
+		
+		redirectAttribute.addFlashAttribute("mensaje_contrasenia", "Te enviamos un mail con tus datos de registro (revisa la sección de spam");	
+		return "redirect:/login";
+	}
+	
 	@GetMapping("/crear-perfil")
 	public String crearPerfil() {
 		return "crear-perfil";
@@ -76,6 +113,7 @@ public class UsuariosController {
 			template.addAttribute("aviso_incompleto", "Por favor completar los campos obligatorios");
 			template.addAttribute("mailCargado", mail);
 			template.addAttribute("nombreCargado", nombre);
+			template.addAttribute("provincia", provincia);
 			template.addAttribute("localidadCargada", localidad);
 			template.addAttribute("direccionCargada", direccion);
 			template.addAttribute("telefonoCargado", telefono);
@@ -97,6 +135,7 @@ public class UsuariosController {
 			template.addAttribute("aviso_contrasenia", "Las contraseñas ingresadas no coinciden.");
 			template.addAttribute("mailCargado", mail);
 			template.addAttribute("nombreCargado", nombre);
+			template.addAttribute("provincia", provincia);
 			template.addAttribute("localidadCargada", localidad);
 			template.addAttribute("direccionCargada", direccion);
 			template.addAttribute("aviso_fotos", "No es necesario que vuelvas a cargar las fotos!");
@@ -129,6 +168,7 @@ public class UsuariosController {
 
 				template.addAttribute("aviso_mail", "El e-mail ingresado ya esta en uso.");
 				template.addAttribute("nombreCargado", nombre);
+				template.addAttribute("provincia", provincia);
 				template.addAttribute("localidadCargada", localidad);
 				template.addAttribute("direccionCargada", direccion);
 				template.addAttribute("telefonoCargado", telefono);
@@ -190,21 +230,7 @@ public class UsuariosController {
 
 			consulta.executeUpdate();
 
-			Email email = EmailBuilder.startingBlank()
-				    .from("Arma Tu Fecha", "armatufecha@gmail.com")
-				    //se puede poner el mail del usuario que se acaba de registrar
-				    .to("Nuevo usuario", mail)
-				    .withSubject("[Arma Tu Fecha]Datos de registro")
-				    .withPlainText("Gracias por registrarte!"
-				    		+ "Los datos de tu cuenta son los siguientes: "
-				    		+ "Mail:" + mail
-				    		+ "Contraseña:" + contrasenia)
-				    .buildEmail();
-
-				MailerBuilder
-				  .withSMTPServer("smtp.sendgrid.net", 587, "apikey", env.getProperty("sendgrid.apikey") )
-				  .buildMailer()
-				  .sendMail(email);
+			
 			
 			connection.close();
 
@@ -231,6 +257,7 @@ public class UsuariosController {
 			template.addAttribute("aviso_incompleto", "Por favor completar los campos obligatorios");
 			template.addAttribute("mailCargado", mail);
 			template.addAttribute("nombreCargado", nombre);
+			template.addAttribute("provincia", provincia);
 			template.addAttribute("localidadCargada", localidad);
 			template.addAttribute("telefonoCargado", telefono);
 			template.addAttribute("mailCargado", mail_contacto);
@@ -254,6 +281,7 @@ public class UsuariosController {
 			template.addAttribute("aviso_contrasenia", "Las contraseñas ingresadas no coinciden.");
 			template.addAttribute("mailCargado", mail);
 			template.addAttribute("nombreCargado", nombre);
+			template.addAttribute("provincia", provincia);
 			template.addAttribute("localidadCargada", localidad);
 			template.addAttribute("telefonoCargado", telefono);
 			template.addAttribute("mail_contactoCargado", mail_contacto);
@@ -288,6 +316,7 @@ public class UsuariosController {
 
 				template.addAttribute("aviso_mail", "El e-mail ingresado ya esta en uso.");
 				template.addAttribute("nombreCargado", nombre);
+				template.addAttribute("provincia", provincia);
 				template.addAttribute("localidadCargada", localidad);
 				template.addAttribute("telefonoCargado", telefono);
 				template.addAttribute("mail_contactoCargado", mail_contacto);
@@ -354,21 +383,6 @@ public class UsuariosController {
 
 			consulta.executeUpdate();
 
-			Email email = EmailBuilder.startingBlank()
-				    .from("Arma Tu Fecha", "armatufecha@gmail.com")
-				    //se puede poner el mail del usuario que se acaba de registrar
-				    .to("Nuevo usuario", mail)
-				    .withSubject("[Arma Tu Fecha]Datos de registro")
-				    .withPlainText("Gracias por registrarte!"
-				    		+ "Los datos de tu cuenta son los siguientes: "
-				    		+ "Mail:" + mail
-				    		+ "Contraseña:" + contrasenia)
-				    .buildEmail();
-
-				MailerBuilder
-				  .withSMTPServer("smtp.sendgrid.net", 587, "apikey", env.getProperty("sendgrid.apikey") )
-				  .buildMailer()
-				  .sendMail(email);
 			
 			connection.close();
 
@@ -491,11 +505,13 @@ public class UsuariosController {
 
 
 	@GetMapping("/login")
-	public String login(HttpSession session) throws SQLException {
+	public String login(HttpSession session, Model template) throws SQLException {
+		
+		Usuario logueado = UsuariosHelper.usuarioLogueado(session);
+		logueado.getMail();
+	
 
-		int idLogueado = UsuariosHelper.usuarioLogueado(session);
-
-		if (idLogueado != 0) {
+		if (logueado != null) {
 			
 			String codigo = (String)session.getAttribute("codigo-autorizacion");
 			
@@ -570,9 +586,10 @@ public class UsuariosController {
 	public String perfilLogueado(HttpSession session, Model template, @PathVariable String nombre, @PathVariable int id_usuario)
 			throws SQLException {
 		
-		int idLogueado = UsuariosHelper.usuarioLogueado(session);
+		Usuario logueado = UsuariosHelper.usuarioLogueado(session);
+		
 
-		if (idLogueado == 0) {
+		if (logueado != null) {
 			return "redirect:/login";
 		}
 	
@@ -723,9 +740,10 @@ public class UsuariosController {
 	@GetMapping("/{nombre}/{id_usuario}/mi-perfil/editar-datos-usuario")
 	public String editarUsuario(HttpSession session, Model template, @PathVariable String nombre, @PathVariable int id_usuario) throws SQLException {
 		
-		int idLogueado = UsuariosHelper.usuarioLogueado(session);
+		Usuario logueado = UsuariosHelper.usuarioLogueado(session);
+		
 
-		if (idLogueado == 0) {
+		if (logueado != null) {
 			return "redirect:/login";
 		}
 		
@@ -793,9 +811,10 @@ public class UsuariosController {
 	@GetMapping("/{nombre}/{id_usuario}/mi-perfil/editar")
 	public String editarPerfil(HttpSession session, Model template, @PathVariable String nombre, @PathVariable int id_usuario) throws SQLException {
 		
-		int idLogueado = UsuariosHelper.usuarioLogueado(session);
+		Usuario logueado = UsuariosHelper.usuarioLogueado(session);
+		
 
-		if (idLogueado == 0) {
+		if (logueado != null) {
 			return "redirect:/login";
 		}
 		
@@ -1026,10 +1045,10 @@ public class UsuariosController {
     
 	@GetMapping("/{nombre}/{id_usuario}/mi-perfil/eliminar-cuenta")
 	public String eliminarCuenta (HttpSession session, Model template, @PathVariable String nombre, @PathVariable int id_usuario) throws SQLException {
+		Usuario logueado = UsuariosHelper.usuarioLogueado(session);
+		
 
-		int idLogueado = UsuariosHelper.usuarioLogueado(session);
-
-		if (idLogueado == 0) {
+		if (logueado != null){
 			return "redirect:/login";
 		}	
 		

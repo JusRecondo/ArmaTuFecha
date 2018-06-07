@@ -13,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 
+import com.example.model.Usuario;
+
 
 @Service
 public class UsuariosHelper {
@@ -55,7 +57,7 @@ public class UsuariosHelper {
 		}
 
 	
-		public int usuarioLogueado(HttpSession session) throws SQLException{
+		public Usuario usuarioLogueado(HttpSession session) throws SQLException{
 			
 			String codigo = (String)session.getAttribute("codigo-autorizacion");
 			
@@ -74,18 +76,17 @@ public class UsuariosHelper {
 				
 				if ( resultado.next() ){
 					
-					int idLogueado = ( resultado.getInt("id") );
 				    
-					return idLogueado;
+					return new Usuario(resultado.getInt("id"), resultado.getString("mail"), resultado.getString("contrasenia"),  resultado.getString("tipo"));
 					
 				} else {
 					
-					return 0;
+					return null;
 				}
 				
 			} else {
 
-			return 0;
+			return null;
 		    }
 		}
 		

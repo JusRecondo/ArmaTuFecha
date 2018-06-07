@@ -14,11 +14,13 @@ import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.model.PerfilLocal;
 import com.example.model.PerfilMusico;
+import com.example.model.Usuario;
 
 @Controller
 public class ListadosController {
@@ -30,12 +32,13 @@ public class ListadosController {
 	private UsuariosHelper UsuariosHelper;
 
 
-	@GetMapping("/listado-locales")
-	public String listadoLocales(HttpSession session, Model template, RedirectAttributes redirectAttribute) throws SQLException {
+	@GetMapping("/listado-locales/{pagina}")
+	public String listadoLocales(HttpSession session, Model template, RedirectAttributes redirectAttribute, @PathVariable int pagina) throws SQLException {
+		//redirect a /1
+		Usuario logueado = UsuariosHelper.usuarioLogueado(session);
 		
-		int idLogueado = UsuariosHelper.usuarioLogueado(session);
-		
-		if (idLogueado != 0) {
+
+		if (logueado != null) {
 			UsuariosHelper.cerrarSesion(session);
 			
 			redirectAttribute.addFlashAttribute("mensaje_logout", "Tu sesion se ha cerrado!");
@@ -49,7 +52,11 @@ public class ListadosController {
 		connection = DriverManager.getConnection(env.getProperty("spring.datasource.url"),
 				env.getProperty("spring.datasource.username"), env.getProperty("spring.datasource.password"));
 
-		PreparedStatement consulta = connection.prepareStatement("SELECT * FROM perfiles_locales;");
+		PreparedStatement consulta = connection.prepareStatement("SELECT * FROM perfiles_locales OFFSET ? LIMIT 5;");
+		
+		consulta.setInt(1, (pagina-1)*5 );
+		
+		
 
 		ResultSet resultado = consulta.executeQuery();
 
@@ -221,9 +228,10 @@ public class ListadosController {
 		@GetMapping("/listado-musicos")
 		public String listadoMusicos(HttpSession session, Model template, RedirectAttributes redirectAttribute) throws SQLException {
 
-			int idLogueado = UsuariosHelper.usuarioLogueado(session);
+			Usuario logueado = UsuariosHelper.usuarioLogueado(session);
 			
-			if (idLogueado != 0) {
+
+			if (logueado != null) {
 				UsuariosHelper.cerrarSesion(session);
 				
 				redirectAttribute.addFlashAttribute("mensaje_logout", "Tu sesion se ha cerrado!");
