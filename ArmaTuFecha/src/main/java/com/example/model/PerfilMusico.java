@@ -9,6 +9,8 @@ public class PerfilMusico {
 	private String telefono;
 	private String mail_contacto; 
 	private String descripcion;
+	private String genero1;
+	private String genero2;
 	private String foto1;
 	private String foto2;
 	private String foto3;
@@ -21,7 +23,7 @@ public class PerfilMusico {
 	private int id_usuario; 
 	
 
-	public PerfilMusico(int i, String n, String p, String l, String t, String m, String des, String f1, String f2, String f3, String rd1, String rd2, String rd3, String lm1, String lm2, String lm3, int iu){
+	public PerfilMusico(int i, String n, String p, String l, String t, String m, String des, String g1, String g2, String f1, String f2, String f3, String rd1, String rd2, String rd3, String lm1, String lm2, String lm3, int iu){
 		
 		this.id = i;
 		this.nombre = n;
@@ -30,6 +32,8 @@ public class PerfilMusico {
 		this.telefono = t;
 		this.mail_contacto = m;
 		this.descripcion = des;
+		this.genero1 = g1;
+		this.genero2= g2;
 		this.foto1 = f1;
 		this.foto2 = f2;
 		this.foto3 = f3;
@@ -41,6 +45,30 @@ public class PerfilMusico {
 		this.link_musica3 = lm3;
 		this.id_usuario = iu;
 		
+	}
+
+
+
+	public String getGenero1() {
+		return genero1;
+	}
+
+
+
+	public void setGenero1(String genero1) {
+		this.genero1 = genero1;
+	}
+
+
+
+	public String getGenero2() {
+		return genero2;
+	}
+
+
+
+	public void setGenero2(String genero2) {
+		this.genero2 = genero2;
 	}
 
 

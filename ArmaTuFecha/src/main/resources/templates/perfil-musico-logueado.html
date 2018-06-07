@@ -114,7 +114,9 @@
 						<label th:text="${provincia} + ', '">Lorem Ipsum</label>&nbsp;<label
 							th:text="${localidad}">Lorem Ipsum</label><br> <label
 							th:text="${telefono}">a</label><br> <label
-							th:text="${mail_contacto}">a</label><br>
+							th:text="${mail_contacto}">a</label><br><label
+							th:text="${genero1} + ','" th:if="${genero1 != null && genero1 != ''}"></label>&nbsp;<label
+							th:text="${genero2}" th:if="${genero2 != null && genero2 != ''}"></label>
 
 
 					</div>
@@ -136,10 +138,10 @@
 							th:text="${link_musica1}">YouTube</a><br>
 						<br> <a th:href="${link_musica2}"
 							th:if="${link_musica2 != null && link_musica2 != ''}"
-							th:text="${link_musica1}">Bandcamp</a><br>
+							th:text="${link_musica2}">Bandcamp</a><br>
 						<br> <a th:href="${link_musica3}"
 							th:if="${link_musica3 != null && link_musica3 != ''}"
-							th:text="${link_musica1}">Otro</a><br>
+							th:text="${link_musica3}">Otro</a><br>
 						<br> <a
 							th:href="'/' + ${nombre} + '/' + ${id_usuario} + '/mi-perfil/editar'">Editar
 							datos del perfil</a><br>

@@ -31,13 +31,17 @@ public class ListadosController {
 
 
 	@GetMapping("/listado-locales")
-	public String listadoLocales(HttpSession session, Model template) throws SQLException {
-
+	public String listadoLocales(HttpSession session, Model template, RedirectAttributes redirectAttribute) throws SQLException {
+		
 		int idLogueado = UsuariosHelper.usuarioLogueado(session);
-
+		
 		if (idLogueado != 0) {
+			UsuariosHelper.cerrarSesion(session);
 			
-			return "redirect:/cerrar-sesion";
+			redirectAttribute.addFlashAttribute("mensaje_logout", "Tu sesion se ha cerrado!");
+			
+			
+			return "redirect:/";
 		
 		}
 		
@@ -218,10 +222,14 @@ public class ListadosController {
 		public String listadoMusicos(HttpSession session, Model template, RedirectAttributes redirectAttribute) throws SQLException {
 
 			int idLogueado = UsuariosHelper.usuarioLogueado(session);
-
+			
 			if (idLogueado != 0) {
+				UsuariosHelper.cerrarSesion(session);
 				
-				return "redirect:/cerrar-sesion";
+				redirectAttribute.addFlashAttribute("mensaje_logout", "Tu sesion se ha cerrado!");
+				
+				
+				return "redirect:/";
 			
 			}
 			
@@ -243,6 +251,8 @@ public class ListadosController {
 				String telefono = resultado.getString("telefono");
 				String mail_contacto = resultado.getString("mail_contacto");
 				String descripcion = resultado.getString("descripcion");
+				String genero1 = resultado.getString("genero1");
+				String genero2 = resultado.getString("genero2");
 				String foto1 = resultado.getString("foto1");
 				String foto2 = resultado.getString("foto2");
 				String foto3 = resultado.getString("foto3");
@@ -254,7 +264,7 @@ public class ListadosController {
 				String link_musica3 = resultado.getString("link_musica3");
 				int id_usuario = resultado.getInt("id_usuario");
 
-				PerfilMusico x = new PerfilMusico(id, nombre, provincia, localidad,  telefono, mail_contacto, descripcion, foto1, foto2, foto3,
+				PerfilMusico x = new PerfilMusico(id, nombre, provincia, localidad,  telefono, mail_contacto, descripcion, genero1, genero2, foto1, foto2, foto3,
 						red_social1, red_social2, red_social3, link_musica1, link_musica2, link_musica3, id_usuario);
 				listadoMusicos.add(x);
 			}
@@ -289,6 +299,8 @@ public class ListadosController {
 				String telefono = resultado.getString("telefono");
 				String mail_contacto = resultado.getString("mail_contacto");
 				String descripcion = resultado.getString("descripcion");
+				String genero1 = resultado.getString("genero1");
+				String genero2 = resultado.getString("genero2");
 				String foto1 = resultado.getString("foto1");
 				String foto2 = resultado.getString("foto2");
 				String foto3 = resultado.getString("foto3");
@@ -300,7 +312,7 @@ public class ListadosController {
 				String link_musica3 = resultado.getString("link_musica3");
 				int id_usuario = resultado.getInt("id_usuario");
 
-				PerfilMusico x = new PerfilMusico(id, nombre, provincia, localidad,  telefono, mail_contacto, descripcion, foto1, foto2, foto3,
+				PerfilMusico x = new PerfilMusico(id, nombre, provincia, localidad,  telefono, mail_contacto, descripcion, genero1, genero2, foto1, foto2, foto3,
 						red_social1, red_social2, red_social3, link_musica1, link_musica2, link_musica3, id_usuario);
 				listadoMusicos.add(x);
 			}
@@ -336,6 +348,8 @@ public class ListadosController {
 				String telefono = resultado.getString("telefono");
 				String mail_contacto = resultado.getString("mail_contacto");
 				String descripcion = resultado.getString("descripcion");
+				String genero1 = resultado.getString("genero1");
+				String genero2 = resultado.getString("genero2");
 				String foto1 = resultado.getString("foto1");
 				String foto2 = resultado.getString("foto2");
 				String foto3 = resultado.getString("foto3");
@@ -347,7 +361,7 @@ public class ListadosController {
 				String link_musica3 = resultado.getString("link_musica3");
 				int id_usuario = resultado.getInt("id_usuario");
 
-				PerfilMusico x = new PerfilMusico(id, nombre, provincia, localidad,  telefono, mail_contacto, descripcion, foto1, foto2, foto3,
+				PerfilMusico x = new PerfilMusico(id, nombre, provincia, localidad,  telefono, mail_contacto, descripcion, genero1, genero2, foto1, foto2, foto3,
 						red_social1, red_social2, red_social3, link_musica1, link_musica2, link_musica3, id_usuario);
 				listadoMusicos.add(x);
 			}
@@ -382,6 +396,8 @@ public class ListadosController {
 				String telefono = resultado.getString("telefono");
 				String mail_contacto = resultado.getString("mail_contacto");
 				String descripcion = resultado.getString("descripcion");
+				String genero1 = resultado.getString("genero1");
+				String genero2 = resultado.getString("genero2");
 				String foto1 = resultado.getString("foto1");
 				String foto2 = resultado.getString("foto2");
 				String foto3 = resultado.getString("foto3");
@@ -393,7 +409,7 @@ public class ListadosController {
 				String link_musica3 = resultado.getString("link_musica3");
 				int id_usuario = resultado.getInt("id_usuario");
 
-				PerfilMusico x = new PerfilMusico(id, nombre, provincia, localidad,  telefono, mail_contacto, descripcion, foto1, foto2, foto3,
+				PerfilMusico x = new PerfilMusico(id, nombre, provincia, localidad,  telefono, mail_contacto, descripcion, genero1, genero2, foto1, foto2, foto3,
 						red_social1, red_social2, red_social3, link_musica1, link_musica2, link_musica3, id_usuario);
 				listadoMusicos.add(x);
 			}

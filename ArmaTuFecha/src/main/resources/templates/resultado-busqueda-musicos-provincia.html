@@ -99,8 +99,10 @@
 									th:text="${perfilMusico.localidad}"></label><br> <label>Teléfono:&nbsp;
 								</label><label th:text="${perfilMusico.telefono}">Teléfono</label><br>
 								<label>Mail:&nbsp; </label><label
-									th:text="${perfilMusico.mail_contacto}">Mail</label><br> <a
-									th:href="${perfilMusico.red_social1}"
+									th:text="${perfilMusico.mail_contacto}">Mail</label><br>
+									<label th:text="${perfilMusico.genero1}"
+									th:if="${perfilMusico.genero1 != null && perfilMusico.genero1 != ''}"></label> 
+									<a th:href="${perfilMusico.red_social1}"
 									th:if="${perfilMusico.red_social1 != null && perfilMusico.red_social1 != ''}"
 									th:text="${perfilMusico.red_social1}">Facebook</a><br>
 								<br>

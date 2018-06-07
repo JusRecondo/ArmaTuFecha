@@ -110,13 +110,7 @@
 
 					</div>
 				</div>
-				<div class="row">
-					<div class="col">
-						<div class="fb-comments"
-							th:data-href="'https://armatufecha.herokuapp.com/musicos/' + ${nombre} + '/' + ${id_usuario}"
-							data-numposts="5"></div>
-					</div>
-				</div>
+				
 			</div>
 			<div class="col-md-4">
 				<div class="row">
@@ -125,7 +119,11 @@
 						<label th:text="${provincia} + ', '">Lorem Ipsum</label>&nbsp;<label
 							th:text="${localidad}">Lorem Ipsum</label><br> <label
 							th:text="${telefono}">a</label><br> <label
-							th:text="${mail_contacto}">a</label><br>
+							th:text="${mail_contacto}">a</label><br><label
+							th:text="${genero1} + ','" th:if="${genero1 != null && genero1 != ''}"></label>&nbsp;<label
+							th:text="${genero2}" th:if="${genero2 != null && genero2 != ''}"></label>
+							
+							
 
 					</div>
 				</div>
@@ -135,22 +133,22 @@
 							música</h3>
 						<a th:href="${red_social1}"
 							th:if="${red_social1 != null && red_social1 != ''}"
-							th:text="${red_social1}">Facebook</a><br>
+							th:text="${red_social1}">Facebook</a>
 						<br> <a th:href="${red_social2}"
 							th:if="${red_social2 != null && red_social2 != ''}"
-							th:text="${red_social2}">Instagram</a><br>
+							th:text="${red_social2}">Instagram</a>
 						<br> <a th:href="${red_social3}"
 							th:if="${red_social3 != null && red_social3 != ''}"
-							th:text="${red_social3}">Otro</a><br>
+							th:text="${red_social3}">Otro</a>
 						<br> <a th:href="${link_musica1}"
 							th:if="${link_musica1 != null && link_musica1 != ''}"
-							th:text="${link_musica1}">YouTube</a><br>
+							th:text="${link_musica1}">YouTube</a>
 						<br> <a th:href="${link_musica2}"
 							th:if="${link_musica2 != null && link_musica2 != ''}"
-							th:text="${link_musica1}">Bandcamp</a><br>
+							th:text="${link_musica2}">Bandcamp</a>
 						<br> <a th:href="${link_musica3}"
 							th:if="${link_musica3 != null && link_musica3 != ''}"
-							th:text="${link_musica1}">Otro</a><br>
+							th:text="${link_musica3}">Otro</a>
 						<br>
 					</div>
 				</div>

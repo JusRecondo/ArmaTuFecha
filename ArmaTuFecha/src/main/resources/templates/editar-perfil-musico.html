@@ -46,7 +46,7 @@
 						th:action="'/musicos/mi-perfil/procesar-edicion/' + ${id_usuario}"
 						method="POST">
 
-						<label>*Nombre del lugar:&nbsp;</label><input class="form-control"
+						<label>*Nombre de la banda/solista/etc.:&nbsp;</label><input class="form-control"
 							name="nombre" type="text" th:value="${nombre}" required></input>
 						<div class="invalid-feedback">Por favor completa este campo.</div>
 						<div class="valid-feedback"></div>
@@ -98,7 +98,108 @@
 							th:value="${mail_contacto}" required></input>
 						<div class="invalid-feedback">Por favor completa este campo.</div>
 						<div class="valid-feedback"></div>
-						<br></br> <label>*Descripción del lugar (máx. 1400
+						<br></br> 
+						<div class="form-group">
+							<label for="exampleFormControlSelect3">Por favor, selecciona uno o dos géneros musicales<br>
+							(esto es para simplificar la busqueda, podes explayarte mas en la descripción):</label><br>
+							 <label>Género 1:</label><select multiple class="form-control" id="exampleFormControlSelect3"
+								name="genero1">
+								<option>Blues</option>
+								<option>Bossa Nova</option> 
+								<option>Cancion</option>
+								<option>Country</option> 
+								<option>Cumbia</option> 
+								<option>Disco</option>
+								<option>Electrónica</option>
+								<option>Folklore</option> 
+								<option>Folk</option>
+								<option>Funk</option>
+								<option>Free Jazz</option>
+								<option>Garage</option>
+								<option>Gospel</option>
+								<option>Grunge</option>
+								<option>Hardcore</option>
+								<option>Hard Rock</option>
+								<option>Heavy Metal</option> 
+								<option>Hip Hop</option>
+								<option>House</option>
+								<option>Indie​</option> 
+								<option>Jazz</option>​
+								<option>Pop</option>
+								<option>Punk</option>
+								<option>Post Punk</option>
+								<option>Rap</option>
+								<option>Reggae</option>
+								<option>Reggaeton</option>
+								<option>Rhythm and Blues (R&B)</option>
+								<option>Rock</option>
+								<option>Rockabilly</option>
+								<option>Rock Alternativo</option>
+								<option>Rock and Roll</option>
+								<option>Rock Stoner</option>
+								<option>Rock Progresivo</option>
+								<option>Salsa</option>
+								<option>Shoegaze</option>
+								<option>Ska</option>
+								<option>Soul</option>
+								<option>Swing</option>
+								<option>Tango</option>
+								<option>Trap</option>
+								<option>Trash Metal</option>
+								<option>Trip hop</option>
+								
+							</select>
+							<label>Género 2:</label><select multiple class="form-control" id="exampleFormControlSelect3"
+								name="genero2">
+								<option>Blues</option>
+								<option>Bossa Nova</option> 
+								<option>Cancion</option>
+								<option>Country</option> 
+								<option>Cumbia</option> 
+								<option>Disco</option>
+								<option>Electrónica</option>
+								<option>Folklore</option> 
+								<option>Folk</option>
+								<option>Funk</option>
+								<option>Free Jazz</option>
+								<option>Garage</option>
+								<option>Gospel</option>
+								<option>Grunge</option>
+								<option>Hardcore</option>
+								<option>Hard Rock</option>
+								<option>Heavy Metal</option> 
+								<option>Hip Hop</option>
+								<option>House</option>
+								<option>Indie​</option> 
+								<option>Jazz</option>​
+								<option>Pop</option>
+								<option>Punk</option>
+								<option>Post Punk</option>
+								<option>Rap</option>
+								<option>Reggae</option>
+								<option>Reggaeton</option>
+								<option>Rhythm and Blues (R&B)</option>
+								<option>Rock</option>
+								<option>Rockabilly</option>
+								<option>Rock Alternativo</option>
+								<option>Rock and Roll</option>
+								<option>Rock Stoner</option>
+								<option>Rock Progresivo</option>
+								<option>Salsa</option>
+								<option>Shoegaze</option>
+								<option>Ska</option>
+								<option>Soul</option>
+								<option>Swing</option>
+								<option>Tango</option>
+								<option>Trap</option>
+								<option>Trash Metal</option>
+								<option>Trip hop</option>
+								
+							</select>
+							<div class="invalid-feedback">Por favor, si tenias generos musicales seleccionados,<br>
+							volve a seleccionarlos.</div>
+						</div>
+						<label>*Descripción del lugar (máx. 1400
 							caracteres). Debe incluir: tipo de establecimiento, equipamiento
 							de sonido, arreglo con los músicos (puerta para las bandas,
 							arreglo 70-30 o similar por entradas, pago de un cashé, etc.),

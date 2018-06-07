@@ -191,11 +191,14 @@ public class UsuariosController {
 			consulta.executeUpdate();
 
 			Email email = EmailBuilder.startingBlank()
-				    .from("app", "pepe@gmail.com")
+				    .from("Arma Tu Fecha", "armatufecha@gmail.com")
 				    //se puede poner el mail del usuario que se acaba de registrar
-				    .to("asd", "pepe@gmail.com")
-				    .withSubject("[Arma Tu Fecha]prueba mail")
-				    .withPlainText("Esto es un mensaje de prueba")
+				    .to("Nuevo usuario", mail)
+				    .withSubject("[Arma Tu Fecha]Datos de registro")
+				    .withPlainText("Gracias por registrarte!"
+				    		+ "Los datos de tu cuenta son los siguientes: "
+				    		+ "Mail:" + mail
+				    		+ "Contraseña:" + contrasenia)
 				    .buildEmail();
 
 				MailerBuilder
@@ -215,8 +218,8 @@ public class UsuariosController {
 	@PostMapping("/procesar-perfil/musico")
 	public String procesarPerfilMusico(Model template, @RequestParam String mail,
 			@RequestParam String contrasenia, @RequestParam String contrasenia2, @RequestParam String nombre,
-			@RequestParam String provincia, @RequestParam String localidad, @RequestParam String telefono, @RequestParam String mail_contacto,
-			@RequestParam String descripcion, @RequestParam(required=false) String foto1, @RequestParam(required=false) String foto2, @RequestParam(required=false) String foto3, 
+			@RequestParam String provincia, @RequestParam String localidad, @RequestParam String telefono, @RequestParam String mail_contacto, @RequestParam(required=false)String genero1, 
+			@RequestParam(required=false)String genero2, @RequestParam String descripcion, @RequestParam(required=false) String foto1, @RequestParam(required=false) String foto2, @RequestParam(required=false) String foto3, 
 			@RequestParam String red_social1, @RequestParam String red_social2,
 			@RequestParam String red_social3, @RequestParam String link_musica1, @RequestParam String link_musica2,
 			@RequestParam String link_musica3) throws SQLException {
@@ -327,7 +330,7 @@ public class UsuariosController {
 			consulta.executeUpdate();
 
 			consulta = connection.prepareStatement(
-					"UPDATE perfiles_musicos SET nombre = ?, provincia = ?, localidad = ?, telefono = ?, mail_contacto = ?, descripcion = ?, "
+					"UPDATE perfiles_musicos SET nombre = ?, provincia = ?, localidad = ?, telefono = ?, mail_contacto = ?, descripcion = ?, genero1 = ?, genero2 = ?,"
 					+ "foto1 = ?, foto2 = ?, foto3 = ?, red_social1 = ?, red_social2 = ?, red_social3 = ?, link_musica1 = ?, link_musica2 = ?, link_musica3 = ? WHERE id_usuario = ?;");
 
 			consulta.setString(1, nombre);
@@ -336,25 +339,30 @@ public class UsuariosController {
 			consulta.setString(4, telefono);
 			consulta.setString(5, mail_contacto);
 			consulta.setString(6, descripcion);
-			consulta.setString(7, foto1);
-			consulta.setString(8, foto2);
-			consulta.setString(9, foto3);
-			consulta.setString(10, red_social1);
-			consulta.setString(11, red_social2);
-			consulta.setString(12, red_social3);
-			consulta.setString(13, link_musica1);
-			consulta.setString(14, link_musica2);
-			consulta.setString(15, link_musica3);
-			consulta.setInt(16, nuevoIdUsuario);
+			consulta.setString(7, genero1);
+			consulta.setString(8, genero2);
+			consulta.setString(9, foto1);
+			consulta.setString(10, foto2);
+			consulta.setString(11, foto3);
+			consulta.setString(12, red_social1);
+			consulta.setString(13, red_social2);
+			consulta.setString(14, red_social3);
+			consulta.setString(15, link_musica1);
+			consulta.setString(16, link_musica2);
+			consulta.setString(17, link_musica3);
+			consulta.setInt(18, nuevoIdUsuario);
 
 			consulta.executeUpdate();
 
 			Email email = EmailBuilder.startingBlank()
-				    .from("app", "pepe@gmail.com")
+				    .from("Arma Tu Fecha", "armatufecha@gmail.com")
 				    //se puede poner el mail del usuario que se acaba de registrar
-				    .to("asd", "pepe@gmail.com")
-				    .withSubject("[Arma Tu Fecha]prueba mail")
-				    .withPlainText("Esto es un mensaje de prueba")
+				    .to("Nuevo usuario", mail)
+				    .withSubject("[Arma Tu Fecha]Datos de registro")
+				    .withPlainText("Gracias por registrarte!"
+				    		+ "Los datos de tu cuenta son los siguientes: "
+				    		+ "Mail:" + mail
+				    		+ "Contraseña:" + contrasenia)
 				    .buildEmail();
 
 				MailerBuilder
@@ -441,6 +449,8 @@ public class UsuariosController {
 			String telefono = resultado.getString("telefono");
 			String mail_contacto = resultado.getString("mail_contacto");
 			String descripcion = resultado.getString("descripcion");
+			String genero1 = resultado.getString("genero1");
+			String genero2 = resultado.getString("genero2");
 			String foto1 = resultado.getString("foto1");
 			String foto2 = resultado.getString("foto2");
 			String foto3 = resultado.getString("foto3");
@@ -459,6 +469,8 @@ public class UsuariosController {
 			template.addAttribute("telefono", telefono);
 			template.addAttribute("mail_contacto", mail_contacto);
 			template.addAttribute("descripcion", descripcion);
+			template.addAttribute("genero1", genero1);
+			template.addAttribute("genero2", genero2);			
 			template.addAttribute("foto1", foto1);
 			template.addAttribute("foto2", foto2);
 			template.addAttribute("foto3", foto3);
@@ -650,6 +662,8 @@ public class UsuariosController {
 						String telefono = resultado2.getString("telefono");
 						String mail_contacto = resultado2.getString("mail_contacto");
 						String descripcion = resultado2.getString("descripcion");
+						String genero1 = resultado2.getString("genero1");
+						String genero2 = resultado2.getString("genero2");
 						String foto1 = resultado2.getString("foto1");
 						String foto2 = resultado2.getString("foto2");
 						String foto3 = resultado2.getString("foto3");
@@ -660,7 +674,7 @@ public class UsuariosController {
 						String link_musica2 = resultado2.getString("link_musica2");
 						String link_musica3 = resultado2.getString("link_musica3");
 
-						// faltan fotos
+					
 
 						template.addAttribute("nombre", nombre1);
 						template.addAttribute("provincia", provincia);
@@ -668,6 +682,8 @@ public class UsuariosController {
 						template.addAttribute("telefono", telefono);
 						template.addAttribute("mail_contacto", mail_contacto);
 						template.addAttribute("descripcion", descripcion);
+						template.addAttribute("genero1", genero1);
+						template.addAttribute("genero2", genero2);
 						template.addAttribute("foto1", foto1);
 						template.addAttribute("foto2", foto2);
 						template.addAttribute("foto3", foto3);
@@ -848,6 +864,8 @@ public class UsuariosController {
 						String telefono = resultado2.getString("telefono");
 						String mail_contacto = resultado2.getString("mail_contacto");
 						String descripcion = resultado2.getString("descripcion");
+						String genero1 = resultado2.getString("genero1");
+						String genero2 = resultado2.getString("genero2");
 						String red_social1 = resultado2.getString("red_social1");
 						String red_social2 = resultado2.getString("red_social2");
 						String red_social3 = resultado2.getString("red_social3");
@@ -863,6 +881,8 @@ public class UsuariosController {
 						template.addAttribute("telefono", telefono);
 						template.addAttribute("mail_contacto", mail_contacto);
 						template.addAttribute("descripcion", descripcion);
+						template.addAttribute("genero1", genero1);
+						template.addAttribute("genero2", genero2);
 						template.addAttribute("red_social1", red_social1);
 						template.addAttribute("red_social2", red_social2);
 						template.addAttribute("red_social3", red_social3);
@@ -946,7 +966,8 @@ public class UsuariosController {
 	@PostMapping("/musicos/mi-perfil/procesar-edicion/{id_usuario}")
 	public String procesarEdicionLocal(Model template, @PathVariable int id_usuario, @RequestParam String nombre, @RequestParam String provincia, 
 			@RequestParam String localidad, @RequestParam String telefono, @RequestParam String mail_contacto,
-			@RequestParam String descripcion, @RequestParam String red_social1, @RequestParam String red_social2,
+			@RequestParam String descripcion, @RequestParam(required=false)String genero1, 
+			@RequestParam(required=false)String genero2, @RequestParam String red_social1, @RequestParam String red_social2,
 			@RequestParam String red_social3, @RequestParam String link_musica1, @RequestParam String link_musica2,
 			@RequestParam String link_musica3) throws SQLException {
 
@@ -974,7 +995,8 @@ public class UsuariosController {
 					env.getProperty("spring.datasource.username"), env.getProperty("spring.datasource.password"));
 
 			PreparedStatement consulta = connection.prepareStatement(
-					"UPDATE perfiles_musicos SET nombre = ?, provincia = ?, localidad = ?, telefono = ?, mail_contacto = ?, descripcion = ?, red_social1 = ?, red_social2 = ?, red_social3 = ?, link_musica1 = ?, link_musica2 = ?, link_musica3 = ? WHERE id_usuario = ?;");
+					"UPDATE perfiles_musicos SET nombre = ?, provincia = ?, localidad = ?, telefono = ?, mail_contacto = ?, descripcion = ?, genero1 = ?, genero2 = ?,"
+					+ " red_social1 = ?, red_social2 = ?, red_social3 = ?, link_musica1 = ?, link_musica2 = ?, link_musica3 = ? WHERE id_usuario = ?;");
 
 			consulta.setString(1, nombre);
 			consulta.setString(2, provincia);
@@ -982,13 +1004,15 @@ public class UsuariosController {
 			consulta.setString(4, telefono);
 			consulta.setString(5, mail_contacto);
 			consulta.setString(6, descripcion);
-			consulta.setString(7, red_social1);
-			consulta.setString(8, red_social2);
-			consulta.setString(9, red_social3);
-			consulta.setString(10, link_musica1);
-			consulta.setString(11, link_musica2);
-			consulta.setString(12, link_musica3);
-			consulta.setInt(13, id_usuario);
+			consulta.setString(7, genero1);
+			consulta.setString(8, genero2);
+			consulta.setString(9, red_social1);
+			consulta.setString(10, red_social2);
+			consulta.setString(11, red_social3);
+			consulta.setString(12, link_musica1);
+			consulta.setString(13, link_musica2);
+			consulta.setString(14, link_musica3);
+			consulta.setInt(15, id_usuario);
 
 			consulta.executeUpdate();
 

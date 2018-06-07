@@ -232,7 +232,7 @@
 							class="contrasenia" type="hidden" name="contrasenia" required></input>
 						<input class="contrasenia2" type="hidden" name="contrasenia2"
 							required></input> <label>*Nombre de la
-							banda/solista:&nbsp;</label><input class="form-control" name="nombre"
+							banda/solista/etc.:&nbsp;</label><input class="form-control" name="nombre"
 							type="text" th:value="${nombreCargado}" required></input>
 						<div class="invalid-feedback">Por favor completa este campo.</div>
 						<div class="valid-feedback"></div>
@@ -286,7 +286,107 @@
 							th:value="${mailCargado}" required></input>
 						<div class="invalid-feedback">Por favor completa este campo.</div>
 						<div class="valid-feedback"></div>
-						<br></br> <label>*Descripción del proyecto musical. Debe
+						<br></br> 
+						<div class="form-group">
+							<label for="exampleFormControlSelect3">Por favor, selecciona uno o dos géneros musicales<br>
+							(esto es para simplificar la busqueda, podes explayarte mas en la descripción):</label><br>
+							 <label>Género 1:</label><select multiple class="form-control" id="exampleFormControlSelect3"
+								name="genero1">
+								<option>Blues</option>
+								<option>Bossa Nova</option> 
+								<option>Cancion</option>
+								<option>Country</option> 
+								<option>Cumbia</option> 
+								<option>Disco</option>
+								<option>Electrónica</option>
+								<option>Folklore</option> 
+								<option>Folk</option>
+								<option>Funk</option>
+								<option>Free Jazz</option>
+								<option>Garage</option>
+								<option>Gospel</option>
+								<option>Grunge</option>
+								<option>Hardcore</option>
+								<option>Hard Rock</option>
+								<option>Heavy Metal</option> 
+								<option>Hip Hop</option>
+								<option>House</option>
+								<option>Indie​</option> 
+								<option>Jazz</option>​
+								<option>Pop</option>
+								<option>Punk</option>
+								<option>Post Punk</option>
+								<option>Rap</option>
+								<option>Reggae</option>
+								<option>Reggaeton</option>
+								<option>Rhythm and Blues (R&B)</option>
+								<option>Rock</option>
+								<option>Rockabilly</option>
+								<option>Rock Alternativo</option>
+								<option>Rock and Roll</option>
+								<option>Rock Stoner</option>
+								<option>Rock Progresivo</option>
+								<option>Salsa</option>
+								<option>Shoegaze</option>
+								<option>Ska</option>
+								<option>Soul</option>
+								<option>Swing</option>
+								<option>Tango</option>
+								<option>Trap</option>
+								<option>Trash Metal</option>
+								<option>Trip hop</option>
+								
+							</select>
+							<label>Género 2:</label><select multiple class="form-control" id="exampleFormControlSelect3"
+								name="genero2">
+								<option>Blues</option>
+								<option>Bossa Nova</option> 
+								<option>Cancion</option>
+								<option>Country</option> 
+								<option>Cumbia</option> 
+								<option>Disco</option>
+								<option>Electrónica</option>
+								<option>Folklore</option> 
+								<option>Folk</option>
+								<option>Funk</option>
+								<option>Free Jazz</option>
+								<option>Garage</option>
+								<option>Gospel</option>
+								<option>Grunge</option>
+								<option>Hardcore</option>
+								<option>Hard Rock</option>
+								<option>Heavy Metal</option> 
+								<option>Hip Hop</option>
+								<option>House</option>
+								<option>Indie​</option> 
+								<option>Jazz</option>​
+								<option>Pop</option>
+								<option>Punk</option>
+								<option>Post Punk</option>
+								<option>Rap</option>
+								<option>Reggae</option>
+								<option>Reggaeton</option>
+								<option>Rhythm and Blues (R&B)</option>
+								<option>Rock</option>
+								<option>Rockabilly</option>
+								<option>Rock Alternativo</option>
+								<option>Rock and Roll</option>
+								<option>Rock Stoner</option>
+								<option>Rock Progresivo</option>
+								<option>Salsa</option>
+								<option>Shoegaze</option>
+								<option>Ska</option>
+								<option>Soul</option>
+								<option>Swing</option>
+								<option>Tango</option>
+								<option>Trap</option>
+								<option>Trash Metal</option>
+								<option>Trip hop</option>
+								
+							</select>
+						<br><br>	
+						</div>
+						<label>*Descripción del proyecto musical. Debe
 							incluir: requerimientos técnicos de sonido, cantidad de
 							integrantes, estilo musical, cashé o arreglo mínimo que aceptan
 							(puerta, porcentaje de entradas, etc.):</label> <br></br>

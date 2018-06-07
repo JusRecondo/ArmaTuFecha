@@ -96,6 +96,8 @@ CREATE TABLE public.perfiles_musicos
     telefono text COLLATE pg_catalog."default",
     mail_contacto text COLLATE pg_catalog."default",
     descripcion character varying(5000) COLLATE pg_catalog."default",
+    genero1 text COLLATE pg_catalog."default",
+    genero2 text COLLATE pg_catalog."default",
     foto1 text COLLATE pg_catalog."default",
     foto2 text COLLATE pg_catalog."default",
     foto3 text COLLATE pg_catalog."default",
