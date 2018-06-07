@@ -69,6 +69,11 @@
 	    	<artifactId>simple-java-mail</artifactId>
 	    	<version>5.0.3</version>
 		</dependency>	
+		
+		<dependency>
+           <groupId> nz.net.ultraq.thymeleaf</groupId>
+           <artifactId>thymeleaf-layout-dialect</artifactId>
+       </dependency>
 			
 		
 	</dependencies>

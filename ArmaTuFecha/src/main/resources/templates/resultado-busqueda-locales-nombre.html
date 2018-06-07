@@ -54,11 +54,11 @@
 				<div class="col-lg-4 col-sm-6 portfolio-item"
 					th:each="perfilLocal:${listadoLocales}">
 					<div class="card h-100">
-						<a th:href="'/' + ${perfilLocal.nombre} + '/' + ${perfilLocal.id_usuario}"><img
+						<a th:href="'/locales/' + ${perfilLocal.nombre} + '/' + ${perfilLocal.id_usuario}"><img
 							class="card-img-top" th:src="${perfilLocal.foto1}" alt=""></a>
 						<div class="card-body">
 							<h4 class="card-title">
-								<a th:href="'/' + ${perfilLocal.nombre} + '/' + ${perfilLocal.id_usuario}"
+								<a th:href="'/locales/' + ${perfilLocal.nombre} + '/' + ${perfilLocal.id_usuario}"
 									th:text="${perfilLocal.nombre}">Project One</a>
 							</h4>
 							<p class="card-text">

@@ -370,9 +370,8 @@ public class UsuariosController {
 		}
 
 	}
-
-	// vista publica, modifcar ruta por /{nombre} y modificar donde haga falta
-	@GetMapping("/{nombre}/{id_usuario}")
+	
+	@GetMapping("/locales/{nombre}/{id_usuario}")
 	public String perfilLocal(Model template, @PathVariable String nombre, @PathVariable int id_usuario) throws SQLException {
 
 		Connection connection;
@@ -421,7 +420,7 @@ public class UsuariosController {
 	}
 
 	// vista publica, modifcar ruta por /{nombre} y modificar donde haga falta
-	@GetMapping("/vista-perfil-musico/{id_usuario}")
+	@GetMapping("/musicos/{nombre}/{id_usuario}")
 	public String perfilMusico(Model template, @PathVariable int id_usuario) throws SQLException {
 
 		Connection connection;

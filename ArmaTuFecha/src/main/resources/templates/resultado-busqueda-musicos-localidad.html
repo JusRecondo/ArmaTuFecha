@@ -69,12 +69,12 @@
 				<div class="col-lg-4 col-sm-6 portfolio-item"
 					th:each="perfilMusico:${listadoMusicos}">
 					<div class="card h-100">
-						<a th:href="'/vista-perfil-musico/' + ${perfilMusico.id_usuario}"><img
+						<a th:href="'/musicos/' + ${perfilMusico.nombre} + '/' + ${perfilMusico.id_usuario}"><img
 							class="card-img-top" th:src="${perfilMusico.foto1}" alt=""></a>
 						<div class="card-body">
 							<h4 class="card-title">
 								<a
-									th:href="'/vista-perfil-musico/' + ${perfilMusico.id_usuario}"
+									th:href="'/musicos/' + ${perfilMusico.nombre} + '/' + ${perfilMusico.id_usuario}"
 									th:text="${perfilMusico.nombre}">Project One</a>
 							</h4>
 							<p class="card-text">
