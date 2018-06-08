@@ -57,7 +57,7 @@
 						</div>
 						<div class="col-md-6">
 							<form class="form-group"
-								action="/musicos/busqueda-localidad/procesar">
+								action="/musicos/busqueda-localidad/procesar/1">
 								<div class="col text-center">
 									<input name="busquedaLocalidad" type="text"
 										class="form-control" placeholder="Buscá por localidad..."></input><br>
@@ -106,19 +106,14 @@
 	<!-- /.row -->
 
 	<!-- Pagination -->
-	<ul class="pagination justify-content-center">
-		<li class="page-item"><a class="page-link" href="#"
-			aria-label="Previous"> <span aria-hidden="true">&laquo;</span> <span
-				class="sr-only">Previous</span>
-		</a></li>
-		<li class="page-item"><a class="page-link" href="#">1</a></li>
-		<li class="page-item"><a class="page-link" href="#">2</a></li>
-		<li class="page-item"><a class="page-link" href="#">3</a></li>
-		<li class="page-item"><a class="page-link" href="#"
-			aria-label="Next"> <span aria-hidden="true">&raquo;</span> <span
-				class="sr-only">Next</span>
-		</a></li>
-	</ul>
+	<div class="pagination justify-content-center"
+		layout:fragment="paginacion">
+
+		<button class="btn btn-outline-dark btn-lg">
+			<a th:href="'/musicos/busqueda-provincia/procesar/'+ ${pagina+1} + '?busquedaProvincia=' + ${busquedaProvincia}">Más resultados </a>
+		</button>
+	</div>
+
 
 
 	<!-- /.container -->

@@ -11,12 +11,12 @@
 <title>Músicos</title>
 
 
+
 </head>
 
 <body>
 
 	<!-- Navigation -->
-
 
 	<header class="bg-primary text-white bootstrap-override-header2"
 		id="color1" layout:fragment="header-listado">
@@ -39,18 +39,49 @@
 		<div class="container">
 			<div class="row">
 				<div class="col text-center" id="bootstrap-override-col3">
-
-					<form class="form-group" action="/musicos/busqueda-nombre/procesar">
-						<div class="col text-center">
-							<input name="busquedaNombre" type="text" class="form-control"
-								placeholder="Buscá un lugar por su nombre..."></input><br>
+					<h5>Buscar por..</h5>
+					<br>
+					<div class="row">
+						<div class="col-md-4">
+							<form class="form-group"
+								action="/musicos/busqueda-nombre/procesar">
+								<div class="col text-center">
+									<input name="busquedaNombre" type="text" class="form-control"
+										placeholder="Buscá un lugar por su nombre..."></input><br>
+								</div>
+								<div class="col text-center">
+									<input class="btn btn-outline-dark" type="submit"
+										value="Buscar"></input>
+								</div>
+							</form>
 						</div>
-						<div class="col text-center">
-							<input class="btn btn-outline-dark btn-lg" type="submit"
-								value="Buscar"></input>
+						<div class="col-md-4">
+							<form class="form-group"
+								action="/musicos/busqueda-provincia/procesar/1">
+								<div class="col text-center">
+									<input name="busquedaProvincia" type="text"
+										class="form-control" placeholder="Buscá por provincia..."></input><br>
+								</div>
+								<div class="col text-center">
+									<input class="btn btn-outline-dark" type="submit"
+										value="Buscar"></input>
+								</div>
+							</form>
 						</div>
-
-					</form>
+						<div class="col-md-4">
+							<form class="form-group"
+								action="/musicos/busqueda-localidad/procesar/1">
+								<div class="col text-center">
+									<input name="busquedaLocalidad" type="text"
+										class="form-control" placeholder="Buscá por localidad..."></input><br>
+								</div>
+								<div class="col text-center">
+									<input class="btn btn-outline-dark" type="submit"
+										value="Buscar"></input>
+								</div>
+							</form>
+						</div>
+					</div>
 				</div>
 			</div>
 			<!-- Page Heading -->
@@ -73,7 +104,7 @@
 								<label>Mail:&nbsp; </label><label
 									th:text="${perfilMusico.mail_contacto}">Mail</label><br>
 									<label th:text="${perfilMusico.genero1}"
-									th:if="${perfilMusico.genero1 != null && perfilMusico.genero1 != ''}"></label>
+									th:if="${perfilMusico.genero1 != null && perfilMusico.genero1 != ''}"></label> 
 									<a th:href="${perfilMusico.red_social1}"
 									th:if="${perfilMusico.red_social1 != null && perfilMusico.red_social1 != ''}"
 									th:text="${perfilMusico.red_social1}">Facebook</a><br>
@@ -92,16 +123,16 @@
 		layout:fragment="paginacion">
 
 		<button class="btn btn-outline-dark btn-lg">
-			<a th:href="'/musicos/busqueda-localidad/procesar/'+ ${pagina+1} + '?busquedaLocalidad=' + ${busquedaLocalidad}">Más resultados </a>
+			<a th:href="'/musicos/busqueda-genero/procesar/'+ ${pagina+1} + '?busquedaGenero=' + ${busquedaGenero}">Más resultados </a>
 		</button>
 	</div>
 
-	
 
 
 	<!-- /.container -->
 
 	<!-- Footer -->
+
 
 
 </body>

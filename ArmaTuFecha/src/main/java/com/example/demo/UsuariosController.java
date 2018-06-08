@@ -508,8 +508,6 @@ public class UsuariosController {
 	public String login(HttpSession session, Model template) throws SQLException {
 		
 		Usuario logueado = UsuariosHelper.usuarioLogueado(session);
-		logueado.getMail();
-	
 
 		if (logueado != null) {
 			
@@ -589,7 +587,7 @@ public class UsuariosController {
 		Usuario logueado = UsuariosHelper.usuarioLogueado(session);
 		
 
-		if (logueado != null) {
+		if (logueado == null) {
 			return "redirect:/login";
 		}
 	
@@ -743,7 +741,7 @@ public class UsuariosController {
 		Usuario logueado = UsuariosHelper.usuarioLogueado(session);
 		
 
-		if (logueado != null) {
+		if (logueado == null) {
 			return "redirect:/login";
 		}
 		
@@ -814,7 +812,7 @@ public class UsuariosController {
 		Usuario logueado = UsuariosHelper.usuarioLogueado(session);
 		
 
-		if (logueado != null) {
+		if (logueado == null) {
 			return "redirect:/login";
 		}
 		
@@ -1048,7 +1046,7 @@ public class UsuariosController {
 		Usuario logueado = UsuariosHelper.usuarioLogueado(session);
 		
 
-		if (logueado != null){
+		if (logueado == null){
 			return "redirect:/login";
 		}	
 		

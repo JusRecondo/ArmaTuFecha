@@ -77,8 +77,9 @@ public class UsuariosHelper {
 				if ( resultado.next() ){
 					
 				    
-					return new Usuario(resultado.getInt("id"), resultado.getString("mail"), resultado.getString("contrasenia"),  resultado.getString("tipo"));
+					Usuario logueado = new Usuario(resultado.getInt("id"), resultado.getString("mail"), resultado.getString("contrasenia"),  resultado.getString("tipo"));
 					
+					return logueado;
 				} else {
 					
 					return null;
