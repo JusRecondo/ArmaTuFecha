@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" layout:decorate="estructura-listado">
+<html lang="es" layout:decorate="~{estructura-listado}">
 
 <head>
 
@@ -19,7 +19,7 @@
 
 
 	<header class="bg-primary text-white bootstrap-override-header2"
-		id="color1" layout:fragment="header-listado">
+		id="color1" layout:fragment="~{header-listado}">
 		<div class="container text-center">
 			<div class="row">
 				<div class="col">
@@ -37,7 +37,7 @@
 	</header>
 	<!-- Page Content -->
 	<section id="about" class="bootstrap-override-section2"
-		layout:fragment="seccion-listado">
+		layout:fragment="~{seccion-listado}">
 		<div class="container">
 			<div class="row">
 				<div class="col text-center" id="bootstrap-override-col3">
@@ -177,7 +177,7 @@
 	<!-- /.row -->
 
 	<!-- Pagination -->
-	<ul class="pagination justify-content-center" layout:fragment="paginacion">
+	<ul class="pagination justify-content-center" layout:fragment="~{paginacion}">
 		<li class="page-item"><a class="page-link" th:href="${pagina-1}"
 			aria-label="Previous"> <span aria-hidden="true">&laquo;</span> <span
 				class="sr-only">Previous</span>

@@ -1,22 +1,21 @@
 <!DOCTYPE html>
-<html lang="es" layout:decorate="estructura-nologueado">
+<html lang="es" layout:decorate="~{estructura-nologueado}">
 
 <head>
 
 <meta charset="utf-8"></meta>
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no"></meta>
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"></meta>
 
 
 <title>Arma Tu Fecha</title>
-
+</head>
 
 <body id="page-top">
 
 	<!-- Navigation -->
 	
 	
-	<header class="bg-primary text-white" id="color1" layout:fragment="header1">
+	<header class="bg-primary text-white" id="color1" layout:fragment="~{header1}">
 		<div class="container text-center">
 			<div class="row">
 				<div class="col-12">
@@ -30,13 +29,13 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-lg-6 mx-auto text-center"
+				<div class="col-md-6 mx-auto text-center"
 					id="bootstrap-override-col1">
 					<a href="/listado-locales/1" id="btn1" class="btn btn-outline-light">Lugares
 						donde<br> tocar
 					</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				</div>
-				<div class="col-lg-6 mx-auto text-center"
+				<div class="col-md-6 mx-auto text-center"
 					id="bootstrap-override-col2">
 					<a href="/listado-musicos/1" id="btn2" class="btn btn-outline-light">Bandas/musicos
 						solistas/etc.<br>para armar fechas
@@ -46,7 +45,7 @@
 		</div>
 	</header>
 
-	<section id="about" layout:fragment="section1">
+	<section id="about" layout:fragment="~{section1}">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-8 mx-auto">

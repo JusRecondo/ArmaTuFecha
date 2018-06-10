@@ -6,6 +6,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
 
@@ -57,41 +58,7 @@ public class UsuariosController {
 		return "logout";
 	}
 
-	@GetMapping("/recuperar-contraseña/{mail}")
-	public String recuperarContrasenia (@PathVariable String mail, RedirectAttributes redirectAttribute) throws SQLException{
-		
-		Connection connection;
-		connection = DriverManager.getConnection(env.getProperty("spring.datasource.url"),
-				env.getProperty("spring.datasource.username"), env.getProperty("spring.datasource.password"));
-
-		PreparedStatement consulta = connection.prepareStatement("SELECT contrasenia FROM usuarios WHERE mail = ?;");
-
-		consulta.setString(1, mail);
-
-		ResultSet resultado = consulta.executeQuery();
-
-		if (resultado.next()) {
-			String contrasenia = resultado.getString("contrasenia");
-        
-
-		Email email = EmailBuilder.startingBlank()
-			    .from("Arma Tu Fecha", "armatufecha@gmail.com")
-			    .to("Usuario", "justina.recondo@gmail.com")
-			    .withSubject("[Arma Tu Fecha]Datos de registro")
-			    .withPlainText("Los datos de tu cuenta son los siguientes: "
-			    		+ "Mail:" + mail
-			    		+ "Contraseña:" + contrasenia)
-			    .buildEmail();
-
-			MailerBuilder
-			  .withSMTPServer("smtp.sendgrid.net", 587, "apikey", env.getProperty("sendgrid.apikey") )
-			  .buildMailer()
-			  .sendMail(email);
-		}
-		
-		redirectAttribute.addFlashAttribute("mensaje_contrasenia", "Te enviamos un mail con tus datos de registro (revisa la sección de spam");	
-		return "redirect:/login";
-	}
+	
 	
 	@GetMapping("/crear-perfil")
 	public String crearPerfil() {
@@ -544,6 +511,8 @@ public class UsuariosController {
 	@PostMapping("/procesar-login")
 	public String procesarLogin(HttpSession session, Model template, @RequestParam String mail, @RequestParam String contrasenia)
 			throws SQLException {
+		template.addAttribute("mail", mail);
+		
 		boolean correcto = UsuariosHelper.IntentarLoguearse(session, mail, contrasenia);
 
 		if (correcto) {
@@ -570,6 +539,7 @@ public class UsuariosController {
 		} else {
 			
 			template.addAttribute("login_incorrecto", "El mail o contraseña ingresados son incorrectos");
+			template.addAttribute("mail", mail);
 		
 			return "login";
 		}
@@ -854,6 +824,9 @@ public class UsuariosController {
 						String telefono = resultado1.getString("telefono");
 						String mail_contacto = resultado1.getString("mail_contacto");
 						String descripcion = resultado1.getString("descripcion");
+						String foto1 = resultado1.getString("foto1");
+						String foto2 = resultado1.getString("foto2");
+						String foto3 = resultado1.getString("foto3");
 						String red_social1 = resultado1.getString("red_social1");
 						String red_social2 = resultado1.getString("red_social2");
 						String red_social3 = resultado1.getString("red_social3");
@@ -865,6 +838,9 @@ public class UsuariosController {
 						template.addAttribute("telefono", telefono);
 						template.addAttribute("mail_contacto", mail_contacto);
 						template.addAttribute("descripcion", descripcion);
+						template.addAttribute("foto1", foto1);
+						template.addAttribute("foto2", foto2);
+						template.addAttribute("foto3", foto3);
 						template.addAttribute("red_social1", red_social1);
 						template.addAttribute("red_social2", red_social2);
 						template.addAttribute("red_social3", red_social3);
@@ -889,6 +865,9 @@ public class UsuariosController {
 						String telefono = resultado2.getString("telefono");
 						String mail_contacto = resultado2.getString("mail_contacto");
 						String descripcion = resultado2.getString("descripcion");
+						String foto1 = resultado2.getString("foto1");
+						String foto2 = resultado2.getString("foto2");
+						String foto3 = resultado2.getString("foto3");
 						String genero1 = resultado2.getString("genero1");
 						String genero2 = resultado2.getString("genero2");
 						String red_social1 = resultado2.getString("red_social1");
@@ -898,7 +877,7 @@ public class UsuariosController {
 						String link_musica2 = resultado2.getString("link_musica2");
 						String link_musica3 = resultado2.getString("link_musica3");
 		
-						// faltan fotos
+						
 		
 						template.addAttribute("nombre", nombre2);
 						template.addAttribute("provincia", provincia);
@@ -906,6 +885,9 @@ public class UsuariosController {
 						template.addAttribute("telefono", telefono);
 						template.addAttribute("mail_contacto", mail_contacto);
 						template.addAttribute("descripcion", descripcion);
+						template.addAttribute("foto1", foto1);
+						template.addAttribute("foto2", foto2);
+						template.addAttribute("foto3", foto3);
 						template.addAttribute("genero1", genero1);
 						template.addAttribute("genero2", genero2);
 						template.addAttribute("red_social1", red_social1);
@@ -935,7 +917,7 @@ public class UsuariosController {
 	@PostMapping("/locales/mi-perfil/procesar-edicion/{id_usuario}")
 	public String procesarEdicionLocal(Model template, @PathVariable int id_usuario, @RequestParam String nombre, 
 			@RequestParam String provincia, @RequestParam String localidad,	@RequestParam String direccion, @RequestParam String telefono, @RequestParam String mail_contacto,
-			@RequestParam String descripcion, @RequestParam String red_social1, @RequestParam String red_social2,
+			@RequestParam String descripcion, @RequestParam(required=false)String foto1, @RequestParam(required=false)String foto2, @RequestParam(required=false) String foto3, @RequestParam String red_social1, @RequestParam String red_social2,
 			@RequestParam String red_social3) throws SQLException {
 
 		if (nombre.length() == 0 || provincia.length() == 0 || localidad.length() == 0 || direccion.length() == 0 || telefono.length() == 0 || mail_contacto.length() == 0
@@ -947,6 +929,7 @@ public class UsuariosController {
 			template.addAttribute("telefono", telefono);
 			template.addAttribute("mail_contacto", mail_contacto);
 			template.addAttribute("descripcion", descripcion);
+			template.addAttribute("aviso_fotos", "No es necesario que vuelvas a cargar las fotos!");
 			template.addAttribute("red_social1", red_social1);
 			template.addAttribute("red_social2", red_social2);
 			template.addAttribute("red_social3", red_social3);
@@ -962,7 +945,8 @@ public class UsuariosController {
 					env.getProperty("spring.datasource.username"), env.getProperty("spring.datasource.password"));
 
 			PreparedStatement consulta = connection.prepareStatement(
-					"UPDATE perfiles_locales SET nombre = ?, provincia = ?, localidad = ?, direccion = ?, telefono = ?, mail_contacto = ?, descripcion = ?, red_social1 = ?, red_social2 = ?, red_social3 = ? WHERE id_usuario = ?;");
+					"UPDATE perfiles_locales SET nombre = ?, provincia = ?, localidad = ?, direccion = ?, telefono = ?, mail_contacto = ?, descripcion = ?, "
+					+ "foto1 = ?, foto2 = ?, foto3 = ?, red_social1 = ?, red_social2 = ?, red_social3 = ? WHERE id_usuario = ?;");
 
 			consulta.setString(1, nombre);
 			consulta.setString(2, provincia);
@@ -971,14 +955,22 @@ public class UsuariosController {
 			consulta.setString(5, telefono);
 			consulta.setString(6, mail_contacto);
 			consulta.setString(7, descripcion);
-			consulta.setString(8, red_social1);
-			consulta.setString(9, red_social2);
-			consulta.setString(10, red_social3);
-			consulta.setInt(11, id_usuario);
+			consulta.setString(8, foto1);
+			consulta.setString(9, foto2);
+			consulta.setString(10, foto3);
+			consulta.setString(11, red_social1);
+			consulta.setString(12, red_social2);
+			consulta.setString(13, red_social3);
+			consulta.setInt(14, id_usuario);
 			// faltan fotos
 
 			consulta.executeUpdate();
 
+			consulta = connection.prepareStatement("UPDATE usuarios SET nombre = ? WHERE id = ?;");
+			consulta.setString(1, nombre);
+			consulta.setInt(2, id_usuario);
+			
+			consulta.executeUpdate();
 			connection.close();
 
 			return "redirect:/" + nombre + "/" + id_usuario + "/mi-perfil";
@@ -991,7 +983,7 @@ public class UsuariosController {
 	@PostMapping("/musicos/mi-perfil/procesar-edicion/{id_usuario}")
 	public String procesarEdicionLocal(Model template, @PathVariable int id_usuario, @RequestParam String nombre, @RequestParam String provincia, 
 			@RequestParam String localidad, @RequestParam String telefono, @RequestParam String mail_contacto,
-			@RequestParam String descripcion, @RequestParam(required=false)String genero1, 
+			@RequestParam String descripcion, @RequestParam(required=false)String foto1, @RequestParam(required=false)String foto2, @RequestParam(required=false) String foto3, @RequestParam(required=false)String genero1, 
 			@RequestParam(required=false)String genero2, @RequestParam String red_social1, @RequestParam String red_social2,
 			@RequestParam String red_social3, @RequestParam String link_musica1, @RequestParam String link_musica2,
 			@RequestParam String link_musica3) throws SQLException {
@@ -1004,6 +996,7 @@ public class UsuariosController {
 			template.addAttribute("telefono", telefono);
 			template.addAttribute("mail_contacto", mail_contacto);
 			template.addAttribute("descripcion", descripcion);
+			template.addAttribute("aviso_fotos", "No es necesario que vuelvas a cargar las fotos!");
 			template.addAttribute("red_social1", red_social1);
 			template.addAttribute("red_social2", red_social2);
 			template.addAttribute("red_social3", red_social3);
@@ -1020,7 +1013,7 @@ public class UsuariosController {
 					env.getProperty("spring.datasource.username"), env.getProperty("spring.datasource.password"));
 
 			PreparedStatement consulta = connection.prepareStatement(
-					"UPDATE perfiles_musicos SET nombre = ?, provincia = ?, localidad = ?, telefono = ?, mail_contacto = ?, descripcion = ?, genero1 = ?, genero2 = ?,"
+					"UPDATE perfiles_musicos SET nombre = ?, provincia = ?, localidad = ?, telefono = ?, mail_contacto = ?, descripcion = ?, genero1 = ?, genero2 = ?, foto1 = ?, foto2 = ?, foto3 = ?,"
 					+ " red_social1 = ?, red_social2 = ?, red_social3 = ?, link_musica1 = ?, link_musica2 = ?, link_musica3 = ? WHERE id_usuario = ?;");
 
 			consulta.setString(1, nombre);
@@ -1031,14 +1024,23 @@ public class UsuariosController {
 			consulta.setString(6, descripcion);
 			consulta.setString(7, genero1);
 			consulta.setString(8, genero2);
-			consulta.setString(9, red_social1);
-			consulta.setString(10, red_social2);
-			consulta.setString(11, red_social3);
-			consulta.setString(12, link_musica1);
-			consulta.setString(13, link_musica2);
-			consulta.setString(14, link_musica3);
-			consulta.setInt(15, id_usuario);
+			consulta.setString(9, foto1);
+			consulta.setString(10, foto2);
+			consulta.setString(11, foto3);
+			consulta.setString(12, red_social1);
+			consulta.setString(13, red_social2);
+			consulta.setString(14, red_social3);
+			consulta.setString(15, link_musica1);
+			consulta.setString(16, link_musica2);
+			consulta.setString(17, link_musica3);
+			consulta.setInt(18, id_usuario);
 
+			consulta.executeUpdate();
+			
+			consulta = connection.prepareStatement("UPDATE usuarios SET nombre = ? WHERE id = ?;");
+			consulta.setString(1, nombre);
+			consulta.setInt(2, id_usuario);
+			
 			consulta.executeUpdate();
 
 			connection.close();

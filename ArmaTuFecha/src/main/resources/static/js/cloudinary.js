@@ -15,10 +15,9 @@ $(document).ready(function() {
 		}, function(error, result) {
 			console.log(error, result)			 
 			var url = result[0].url;
-			var thumbnail = result[0].thumbnail_url;
 
 			$("form").find('#foto1').val(url);
-			$("#preview1").append( '<img src=\"' + thumbnail + '\" />' );
+			$("#preview1").append( '<img src=\"' + url + '\" class="img-thumbnail form-control"/>' );
 			
 
 		})
@@ -38,10 +37,9 @@ $(document).ready(function() {
 		}, function(error, result) {
 			console.log(error, result)
 			var url = result[0].url;
-			var thumbnail = result[0].thumbnail_url;
 			
 			$("form").find('#foto2').val(url);
-			$("#preview2").append( '<img src=\"' + thumbnail + '\" />' );
+			$("#preview2").append( '<img src=\"' + url + '\" class="img-thumbnail"/>' );
 
 		})
 	})
@@ -60,9 +58,9 @@ $(document).ready(function() {
 		}, function(error, result) {
 			console.log(error, result)
 			var url = result[0].url;
-			var thumbnail = result[0].thumbnail_url;
+		
 			$("form").find('#foto3').val(url);
-			$("#preview3").append( '<img src=\"' + thumbnail + '\" />' );
+			$("#preview3").append( '<img src=\"' + url + '\" class="img-thumbnail"/>' );
 
 		})
 	})
@@ -82,9 +80,9 @@ $(document).ready(function() {
 		}, function(error, result) {
 			console.log(error, result)
 			var url = result[0].url;
-			var thumbnail = result[0].thumbnail_url;
+			
 			$("form").find('#foto4').val(url);
-			$("#preview4").append( '<img src=\"' + thumbnail + '\" />' );
+			$("#preview4").append( '<img src=\"' + url + '\" class="img-thumbnail"/>' );
 
 		})
 	})
@@ -104,9 +102,9 @@ $(document).ready(function() {
 		}, function(error, result) {
 			console.log(error, result)
 			var url = result[0].url;
-			var thumbnail = result[0].thumbnail_url;
+			
 			$("form").find('#foto5').val(url);
-			$("#preview5").append( '<img src=\"' + thumbnail + '\" />' );
+			$("#preview5").append( '<img src=\"' + url + '\" class="img-thumbnail"/>' );
 
 		})
 	})
@@ -125,9 +123,9 @@ $(document).ready(function() {
 		}, function(error, result) {
 			console.log(error, result)
 			var url = result[0].url;
-			var thumbnail = result[0].thumbnail_url;
+			
 			$("form").find('#foto6').val(url);
-			$("#preview6").append( '<img src=\"' + thumbnail + '\" />' );
+			$("#preview6").append( '<img src=\"' + url + '\" class="img-thumbnail"/>' );
 
 		})
 	})

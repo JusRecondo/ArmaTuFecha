@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" layout:decorate="estructura-logueado">
+<html lang="es" layout:decorate="~{estructura-logueado}">
 
 <head>
 
@@ -20,7 +20,7 @@
 
 
 	<header class="bg-primary text-white bootstrap-override-header"
-		id="color1" layout:fragment="header-logueado">
+		id="color1" layout:fragment="~{header-logueado}">
 		<div class="container text-center">
 			<div class="row">
 				<div class="col-12">
@@ -199,7 +199,44 @@
 							type="text" maxlength="1400" th:text="${descripcion}" required></textarea>
 						<div class="invalid-feedback">Por favor completa este campo.</div>
 						<div class="valid-feedback"></div>
-						<br></br> <label>Links a redes sociales:&nbsp;</label><br></br> <label>Facebook:&nbsp;</label><input
+						<br></br> 
+						<label>Edita o agregá tres fotos a tu perfil:</label><br>
+						<div class="alert alert-danger" role="alert"
+							th:text="${aviso_fotos}" th:if="${aviso_fotos}"></div>
+						<div class="row">
+							<div class="col-md-4 text-center">
+								<div id="preview1"></div>
+								<img th:src="${foto1}" alt="foto 1" class="img-thumbnail form-control" id="foto-preview1"></img><br>
+								<input class="btn btn-outline-light form-control" id="eliminar1"
+									value="Eliminar"></input>
+								<input type="hidden" th:value="${foto1}" id="foto1" name="foto1"></input>
+								<a class="btn btn-outline-light form-control" href="#"
+									id="upload_widget_opener1" >Agregar foto</a>
+								<br> 
+							</div>
+							<div class="col-md-4 text-center">
+								<div id="preview2"></div>
+								<img th:src="${foto2}" alt="foto 2"	class="img-thumbnail form-control" id="foto-preview2"></img><br>
+								<input class="btn btn-outline-light form-control" id="eliminar2"
+									value="Eliminar"></input>
+								<input type="hidden" th:value="${foto2}" id="foto2" name="foto2"></input>
+								<a class="btn btn-outline-light form-control" href="#"
+									id="upload_widget_opener2">Agregar foto</a>
+								<br> 
+							</div>
+							<div class="col-md-4 text-center">
+								<div id="preview3"></div>
+								<img th:src="${foto3}" alt="foto 3"	class="img-thumbnail form-control" id="foto-preview3"></img><br>
+								<input class="btn btn-outline-light form-control" id="eliminar3"
+									value="Eliminar"></input>
+									<input type="hidden" th:value="${foto3}" id="foto3" name="foto3"></input>
+								<a class="btn btn-outline-light form-control" href="#"
+									id="upload_widget_opener3">Agregar foto</a>
+								<br> 
+							</div>
+						</div>
+						<br><br>
+						<label>Links a redes sociales:&nbsp;</label><br></br> <label>Facebook:&nbsp;</label><input
 							class="form-control" name="red_social1" type="url"
 							th:value="${red_social1}"></input><br></br> <label>Instagram:&nbsp;</label><input
 							class="form-control" name="red_social2" type="url"

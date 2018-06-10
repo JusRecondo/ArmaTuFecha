@@ -56,9 +56,9 @@ public class ListadosController {
 		connection = DriverManager.getConnection(env.getProperty("spring.datasource.url"),
 				env.getProperty("spring.datasource.username"), env.getProperty("spring.datasource.password"));
 
-		PreparedStatement consulta = connection.prepareStatement("SELECT * FROM perfiles_locales OFFSET ? LIMIT 2;");
+		PreparedStatement consulta = connection.prepareStatement("SELECT * FROM perfiles_locales OFFSET ? LIMIT 3;");
 		
-		consulta.setInt(1, (pagina-1)*2 );
+		consulta.setInt(1, (pagina-1)*3 );
 		
 
 		ResultSet resultado = consulta.executeQuery();
@@ -158,10 +158,10 @@ public class ListadosController {
 				env.getProperty("spring.datasource.username"), env.getProperty("spring.datasource.password") );
 
 		
-		PreparedStatement consulta = connection.prepareStatement("SELECT * FROM perfiles_locales WHERE LOWER (provincia) LIKE ? OFFSET ? LIMIT 2;");
+		PreparedStatement consulta = connection.prepareStatement("SELECT * FROM perfiles_locales WHERE LOWER (provincia) LIKE ? OFFSET ? LIMIT 3;");
 		
 		consulta.setString(1, "%" + busquedaProvincia.toLowerCase() + "%");
-		consulta.setInt(2, (pagina-1)*2 );
+		consulta.setInt(2, (pagina-1)*3 );
 		
 	
 		ResultSet resultado = consulta.executeQuery();
@@ -210,10 +210,10 @@ public class ListadosController {
 				env.getProperty("spring.datasource.username"), env.getProperty("spring.datasource.password") );
 
 		
-		PreparedStatement consulta = connection.prepareStatement("SELECT * FROM perfiles_locales WHERE LOWER (localidad) LIKE ? OFFSET ? LIMIT 2;");
+		PreparedStatement consulta = connection.prepareStatement("SELECT * FROM perfiles_locales WHERE LOWER (localidad) LIKE ? OFFSET ? LIMIT 3;");
 		
 		consulta.setString(1, "%" + busquedaLocalidad.toLowerCase() + "%");
-		consulta.setInt(2, (pagina-1)*2 );
+		consulta.setInt(2, (pagina-1)*3 );
 		
 	
 		ResultSet resultado = consulta.executeQuery();
@@ -274,9 +274,9 @@ public class ListadosController {
 			connection = DriverManager.getConnection(env.getProperty("spring.datasource.url"),
 					env.getProperty("spring.datasource.username"), env.getProperty("spring.datasource.password"));
 
-			PreparedStatement consulta = connection.prepareStatement("SELECT * FROM perfiles_musicos OFFSET ? LIMIT 2;");
+			PreparedStatement consulta = connection.prepareStatement("SELECT * FROM perfiles_musicos OFFSET ? LIMIT 3;");
 			
-			consulta.setInt(1, (pagina-1)*2 );
+			consulta.setInt(1, (pagina-1)*3 );
 
 			ResultSet resultado = consulta.executeQuery();
 
@@ -379,10 +379,10 @@ public class ListadosController {
 					env.getProperty("spring.datasource.username"), env.getProperty("spring.datasource.password") );
 
 			
-			PreparedStatement consulta = connection.prepareStatement("SELECT * FROM perfiles_musicos WHERE LOWER (provincia) LIKE ? OFFSET ? LIMIT 2;");
+			PreparedStatement consulta = connection.prepareStatement("SELECT * FROM perfiles_musicos WHERE LOWER (provincia) LIKE ? OFFSET ? LIMIT 3;");
 			
 			consulta.setString(1, "%" + busquedaProvincia.toLowerCase() + "%");
-			consulta.setInt(2, (pagina-1)*2 );
+			consulta.setInt(2, (pagina-1)*3 );
 		
 			ResultSet resultado = consulta.executeQuery();
 			
@@ -435,10 +435,10 @@ public class ListadosController {
 					env.getProperty("spring.datasource.username"), env.getProperty("spring.datasource.password") );
 
 			
-			PreparedStatement consulta = connection.prepareStatement("SELECT * FROM perfiles_musicos WHERE LOWER (localidad) LIKE ? OFFSET ? LIMIT 2;");
+			PreparedStatement consulta = connection.prepareStatement("SELECT * FROM perfiles_musicos WHERE LOWER (localidad) LIKE ? OFFSET ? LIMIT 3;");
 			
 			consulta.setString(1, "%" + busquedaLocalidad.toLowerCase() + "%");
-			consulta.setInt(2, (pagina-1)*2 );
+			consulta.setInt(2, (pagina-1)*3 );
 			
 		
 			ResultSet resultado = consulta.executeQuery();
@@ -491,10 +491,10 @@ public class ListadosController {
 					env.getProperty("spring.datasource.username"), env.getProperty("spring.datasource.password") );
 
 			
-			PreparedStatement consulta = connection.prepareStatement("SELECT * FROM perfiles_musicos WHERE LOWER (genero1) LIKE ? OFFSET ? LIMIT 2;");
+			PreparedStatement consulta = connection.prepareStatement("SELECT * FROM perfiles_musicos WHERE LOWER (genero1) LIKE ? OFFSET ? LIMIT 3;");
 			
 			consulta.setString(1, "%" + busquedaGenero.toLowerCase() + "%");
-			consulta.setInt(2, (pagina-1)*2 );
+			consulta.setInt(2, (pagina-1)*3 );
 			
 		
 			ResultSet resultado = consulta.executeQuery();

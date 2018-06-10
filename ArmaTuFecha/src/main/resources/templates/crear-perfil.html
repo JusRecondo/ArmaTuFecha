@@ -189,7 +189,7 @@
 								provincia.</div>
 							<div class="valid-feedback"></div>
 						</div>
-						<label>*Localidad/Ciudad:&nbsp;</label><input class="form-control"
+						<label>*Localidad/Ciudad (Si estan en capital, escribi CABA):&nbsp;</label><input class="form-control"
 							name="localidad" type="text" th:value="${localidadCargada}"
 							required></input>
 						<div class="invalid-feedback">Por favor completa este campo.</div>
@@ -219,24 +219,32 @@
 							required></textarea>
 						<div class="invalid-feedback">Por favor completa este campo.</div>
 						<div class="valid-feedback"></div>
-						<br></br> <label>Agrega 3 fotos a tu perfil:</label><br>
+						<br></br> <label>Agrega 3 fotos a tu perfil:</label><br><br>
 						<div class="alert alert-danger" role="alert"
 							th:text="${aviso_fotos}" th:if="${aviso_fotos}"></div>
-						<a href="#" id="upload_widget_opener1">Agregar una foto</a><br>
-						<input type="hidden" id="foto1" name="foto1"></input>
-						<ul id="preview1"></ul>
-						<a href="#" id="upload_widget_opener2">Agregar una foto</a> <input
-							type="hidden" id="foto2" name="foto2"></input>
-						<ul id="preview2"></ul>
-						<a href="#" id="upload_widget_opener3">Agregar una foto</a> <input
-							type="hidden" id="foto3" name="foto3"></input>
-						<ul id="preview3"></ul>
+						<div class="row">
+							<div class="col-md-4 text-center">
+								<div id="preview1"></div>
+								<input type="button" href="#" id="upload_widget_opener1" value="Agregar una foto" class="btn btn-outline-dark"></input><br>
+								<input type="hidden" id="foto1" name="foto1"></input>
+							</div>
+							<div class="col-md-4 text-center">
+								<div id="preview2"></div>
+								<input type="button" href="#" id="upload_widget_opener2" value="Agregar una foto" class="btn btn-outline-dark"></input><br> 
+								<input type="hidden" id="foto2" name="foto2"></input>
+							</div>
+							<div class="col-md-4 text-center">
+								<div id="preview3"></div>
+								<input type="button" href="#" id="upload_widget_opener3" value="Agregar una foto" class="btn btn-outline-dark"></input><br>
+								<input	type="hidden" id="foto3" name="foto3"></input>
+							</div>
+						</div>
 
-						<br></br> <label>Links a redes sociales:&nbsp;</label><br></br> <label>Facebook:&nbsp;</label><input
+						<br></br> <label>Links a redes sociales:&nbsp;</label><br></br> <label>Facebook, Instagram, etc.:&nbsp;</label><input
 							class="form-control" name="red_social1" type="url"
-							th:value="${red_social1Cargada}"></input><br></br> <label>Instagram:&nbsp;</label><input
+							th:value="${red_social1Cargada}"></input><br></br> <label>Facebook, Instagram, etc.:&nbsp;</label><input
 							class="form-control" name="red_social2" type="url"
-							th:value="${red_social2Cargada}"></input><br></br> <label>Otro:&nbsp;</label><input
+							th:value="${red_social2Cargada}"></input><br></br> <label>Facebook, Instagram, etc.:&nbsp;</label><input
 							class="form-control" name="red_social3" type="url"
 							th:value="${red_social3Cargada}"></input><br></br>
 
@@ -303,7 +311,7 @@
 								provincia.</div>
 							<div class="valid-feedback"></div>
 						</div>
-						<label>*Localidad/Ciudad:&nbsp;</label><input class="form-control"
+						<label>*Localidad/Ciudad (Si estan en capital, escribi CABA):&nbsp;</label><input class="form-control"
 							name="localidad" type="text" th:value="${localidadCargada}"
 							required></input>
 						<div class="invalid-feedback">Por favor completa este campo.</div>
@@ -429,32 +437,40 @@
 							required></textarea>
 						<div class="invalid-feedback">Por favor completa este campo.</div>
 						<div class="valid-feedback"></div>
-						<br></br> <label>Agrega 3 fotos a tu perfil:</label><br>
+						<br></br> <label>Agrega 3 fotos a tu perfil:</label><br><br>
 						<div class="alert alert-danger" role="alert"
 							th:text="${aviso_fotos}" th:if="${aviso_fotos}"></div>
-						<a href="#" id="upload_widget_opener4">Agregar foto</a> <input
-							type="hidden" id="foto4" name="foto1"></input>
-						<ul id="preview4"></ul>
-						<a href="#" id="upload_widget_opener5">Agregar foto</a> <input
-							type="hidden" id="foto5" name="foto2"></input>
-						<ul id="preview5"></ul>
-						<a href="#" id="upload_widget_opener6">Agregar foto</a> <input
-							type="hidden" id="foto6" name="foto3"></input>
-						<ul id="preview6"></ul>
-
-						<br></br> <label>Links a redes sociales:&nbsp;</label><br></br> <label>Facebook:&nbsp;</label><input
+						<div class="row">
+							<div class="col-md-4 text-center">
+								<div id="preview4"></div>
+								<input type="button" href="#" id="upload_widget_opener4" value="Agregar una foto" class="btn btn-outline-dark"></input><br>
+								<input type="hidden" id="foto4" name="foto1"></input>
+							</div>
+							<div class="col-md-4 text-center">
+								<div id="preview5"></div>
+								<input type="button" href="#" id="upload_widget_opener5" value="Agregar una foto" class="btn btn-outline-dark"></input><br> 
+								<input type="hidden" id="foto5" name="foto2"></input>
+							</div>
+							<div class="col-md-4 text-center">
+								<div id="preview6"></div>
+								<input type="button" href="#" id="upload_widget_opener6" value="Agregar una foto" class="btn btn-outline-dark"></input><br>
+								<input	type="hidden" id="foto6" name="foto3"></input>
+							</div>
+						</div>
+						
+						<br></br> <label>Links a redes sociales:&nbsp;</label><br></br> <label>Facebook, Instagram, etc.:&nbsp;</label><input
 							class="form-control" name="red_social1" type="url"
-							th:value="${red_social1Cargada}"></input><br></br> <label>Instagram:&nbsp;</label><input
+							th:value="${red_social1Cargada}"></input><br></br> <label>Facebook, Instagram, etc.:&nbsp;</label><input
 							class="form-control" name="red_social2" type="url"
-							th:value="${red_social2Cargada}"></input><br></br> <label>Otro:&nbsp;</label><input
+							th:value="${red_social2Cargada}"></input><br></br> <label>Facebook, Instagram, etc.:&nbsp;</label><input
 							class="form-control" name="red_social3" type="url"
 							th:value="${red_social3Cargada}"></input><br></br> <label>Links
-							a tu música (Youtube, Bandcamp, Spotify, Soundcloud, etc.):&nbsp;</label><br></br>
-						<label>YouTube:&nbsp;</label><input class="form-control"
+							a tu música:&nbsp;</label><br></br>
+						<label>Youtube, Bandcamp, Spotify, Soundcloud, etc.:&nbsp;</label><input class="form-control"
 							name="link_musica1" type="url" th:value="${link_musicaCargado1}"></input><br></br>
-						<label>Bandcamp:&nbsp;</label><input class="form-control"
+						<label>Youtube, Bandcamp, Spotify, Soundcloud, etc.:&nbsp;</label><input class="form-control"
 							name="link_musica2" type="url" th:value="${link_musicaCargado2}"></input><br></br>
-						<label>Otro:&nbsp;</label><input class="form-control"
+						<label>Youtube, Bandcamp, Spotify, Soundcloud, etc.:&nbsp;</label><input class="form-control"
 							name="link_musica3" type="url" th:value="${link_musicaCargado3}"></input><br></br>
 
 						<div class="text-center">
