@@ -131,9 +131,8 @@
 						<br> <a th:href="${red_social3}"
 							th:if="${red_social3 != null && red_social3 != ''}"
 							th:text="${red_social3}">Otro</a><br>
-						<br> <a
-							th:href="'/' + ${nombre} + '/' + ${id_usuario} + '/mi-perfil/editar'">Editar
-							datos del perfil</a><br>
+						<br> <a th:href="'/' + ${nombre} + '/' + ${id_usuario} + '/mi-perfil/editar'"
+						    class="btn btn-outline-dark">Editar datos del perfil</a><br>
 					</div>
 				</div>
 				<div class="row">
@@ -141,11 +140,14 @@
 						<h3 class="my-3">Datos de la cuenta</h3>
 						<label>Mail:&nbsp;</label><label th:text="${mail}"></label><br>
 						<label>Contraseña:&nbsp;</label><label th:text="${contrasenia}"></label><br>
-						<a
-							th:href="'/' + ${nombre} + '/' + ${id_usuario} + '/mi-perfil/editar-datos-usuario'">Editar
-							datos de usuario</a><br></br> <a
-							th:href="'/' + ${nombre} + '/' + ${id_usuario} + '/mi-perfil/eliminar-cuenta'">Eliminar
-							cuenta y perfil.</a><br>
+						<div>
+							<a th:href="'/' + ${nombre} + '/' + ${id_usuario} + '/mi-perfil/editar-datos-usuario'"
+								class="btn btn-outline-dark">Editar datos de usuario</a><br><br>
+						</div>
+						<div>
+							<a th:href="'/' + ${nombre} + '/' + ${id_usuario} + '/mi-perfil/eliminar-cuenta'"
+							  class="btn btn-outline-dark" >Eliminar cuenta y perfil</a><br>
+						</div>	
 						<br>
 					</div>
 				</div>
