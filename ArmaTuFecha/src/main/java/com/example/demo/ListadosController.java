@@ -86,8 +86,10 @@ public class ListadosController {
 					red_social2, red_social3, id_usuario);
 			listadoLocales.add(x);
 		}
+		
 
 		template.addAttribute("listadoLocales", listadoLocales);
+		connection.close();
 
 		return "listado-locales";
 	}
@@ -132,8 +134,11 @@ public class ListadosController {
 					red_social1, red_social2, red_social3, id_usuario);
 			listadoLocales.add(x);
 		}
+		
+
 
 		template.addAttribute("listadoLocales", listadoLocales);
+		connection.close();
 
 		return "resultado-busqueda-locales-nombre";
 	}
@@ -186,6 +191,7 @@ public class ListadosController {
 		}
 
 		template.addAttribute("listadoLocales", listadoLocales);
+		connection.close();
 
 		return "resultado-busqueda-locales-provincia";
 	}
@@ -236,7 +242,9 @@ public class ListadosController {
 			listadoLocales.add(x);
 		}
 
+		
 		template.addAttribute("listadoLocales", listadoLocales);
+		connection.close();
 
 		return "resultado-busqueda-locales-localidad";
 	}
@@ -299,8 +307,10 @@ public class ListadosController {
 						red_social1, red_social2, red_social3, link_musica1, link_musica2, link_musica3, id_usuario);
 				listadoMusicos.add(x);
 			}
+			
 
 			template.addAttribute("listadoMusicos", listadoMusicos);
+			connection.close();
 
 			return "listado-musicos";
 		}
@@ -349,6 +359,7 @@ public class ListadosController {
 			}
 
 			template.addAttribute("listadoMusicos", listadoMusicos);
+			connection.close();
 
 			return "resultado-busqueda-musicos-nombre";
 		}
@@ -403,7 +414,9 @@ public class ListadosController {
 				listadoMusicos.add(x);
 			}
 
+			
 			template.addAttribute("listadoMusicos", listadoMusicos);
+			connection.close();
 
 			return "resultado-busqueda-musicos-provincia";
 		}
@@ -459,6 +472,7 @@ public class ListadosController {
 			}
 
 			template.addAttribute("listadoMusicos", listadoMusicos);
+			connection.close();
 
 			return "resultado-busqueda-musicos-localidad";
 		}
@@ -514,6 +528,7 @@ public class ListadosController {
 			}
 
 			template.addAttribute("listadoMusicos", listadoMusicos);
+			connection.close();
 
 			return "resultado-busqueda-musicos-genero";
 		}

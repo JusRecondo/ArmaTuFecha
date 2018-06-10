@@ -438,10 +438,11 @@ public class UsuariosController {
 			template.addAttribute("red_social3", red_social3);
 		}
 
+		connection.close();
 		return "perfil-local";
 	}
 
-	// vista publica, modifcar ruta por /{nombre} y modificar donde haga falta
+	
 	@GetMapping("/musicos/{nombre}/{id_usuario}")
 	public String perfilMusico(Model template, @PathVariable int id_usuario) throws SQLException {
 
@@ -496,6 +497,7 @@ public class UsuariosController {
 			template.addAttribute("link_musica3", link_musica3);
 		}
 
+		connection.close();
 		return "perfil-musico";
 	}
 
@@ -531,8 +533,10 @@ public class UsuariosController {
 					
 					return "redirect:/" + nombre + "/" + id + "/mi-perfil";				
 				}
-			
+				
+				connection.close();
 		}
+		
 		
 		return "login";
 	}
@@ -561,7 +565,8 @@ public class UsuariosController {
 				
 				return "redirect:/" + nombre + "/" + id + "/mi-perfil";				
 			}
-				
+			
+			connection.close();
 		} else {
 			
 			template.addAttribute("login_incorrecto", "El mail o contraseña ingresados son incorrectos");
@@ -728,7 +733,7 @@ public class UsuariosController {
 					}
 					return "perfil-musico-logueado";
 				}
-					
+				connection.close();	
 			}
 			return "redirect:/";
 	}	
@@ -765,7 +770,8 @@ public class UsuariosController {
 			template.addAttribute("contrasenia", contrasenia);
 
 		}
-
+		connection.close();
+		
 		return "editar-datos-usuario";
 	}
 
@@ -799,10 +805,12 @@ public class UsuariosController {
 			consulta.setInt(3, id_usuario);
 
 			consulta.executeUpdate();
+			connection.close();
 
 		}
 		template.addAttribute("nombre", nombre);
 
+		
 		return "redirect:/" + nombre + "/" + id_usuario + "/mi-perfil";
 	}
 	
@@ -1108,6 +1116,7 @@ public class UsuariosController {
 
 				return "redirect:/";
 			}
+			connection.close();
 		}
 		return "redirect:/";	
 				

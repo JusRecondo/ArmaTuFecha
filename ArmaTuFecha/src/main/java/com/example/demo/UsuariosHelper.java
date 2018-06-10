@@ -78,6 +78,7 @@ public class UsuariosHelper {
 					
 				    
 					Usuario logueado = new Usuario(resultado.getInt("id"), resultado.getString("mail"), resultado.getString("contrasenia"),  resultado.getString("tipo"));
+					connection.close();
 					
 					return logueado;
 				} else {
