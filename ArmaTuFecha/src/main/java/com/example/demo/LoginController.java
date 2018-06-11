@@ -161,6 +161,8 @@ public class LoginController {
 					    .withSubject("[Arma Tu Fecha]Recuperar contraseña")
 					    .withPlainText("Para restablecer tu contraseña, ingresá en el siguiente link: "
 					    		+ "https://armatufecha.herokuapp.com/recuperar-contrasenia/" + mail + "/" + codigoRecuperacion)
+					    .withHTMLText("<label>Para restablecer tu contraseña, </label><br>"
+					    		+ "<a th:href=${'https://armatufecha.herokuapp.com/recuperar-contrasenia/' + mail + '/' + codigoRecuperacion}>ingresá en este siguiente link</a>")
 					    .buildEmail();
 		
 					MailerBuilder

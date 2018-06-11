@@ -124,9 +124,9 @@
 			aria-label="Previous"> <span aria-hidden="true">&laquo;</span> <span
 				class="sr-only">Previous</span>
 		</a></li>
-		<li th:each="i:${#numbers.sequence(1, ( listadoLocales.size () / 3 ) + 2  )}" class="page-item"><a   class="page-link"  th:text="${i}" th:href="'/listado-locales/' + ${i}">1</a></li>
+		<li  th:each="i:${#numbers.sequence(1, ( total_perfiles / 3 ) + 1  )}" class="page-item"><a   class="page-link"  th:text="${i}" th:href="'/listado-locales/' + ${i}">1</a></li>
 		
-		<li class="page-item"><a class="page-link" th:href="${pagina+1}"
+		<li class="page-item" ><a class="page-link" th:href="${pagina+1}"
 			aria-label="Next"> <span aria-hidden="true">&raquo;</span> <span
 				class="sr-only">Next</span>
 		</a></li>
