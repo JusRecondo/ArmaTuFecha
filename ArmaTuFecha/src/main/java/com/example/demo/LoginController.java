@@ -160,7 +160,7 @@ public class LoginController {
 					    .to("Usuario", "justina.recondo@gmail.com")
 					    .withSubject("[Arma Tu Fecha]Recuperar contraseña")
 					    .withPlainText("Para restablecer tu contraseña, ingresá en el siguiente link: "
-					    		+ "localhost:8081/" + mail + "/" + codigoRecuperacion)
+					    		+ "localhost:8081/recuperar-contrasenia/" + mail + "/" + codigoRecuperacion)
 					    .buildEmail();
 		
 					MailerBuilder
@@ -178,7 +178,7 @@ public class LoginController {
 	   }
 	}
 	
-	@GetMapping ("/{mail}/{codigoRecuperacion}")
+	@GetMapping ("/recuperar-contrasenia/{mail}/{codigoRecuperacion}")
 	public String verificacionCodigo(@PathVariable String mail, @PathVariable String codigoRecuperacion, Model template, RedirectAttributes redirectAttribute) throws SQLException {
 		
 		
