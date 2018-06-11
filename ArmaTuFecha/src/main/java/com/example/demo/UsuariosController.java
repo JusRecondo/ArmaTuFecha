@@ -473,88 +473,9 @@ public class UsuariosController {
 
 
 
-	@GetMapping("/login")
-	public String login(HttpSession session, Model template) throws SQLException {
-		
-		Usuario logueado = UsuariosHelper.usuarioLogueado(session);
-
-		if (logueado != null) {
-			
-			String codigo = (String)session.getAttribute("codigo-autorizacion");
-			
-			Connection connection;
-			connection = DriverManager.getConnection( env.getProperty("spring.datasource.url"),
-					env.getProperty("spring.datasource.username"), env.getProperty("spring.datasource.password") );
-			
-			PreparedStatement consulta = 
-					connection.prepareStatement("SELECT id, nombre FROM usuarios WHERE codigo = ?;");
-			                                                  
-			consulta.setString(1, codigo);
-			
-			ResultSet resultado = consulta.executeQuery();
-			
-				if (resultado.next()) {
-					
-					String nombre = resultado.getString("nombre");
-					int id = resultado.getInt("id");
-					
-					return "redirect:/" + nombre + "/" + id + "/mi-perfil";				
-				}
-				
-				connection.close();
-		}
-		
-		
-		return "login";
-	}
-
-	@PostMapping("/procesar-login")
-	public String procesarLogin(HttpSession session, Model template, @RequestParam String mail, @RequestParam String contrasenia)
-			throws SQLException {
-		template.addAttribute("mail", mail);
-		
-		boolean correcto = UsuariosHelper.IntentarLoguearse(session, mail, contrasenia);
-
-		if (correcto) {
-
-			Connection connection = DriverManager.getConnection(env.getProperty("spring.datasource.url"),
-					env.getProperty("spring.datasource.username"), env.getProperty("spring.datasource.password"));
-
-			PreparedStatement consulta = connection
-					.prepareStatement("SELECT nombre, id FROM usuarios WHERE mail = ?;");
-
-			consulta.setString(1, mail);
-
-			ResultSet resultado = consulta.executeQuery();
-
-			if (resultado.next()) {
-				
-				String nombre = resultado.getString("nombre");
-				int id = resultado.getInt("id");
-				
-				return "redirect:/" + nombre + "/" + id + "/mi-perfil";				
-			}
-			
-			connection.close();
-		} else {
-			
-			template.addAttribute("login_incorrecto", "El mail o contraseña ingresados son incorrectos");
-			template.addAttribute("mail", mail);
-		
-			return "login";
-		}
 	
-		return "login";
-	}
-
-	@GetMapping("/logout")
-	public String logout(HttpSession session, Model template, RedirectAttributes redirectAttribute) throws SQLException {
-		UsuariosHelper.cerrarSesion(session);
-		
-		redirectAttribute.addFlashAttribute("mensaje_logout", "Tu sesion se ha cerrado!");
-		return "redirect:/";
-	}
-
+	
+	
 	@GetMapping ("/{nombre}/{id_usuario}/mi-perfil")
 	public String perfilLogueado(HttpSession session, Model template, @PathVariable String nombre, @PathVariable int id_usuario)
 			throws SQLException {
