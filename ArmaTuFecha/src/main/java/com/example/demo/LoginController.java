@@ -156,11 +156,11 @@ public class LoginController {
 				
 				
 				Email email = EmailBuilder.startingBlank()
-					    .from("Arma Tu Fecha", "armatufecha@gmail.com")
+					    .from("Arma Tu Fecha", "justina.recondo@gmail.com")
 					    .to("Usuario", "justina.recondo@gmail.com")
 					    .withSubject("[Arma Tu Fecha]Recuperar contraseña")
 					    .withPlainText("Para restablecer tu contraseña, ingresá en el siguiente link: "
-					    		+ "localhost:8081/recuperar-contrasenia/" + mail + "/" + codigoRecuperacion)
+					    		+ "https://armatufecha.herokuapp.com/recuperar-contrasenia/" + mail + "/" + codigoRecuperacion)
 					    .buildEmail();
 		
 					MailerBuilder
@@ -210,31 +210,50 @@ public class LoginController {
 		return "login";
 	}
 	
-	@PostMapping ("/restablecer-contraseña/{mail}")
-	public String restablecerContrasenia(@PathVariable String mail, @RequestParam String contrasenia, @RequestParam String contrasenia2, Model template, RedirectAttributes redirectAttribute) throws SQLException {
-		
-		if (!contrasenia.equals(contrasenia2)) {
-
-			template.addAttribute("aviso_contrasenia", "Las contraseñas ingresadas no coinciden.");
-		
-			return "redirect:/restablecer-contraseña/" + mail;
-		}
+	@PostMapping ("/restablecer-contraseña/{mail}/{codigoRecuperacion}")
+	public String restablecerContrasenia(@PathVariable String mail, @PathVariable String codigoRecuperacion, @RequestParam String contrasenia, @RequestParam String contrasenia2, Model template, RedirectAttributes redirectAttribute) throws SQLException {
 		
 		Connection connection;
 		connection = DriverManager.getConnection(env.getProperty("spring.datasource.url"),
 				env.getProperty("spring.datasource.username"), env.getProperty("spring.datasource.password"));
-		PreparedStatement consulta = connection
-				.prepareStatement("UPDATE usuarios SET contrasenia = ? WHERE mail = ?;");
-		
-		consulta.setString(1, contrasenia);
-		consulta.setString(2, mail);
-		
-		consulta.executeUpdate();
-		connection.close();
-		
-		redirectAttribute.addFlashAttribute("mensaje_contrasenia3", "Listo! Ahora podes loguearte con tu nueva contraseña");	
-		
-		return "redirect:/login";
-	}
 
+		PreparedStatement consulta = connection.prepareStatement("SELECT codigo_recuperacion FROM usuarios WHERE mail = ? ;");
+		
+		consulta.setString(1, mail);
+
+		ResultSet resultado = consulta.executeQuery();
+		
+		if (resultado.next()) {
+			String codigoRecuperacionTabla = resultado.getString("codigo_recuperacion");
+		
+			if (codigoRecuperacionTabla.equals(codigoRecuperacion)) {
+			
+				if (!contrasenia.equals(contrasenia2)) {
+			
+						template.addAttribute("aviso_contrasenia", "Las contraseñas ingresadas no coinciden.");
+					
+						return "redirect:/restablecer-contraseña/" + mail + codigoRecuperacion;
+					}
+				
+					consulta = connection
+							.prepareStatement("UPDATE usuarios SET contrasenia = ? WHERE mail = ?;");
+					
+					consulta.setString(1, contrasenia);
+					consulta.setString(2, mail);
+					
+					consulta.executeUpdate();
+					connection.close();
+					
+					redirectAttribute.addFlashAttribute("mensaje_contrasenia3", "Listo! Ahora podes loguearte con tu nueva contraseña");	
+					
+					return "redirect:/login";
+				} else {
+			
+	} 
+		redirectAttribute.addFlashAttribute("mensaje_contrasenia2", "Código inválido");		
+		return "redirect:/login";
+		
+		}
+		return "redirect:login";
+	}
 }

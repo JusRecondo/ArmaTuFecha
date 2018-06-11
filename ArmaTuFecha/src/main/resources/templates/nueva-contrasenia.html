@@ -60,10 +60,10 @@
 					<h1>Ingresá tu nueva contraseña</h>
 				</div>
 			</div>
-			<form class="form-group needs-validation" th:action="'/restablecer-contraseña/' + ${mail}" method="POST">
-				<div class="col-lg-6 mx-auto text-center form-group text-white"
+			<form class="form-group needs-validation" th:action="'/restablecer-contraseña/' + ${mail} + '/' + ${codigoRecuperacion}" method="POST">
+				<div class="col-lg-6 mx-auto text-center form-group"
 					id="bootstrap-override-col1">
-					<label id="label1">Mail:</label> <input readonly class="form-control-plaintext"
+					<label id="label1">Mail:</label> <input readonly class="form-control-plaintext text-center text-white"
 						type="text" name="mail" th:value=${mail}></input>
 				</div>
 				
