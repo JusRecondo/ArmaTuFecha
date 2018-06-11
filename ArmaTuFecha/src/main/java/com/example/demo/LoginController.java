@@ -116,12 +116,12 @@ public class LoginController {
 		return "redirect:/";
 	}
 
-	@GetMapping ("/olvide-mi-contraseña")
+	@GetMapping ("/olvide-mi-contrasenia")
 	public String olvidoContrasenia () {
 		return "recuperar-contrasenia";
 	}
 	
-	@PostMapping("/recuperar-contraseña")
+	@PostMapping("/recuperar-contrasenia")
 	public String recuperarContrasenia (@RequestParam String mail, RedirectAttributes redirectAttribute, Model template) throws SQLException{
 		
 		if (mail.length() == 0) {
@@ -160,7 +160,7 @@ public class LoginController {
 					    .to("Usuario", "justina.recondo@gmail.com")
 					    .withSubject("[Arma Tu Fecha]Recuperar contraseña")
 					    .withPlainText("Para restablecer tu contraseña, ingresá en el siguiente link: "
-					    		+ "http://armatufecha.herokuapp.com/" + mail + "/" + codigoRecuperacion)
+					    		+ "localhost:8081/" + mail + "/" + codigoRecuperacion)
 					    .buildEmail();
 		
 					MailerBuilder
