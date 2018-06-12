@@ -641,27 +641,14 @@ public class UsuariosController {
 			return "redirect:/login";
 		}
 		
-		template.addAttribute("nombre", nombre);
+		String mail = logueado.getMail();
+		String contrasenia = logueado.getContrasenia();
 		
-		Connection connection;
-		connection = DriverManager.getConnection(env.getProperty("spring.datasource.url"),
-				env.getProperty("spring.datasource.username"), env.getProperty("spring.datasource.password"));
+		template.addAttribute("nombre", nombre);
 
-		PreparedStatement consulta = connection.prepareStatement("SELECT * FROM usuarios WHERE id = ?;");
+		template.addAttribute("mail", mail);
+		template.addAttribute("contrasenia", contrasenia);
 
-		consulta.setInt(1, id_usuario);
-
-		ResultSet resultado = consulta.executeQuery();
-
-		if (resultado.next()) {
-			String mail = resultado.getString("mail");
-			String contrasenia = resultado.getString("contrasenia");
-
-			template.addAttribute("mailCargado", mail);
-			template.addAttribute("contrasenia", contrasenia);
-
-		}
-		connection.close();
 		
 		return "editar-datos-usuario";
 	}
@@ -714,6 +701,7 @@ public class UsuariosController {
 		if (logueado == null) {
 			return "redirect:/login";
 		}
+		
 		
 		Connection connection = DriverManager.getConnection(env.getProperty("spring.datasource.url"),
 				env.getProperty("spring.datasource.username"), env.getProperty("spring.datasource.password"));

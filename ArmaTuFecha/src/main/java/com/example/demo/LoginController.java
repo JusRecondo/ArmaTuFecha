@@ -154,7 +154,7 @@ public class LoginController {
 				
 				connection.close();
 				
-				
+				// TODO cambiar mi mail por el mail del usuario
 				Email email = EmailBuilder.startingBlank()
 					    .from("Arma Tu Fecha", "justina.recondo@gmail.com")
 					    .to("Usuario", "justina.recondo@gmail.com")
