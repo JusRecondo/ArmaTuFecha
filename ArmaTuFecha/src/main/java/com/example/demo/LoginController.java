@@ -247,7 +247,7 @@ public class LoginController {
 					consulta.setString(2, mail);
 					
 					consulta.executeUpdate();
-					connection.close();
+					
 					
 					redirectAttribute.addFlashAttribute("mensaje_contrasenia3", "Listo! Ahora podes loguearte con tu nueva contraseña");	
 					
