@@ -215,7 +215,8 @@ public class LoginController {
 	}
 	
 	@PostMapping ("/restablecer-contraseña/{mail}/{codigoRecuperacion}")
-	public String restablecerContrasenia(@PathVariable String mail, @PathVariable String codigoRecuperacion, @RequestParam String contrasenia, @RequestParam String contrasenia2, Model template, RedirectAttributes redirectAttribute) throws SQLException {
+	public String restablecerContrasenia(@PathVariable String mail, @PathVariable String codigoRecuperacion, @RequestParam String contrasenia, @RequestParam String contrasenia2, 
+			Model template, RedirectAttributes redirectAttribute, HttpSession session) throws SQLException {
 		
 		Connection connection;
 		connection = DriverManager.getConnection(env.getProperty("spring.datasource.url"),
@@ -250,7 +251,24 @@ public class LoginController {
 					
 					redirectAttribute.addFlashAttribute("mensaje_contrasenia3", "Listo! Ahora podes loguearte con tu nueva contraseña");	
 					
-					return "redirect:/procesar-login";
+					UsuariosHelper.IntentarLoguearse(session, mail, contrasenia);
+					
+					consulta = connection
+							.prepareStatement("SELECT nombre, id FROM usuarios WHERE mail = ?;");
+
+					consulta.setString(1, mail);
+
+					ResultSet resultado2 = consulta.executeQuery();
+
+					if (resultado2.next()) {
+						
+						String nombre = resultado2.getString("nombre");
+						int id = resultado2.getInt("id");
+						
+						return "redirect:/" + nombre + "/" + id + "/mi-perfil";				
+					}
+					
+					connection.close();
 				} else {
 			
 	} 
