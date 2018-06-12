@@ -162,7 +162,7 @@ public class LoginController {
 					    .withPlainText("Para restablecer tu contraseña, ingresá en el siguiente link: "
 					    		+ "https://armatufecha.herokuapp.com/recuperar-contrasenia/" + mail + "/" + codigoRecuperacion)
 					    .withHTMLText("<label>Para restablecer tu contraseña, </label><br>"
-					    		+ "<a th:href=${'https://armatufecha.herokuapp.com/recuperar-contrasenia/' + mail + '/' + codigoRecuperacion}>ingresá en este siguiente link</a>")
+					    		+ "<a href=\"https://armatufecha.herokuapp.com/recuperar-contrasenia/" +  mail  +"/" + codigoRecuperacion + ">ingresá en este siguiente link</a>")
 					    .buildEmail();
 		
 					MailerBuilder
@@ -175,8 +175,10 @@ public class LoginController {
 
 		
 		} else {
-		
-		return "redirect:/login";
+			
+			template.addAttribute("mail_incorrecto", "El mail ingresado es incorrecto");
+			
+		return "recuperar-contrasenia";
 	   }
 	}
 	

@@ -60,7 +60,8 @@
 				<div class="col-12">
 					<h1>Ingresá tu mail y te enviaremos un correo de recuperación</h1>
 					<h2>(Revisa tu carpeta de spam)</h2>
-					<h4 th:text="${aviso_mail}"></h4>			
+					<h4 th:text="${aviso_mail}"></h4>
+					<h4 th:text="${mail_incorrecto}"></h4>			
 				</div>
 			</div>
 			<form class="form-group needs-validation" action="/recuperar-contrasenia" method="POST">
