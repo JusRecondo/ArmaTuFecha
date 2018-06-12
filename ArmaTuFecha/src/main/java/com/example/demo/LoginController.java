@@ -162,7 +162,7 @@ public class LoginController {
 					    .withPlainText("Para restablecer tu contraseña, ingresá en el siguiente link: "
 					    		+ "https://armatufecha.herokuapp.com/recuperar-contrasenia/" + mail + "/" + codigoRecuperacion)
 					    .withHTMLText("<label>Para restablecer tu contraseña, </label><br>"
-					    		+ "<a href=\"https://armatufecha.herokuapp.com/recuperar-contrasenia/" +  mail  +"/" + codigoRecuperacion + ">ingresá en este siguiente link</a>")
+					    		+ "<a href=\"https://armatufecha.herokuapp.com/recuperar-contrasenia/" +  mail  +"/" + codigoRecuperacion + "\">Ingresá en este link</a>")
 					    .buildEmail();
 		
 					MailerBuilder
@@ -250,7 +250,7 @@ public class LoginController {
 					
 					redirectAttribute.addFlashAttribute("mensaje_contrasenia3", "Listo! Ahora podes loguearte con tu nueva contraseña");	
 					
-					return "redirect:/login";
+					return "redirect:/procesar-login";
 				} else {
 			
 	} 
