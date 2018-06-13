@@ -23,7 +23,7 @@
 		id="color1" layout:fragment="~{header-logueado}">
 		<div class="container text-center">
 			<div class="row">
-				<div class="col-12">
+				<div class="col">
 					<h1>Modifica tus datos de usuario</h1>
 					<h5>(Los campos marcados con * son obligatorios)</h5>
 					<div class="alert alert-danger" role="alert"
@@ -32,7 +32,7 @@
 			</div>
 
 			<div class="row">
-				<div class="col-12">
+				<div class="col-lg-8 mx-auto">
 					<form class="form-group needs-validation"
 						th:action="'/procesar-edicion-usuario/' + ${nombre} + '/' + ${id_usuario}"
 						method="POST">
@@ -51,9 +51,9 @@
 							th:value="${contrasenia}" required></input>
 						<div class="invalid-feedback">Por favor completa este campo.</div>
 						<div class="valid-feedback"></div>
-						<br></br> <label>*Volvé a ingresar la contraseña:&nbsp;</label><input
+						<br></br> <label></label><input
 							class="form-control" name="contrasenia2" type="password"
-							placeholder="repetir contraseña..." required></input>
+							placeholder="*Repetí la contraseña..." required></input>
 						<div class="invalid-feedback">Por favor completa este campo.</div>
 						<div class="valid-feedback"></div>
 						<br></br> <input class="btn btn-outline-light btn-lg"

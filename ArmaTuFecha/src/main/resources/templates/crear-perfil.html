@@ -82,47 +82,42 @@
 	</nav>
 
 
-	<header class="bg-primary text-white bootstrap-override-header"
+	<header class="bg-primary text-white bootstrap-override-header4"
 		id="color1">
 		<div class="container text-center">
 			<div class="row">
-				<div class="col-12">
+				<div class="col">
 					<h1>
-						Ingresá tus datos y selecciona<br>el tipo de perfil que vas a
-						crear
+						Crea tu perfil
 					</h1>
 					<h5>(Los campos marcados con * son obligatorios)</h5>
 					<div class="alert alert-danger" role="alert"
 						th:text="${aviso_incompleto}" th:if="${aviso_incompleto}"></div>
 				</div>
 			</div>
-			<div class="col-12">
+			<div class="col-lg-8 mx-auto">
 				<div class="form-group">
 
 					<div class="alert alert-danger" role="alert"
 						th:text="${aviso_mail}" th:if="${aviso_mail}"></div>
-					<br> <label>*Ingresá una dirección de e-mail:&nbsp;</label> <br>
+					<br> <br>
 
 					<input class="form-control" id="mail" type="email"
-						placeholder="mail..." th:value="${mailCargado}" required></input>
+						 th:value="${mailCargado}" placeholder="*Ingresá una dirección de e-mail..."required></input>
 					<div class="invalid-feedback">Por favor completa este campo.</div>
 					<div class="valid-feedback"></div>
 					<br></br>
 					<div class="alert alert-danger" role="alert"
 						th:text="${aviso_contrasenia}" th:if="${aviso_contrasenia}"
 						required></div>
-					<label>*Ingresá una contraseña:&nbsp;</label> <br> <input
-						class="form-control" id="contrasenia" type="password"
-						placeholder="contraseña..."></input> <br></br>
+					<br> <input class="form-control" id="contrasenia" type="password" placeholder="*Ingresá una contraseña..."></input> <br></br>
 					<div class="invalid-feedback">Por favor completa este campo.</div>
 					<div class="valid-feedback"></div>
-					<label>*Volvé a ingresar la contraseña:&nbsp;</label> <br> <input
-						class="form-control" id="contrasenia2" type="password"
-						placeholder="contraseña..."></input> <br></br>
+					<br> <input class="form-control" id="contrasenia2" type="password" placeholder="*Repetí la contraseña..."></input> <br></br>
 					<div class="invalid-feedback">Por favor completa este campo.</div>
 					<div class="valid-feedback"></div>
 
-					<!-- TO DO re ingresar contraseña y en caso de no coincidir recargar el formulario -->
+					
 				</div>
 				<div class="form-group">
 					<label> <input id="tipo-local" type="radio"
@@ -224,17 +219,17 @@
 							th:text="${aviso_fotos}" th:if="${aviso_fotos}"></div>
 						<div class="row">
 							<div class="col-md-4 text-center">
-								<div id="preview1"></div>
+								<div id="preview1"></div><br>
 								<input type="button" href="#" id="upload_widget_opener1" value="Agregar una foto" class="btn btn-outline-dark"></input><br>
 								<input type="hidden" id="foto1" name="foto1"></input>
 							</div>
 							<div class="col-md-4 text-center">
-								<div id="preview2"></div>
+								<div id="preview2"></div><br>
 								<input type="button" href="#" id="upload_widget_opener2" value="Agregar una foto" class="btn btn-outline-dark"></input><br> 
 								<input type="hidden" id="foto2" name="foto2"></input>
 							</div>
 							<div class="col-md-4 text-center">
-								<div id="preview3"></div>
+								<div id="preview3"></div><br>
 								<input type="button" href="#" id="upload_widget_opener3" value="Agregar una foto" class="btn btn-outline-dark"></input><br>
 								<input	type="hidden" id="foto3" name="foto3"></input>
 							</div>
@@ -442,17 +437,17 @@
 							th:text="${aviso_fotos}" th:if="${aviso_fotos}"></div>
 						<div class="row">
 							<div class="col-md-4 text-center">
-								<div id="preview4"></div>
+								<div id="preview4"></div><br>
 								<input type="button" href="#" id="upload_widget_opener4" value="Agregar una foto" class="btn btn-outline-dark"></input><br>
 								<input type="hidden" id="foto4" name="foto1"></input>
 							</div>
 							<div class="col-md-4 text-center">
-								<div id="preview5"></div>
+								<div id="preview5"></div><br>
 								<input type="button" href="#" id="upload_widget_opener5" value="Agregar una foto" class="btn btn-outline-dark"></input><br> 
 								<input type="hidden" id="foto5" name="foto2"></input>
 							</div>
 							<div class="col-md-4 text-center">
-								<div id="preview6"></div>
+								<div id="preview6"></div><br>
 								<input type="button" href="#" id="upload_widget_opener6" value="Agregar una foto" class="btn btn-outline-dark"></input><br>
 								<input	type="hidden" id="foto6" name="foto3"></input>
 							</div>
@@ -487,7 +482,7 @@
 	<!-- Footer -->
 	<footer class="py-5 bg-dark">
 		<div class="container">
-			<p class="m-0 text-center text-white">Copyright &copy; Your
+			<p class="m-0 text-center text-white d-none">Copyright &copy; Your
 				Website 2018</p>
 		</div>
 		<!-- /.container -->

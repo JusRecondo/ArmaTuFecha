@@ -115,43 +115,42 @@
 			<div class="col-md-4">
 				<div class="row">
 					<div class="col">
-						<h3 class="my-3">Datos de contacto</h3>
-						<label th:text="${provincia} + ', '">Lorem Ipsum</label>&nbsp;<label
-							th:text="${localidad}">Lorem Ipsum</label><br> <label
-							th:text="${telefono}">a</label><br> <label
-							th:text="${mail_contacto}">a</label><br><label
-							th:text="${genero1} + ','" th:if="${genero1 != null && genero1 != ''}"></label>&nbsp;<label
-							th:text="${genero2}" th:if="${genero2 != null && genero2 != ''}"></label>
-							
-							
+					<br>
+						<div class="card border-dark mb-3" style="max-width: 18rem;">
+						  <div class="card-header">
+						  	 <h5 class="card-title" th:text="${provincia} + ', ' + ${localidad}"></h5>
+						</div>
+						  <div class="card-body text-dark">
+						   
+						    <label class="card-text" th:text="${genero1}" th:if="${genero1 != null && genero1 != ''}"></label>
+							<label class="card-text" th:text="','+ ' ' + ${genero2}" th:if="${genero2 != null && genero2 != ''}"></label><br>
+						    <label class="card-text" th:text="${telefono}"></label><br>
+						    <label class="card-text" th:text="${mail_contacto}"></label>
+						    <a class="card-text" th:href="${red_social1}"
+							th:if="${red_social1 != null && red_social1 != ''}"
+							th:text="${red_social1}">Facebook</a>
+							<br> <a class="card-text" th:href="${red_social2}"
+							th:if="${red_social2 != null && red_social2 != ''}"
+							th:text="${red_social2}">Instagram</a>
+							<br> <a class="card-text" th:href="${red_social3}"
+							th:if="${red_social3 != null && red_social3 != ''}"
+							th:text="${red_social3}">Otro</a>
+							<br> <a class="card-text" th:href="${link_musica1}"
+							th:if="${link_musica1 != null && link_musica1 != ''}"
+							th:text="${link_musica1}">YouTube</a>
+							<br> <a class="card-text" th:href="${link_musica2}"
+							th:if="${link_musica2 != null && link_musica2 != ''}"
+							th:text="${link_musica2}">Bandcamp</a>
+							<br> <a class="card-text" th:href="${link_musica3}"
+							th:if="${link_musica3 != null && link_musica3 != ''}"
+							th:text="${link_musica3}">Otro</a>
+							<br>
+						  </div>
+						</div>
 
 					</div>
 				</div>
-				<div class="row">
-					<div class="col">
-						<h3 class="my-3">Redes sociales y links para escuchar nuestra
-							música</h3>
-						<a th:href="${red_social1}"
-							th:if="${red_social1 != null && red_social1 != ''}"
-							th:text="${red_social1}">Facebook</a>
-						<br> <a th:href="${red_social2}"
-							th:if="${red_social2 != null && red_social2 != ''}"
-							th:text="${red_social2}">Instagram</a>
-						<br> <a th:href="${red_social3}"
-							th:if="${red_social3 != null && red_social3 != ''}"
-							th:text="${red_social3}">Otro</a>
-						<br> <a th:href="${link_musica1}"
-							th:if="${link_musica1 != null && link_musica1 != ''}"
-							th:text="${link_musica1}">YouTube</a>
-						<br> <a th:href="${link_musica2}"
-							th:if="${link_musica2 != null && link_musica2 != ''}"
-							th:text="${link_musica2}">Bandcamp</a>
-						<br> <a th:href="${link_musica3}"
-							th:if="${link_musica3 != null && link_musica3 != ''}"
-							th:text="${link_musica3}">Otro</a>
-						<br>
-					</div>
-				</div>
+				
 			</div>
 
 
@@ -165,7 +164,7 @@
 	<!-- Footer -->
 	<footer class="py-5 bg-dark">
 		<div class="container">
-			<p class="m-0 text-center text-white">Copyright &copy; Your
+			<p class="m-0 text-center text-white d-none">Copyright &copy; Your
 				Website 2018</p>
 		</div>
 		<!-- /.container -->

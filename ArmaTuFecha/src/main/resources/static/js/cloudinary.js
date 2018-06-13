@@ -17,8 +17,8 @@ $(document).ready(function() {
 			var url = result[0].url;
 
 			$("form").find('#foto1').val(url);
-			$("#preview1").append( '<img src=\"' + url + '\" class="img-thumbnail form-control"/>' );
-			
+			$("#preview1").append( '<img src=\"' + url + '\" class="img-thumbnail"/>' );
+			$("#upload_widget_opener1").hide();
 
 		})
 	})
@@ -40,7 +40,7 @@ $(document).ready(function() {
 			
 			$("form").find('#foto2').val(url);
 			$("#preview2").append( '<img src=\"' + url + '\" class="img-thumbnail"/>' );
-
+			$("#upload_widget_opener2").hide();
 		})
 	})
 	$("#upload_widget_opener3").click(function() {
@@ -61,7 +61,7 @@ $(document).ready(function() {
 		
 			$("form").find('#foto3').val(url);
 			$("#preview3").append( '<img src=\"' + url + '\" class="img-thumbnail"/>' );
-
+			$("#upload_widget_opener3").hide();
 		})
 	})
 
@@ -83,7 +83,7 @@ $(document).ready(function() {
 			
 			$("form").find('#foto4').val(url);
 			$("#preview4").append( '<img src=\"' + url + '\" class="img-thumbnail"/>' );
-
+			$("#upload_widget_opener4").hide();
 		})
 	})
 
@@ -105,7 +105,7 @@ $(document).ready(function() {
 			
 			$("form").find('#foto5').val(url);
 			$("#preview5").append( '<img src=\"' + url + '\" class="img-thumbnail"/>' );
-
+			$("#upload_widget_opener5").hide();
 		})
 	})
 	$("#upload_widget_opener6").click(function() {
@@ -126,7 +126,7 @@ $(document).ready(function() {
 			
 			$("form").find('#foto6').val(url);
 			$("#preview6").append( '<img src=\"' + url + '\" class="img-thumbnail"/>' );
-
+			$("#upload_widget_opener6").hide();
 		})
 	})
 	
