@@ -111,7 +111,7 @@
 	<div class="pagination justify-content-center"
 		layout:fragment="~{paginacion}">
 
-		<button class="btn btn-outline-dark btn-lg">
+		<button class="btn btn-outline-dark btn-lg" th:if="${pagina != ( total_perfiles / 3 ) + 1}">
 			<a th:href="'/locales/busqueda-provincia/procesar/'+ ${pagina+1} + '?busquedaProvincia=' + ${busquedaProvincia}">Más resultados </a>
 		</button>
 	</div>

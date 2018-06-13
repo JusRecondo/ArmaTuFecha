@@ -199,6 +199,17 @@ public class ListadosController {
 			listadoLocales.add(x);
 		}
 
+		consulta = connection.prepareStatement("SELECT COUNT (*) AS total_perfiles FROM perfiles_locales WHERE LOWER (provincia) LIKE ?;");		
+
+		consulta.setString(1, "%" + busquedaProvincia.toLowerCase() + "%");
+		
+		ResultSet resultado1 = consulta.executeQuery();
+		
+		if (resultado1.next()) {
+			int total_perfiles = resultado1.getInt("total_perfiles");
+			
+			template.addAttribute("total_perfiles", total_perfiles);
+		}
 		template.addAttribute("listadoLocales", listadoLocales);
 		connection.close();
 
@@ -251,6 +262,17 @@ public class ListadosController {
 			listadoLocales.add(x);
 		}
 
+		consulta = connection.prepareStatement("SELECT COUNT (*) AS total_perfiles FROM perfiles_locales WHERE LOWER (localidad) LIKE ?;");		
+
+		consulta.setString(1, "%" + busquedaLocalidad.toLowerCase() + "%");
+		
+		ResultSet resultado1 = consulta.executeQuery();
+		
+		if (resultado1.next()) {
+			int total_perfiles = resultado1.getInt("total_perfiles");
+			
+			template.addAttribute("total_perfiles", total_perfiles);
+		}
 		
 		template.addAttribute("listadoLocales", listadoLocales);
 		connection.close();
@@ -317,7 +339,16 @@ public class ListadosController {
 				listadoMusicos.add(x);
 			}
 			
+			consulta = connection.prepareStatement("SELECT COUNT (*) AS total_perfiles FROM perfiles_musicos;");		
 
+			ResultSet resultado1 = consulta.executeQuery();
+			
+			if (resultado1.next()) {
+				int total_perfiles = resultado1.getInt("total_perfiles");
+				
+				template.addAttribute("total_perfiles", total_perfiles);
+			}
+			
 			template.addAttribute("listadoMusicos", listadoMusicos);
 			connection.close();
 
@@ -423,6 +454,17 @@ public class ListadosController {
 				listadoMusicos.add(x);
 			}
 
+			consulta = connection.prepareStatement("SELECT COUNT (*) AS total_perfiles FROM perfiles_musicos WHERE LOWER (provincia) LIKE ?;");		
+
+			consulta.setString(1, "%" + busquedaProvincia.toLowerCase() + "%");
+			
+			ResultSet resultado1 = consulta.executeQuery();
+			
+			if (resultado1.next()) {
+				int total_perfiles = resultado1.getInt("total_perfiles");
+				
+				template.addAttribute("total_perfiles", total_perfiles);
+			}
 			
 			template.addAttribute("listadoMusicos", listadoMusicos);
 			connection.close();
@@ -480,6 +522,18 @@ public class ListadosController {
 				listadoMusicos.add(x);
 			}
 
+			consulta = connection.prepareStatement("SELECT COUNT (*) AS total_perfiles FROM perfiles_musicos WHERE LOWER (localidad) LIKE ?;");		
+
+			consulta.setString(1, "%" + busquedaLocalidad.toLowerCase() + "%");
+			
+			ResultSet resultado1 = consulta.executeQuery();
+			
+			if (resultado1.next()) {
+				int total_perfiles = resultado1.getInt("total_perfiles");
+				
+				template.addAttribute("total_perfiles", total_perfiles);
+			}
+			
 			template.addAttribute("listadoMusicos", listadoMusicos);
 			connection.close();
 
@@ -536,6 +590,18 @@ public class ListadosController {
 				listadoMusicos.add(x);
 			}
 
+			consulta = connection.prepareStatement("SELECT COUNT (*) AS total_perfiles FROM perfiles_musicos WHERE LOWER (genero1) LIKE ?;");		
+
+			consulta.setString(1, "%" + busquedaGenero.toLowerCase() + "%");
+			
+			ResultSet resultado1 = consulta.executeQuery();
+			
+			if (resultado1.next()) {
+				int total_perfiles = resultado1.getInt("total_perfiles");
+				
+				template.addAttribute("total_perfiles", total_perfiles);
+			}
+			
 			template.addAttribute("listadoMusicos", listadoMusicos);
 			connection.close();
 

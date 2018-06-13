@@ -122,7 +122,7 @@
 	<div class="pagination justify-content-center"
 		layout:fragment="~{paginacion}">
 
-		<button class="btn btn-outline-dark btn-lg" th:if="${listadoMusicos.size()- 3 != 0}" >
+		<button class="btn btn-outline-dark btn-lg" th:if="${pagina != ( total_perfiles / 3 ) + 1}" >
 			<a th:href="'/musicos/busqueda-genero/procesar/'+ ${pagina+1} + '?busquedaGenero=' + ${busquedaGenero}">Más resultados </a>
 		</button>
 	</div>
